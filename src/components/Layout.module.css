@@ -1,0 +1,19 @@
+.layout-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30vh 1fr min-content;
+  padding: 1rem;
+}
+
+.layout-header {
+}
+
+.layout-navbar {
+  text-align: right;
+}
+
+.layout-title {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 300;
+}

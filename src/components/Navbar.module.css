@@ -1,0 +1,27 @@
+.navbar-main {
+  padding: 0.3rem;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+}
+
+.navbar-list li {
+  padding-right: 0.5rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-list li::after {
+  content: '';
+  width: 2px;
+  height: 12px;
+  display: inline-block;
+  background-color: #333;
+  margin-left: 1rem;
+}

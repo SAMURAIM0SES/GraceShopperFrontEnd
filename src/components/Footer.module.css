@@ -1,0 +1,30 @@
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 35vh min-content;
+  font-size: 1.8rem;
+}
+
+.footer-content {
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-title {
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.footer-end {
+  font-weight: 300;
+  font-size: 1.8rem;
+}
