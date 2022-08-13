@@ -1,0 +1,90 @@
+:root {
+  --primary-blue-dark: #0081a7;
+  --primary-blue-light: #00afb9;
+  --secondary-yellow-dark: #fed9b7;
+  --secondary-yellow-light: #fdfcdc;
+  --extra-red: #f07167;
+  --primary-grey: #333;
+  --grey-ligth: #e9ecef;
+}
+
+.login {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 7rem;
+  justify-items: center;
+}
+.login-form {
+  font-size: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2rem;
+}
+
+.login-img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 3rem;
+}
+
+.login-img img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: fill;
+}
+
+.login-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-inputs label {
+  font-size: 1.3rem;
+}
+
+.login-inputs input {
+  font-family: inherit;
+  padding: 0.2rem;
+}
+
+.login-inputs input:focus {
+  outline: none;
+  border: 1.5px solid var(--primary-blue-light);
+}
+
+.login-btn {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.login-btn button {
+  padding: 0.3rem 1.5rem;
+  font-family: inherit;
+  border: none;
+  background-color: #04aa6d;
+  color: #fff;
+  opacity: 0.9;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.login-btn button:hover {
+  opacity: 1;
+}
+
+.login-signUp {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-signUp p {
+  font-size: 1.2rem;
+  color: #dd4b39;
+}
+
+.signUp-link a:visited {
+  color: #333;
+}

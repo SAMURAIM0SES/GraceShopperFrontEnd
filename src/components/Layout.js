@@ -10,7 +10,6 @@ const Layout = (props) => {
           <Navbar />
         </nav>
         <h1 className={classes['layout-title']}>RestaWant Supplies</h1>
-        <div>Here is the filter products</div>
       </header>
       <main className={classes['layout-body']}>{props.children}</main>
       <footer>
