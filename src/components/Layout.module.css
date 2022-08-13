@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 30vh 1fr min-content;
-  padding: 1rem;
 }
 
 .layout-header {
@@ -16,4 +15,6 @@
   text-align: center;
   font-size: 4rem;
   font-weight: 300;
+  font-size: 6rem;
+  color: #333;
 }

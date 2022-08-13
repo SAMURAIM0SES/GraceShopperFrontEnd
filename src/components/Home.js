@@ -1,9 +1,14 @@
 import Layout from './Layout';
 import classes from './Home.module.css';
 import Categories from './Categories';
+import Login from './Login';
+import FeatureProducts from './FeatureProducts';
+import { BsSearch } from 'react-icons/bs';
+
 const { faker } = require('@faker-js/faker');
 
 //https://graceshopperbackend.herokuapp.com/
+// npm install react-icons --save
 
 const DUMMY_DATA = [
   {
@@ -79,6 +84,15 @@ const DUMMY_DATA = [
 const Home = () => {
   return (
     <Layout>
+      <section>
+        <div className={classes.filter}>
+          <span>
+            <BsSearch />
+          </span>
+          <input type="text" placeholder="Search..." />
+          <button>Search</button>
+        </div>
+      </section>
       <Categories data={DUMMY_DATA} />
 
       <section>
@@ -100,112 +114,20 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <section className={classes.login}>
-        <div>
-          <form className={classes['login-form']}>
-            <div className={classes['login-img']}>
-              <img src={`${faker.image.imageUrl()}`} alt="random" />
-            </div>
-            <div className={classes['login-inputs']}>
-              <label>Username</label>
-              <input type="text" placeholder="Enter Username" />
-              <label>Password</label>
-              <input type="text" placeholder="Enter Password" />
-            </div>
-            <div className={classes['login-btn']}>
-              <button>LOGIN</button>
-            </div>
-          </form>
-        </div>
-
-        <div>
-          <h3>Do not have an account Sign up here!</h3>
-        </div>
-      </section>
+      <Login />
+      <FeatureProducts />
 
       <section>
-        <div className={classes['features-main']}>
-          <h2 className={classes['features-title']}>Feature Products</h2>
-          <div className={classes['features-product-header']}>
-            <div className={classes['features-product-container']}>
-              <div className={classes['features-product-image']}>
-                <img src={`${faker.image.animals()}`} alt="random" />
-              </div>
-              <div className={classes['features-product-description']}>
-                <p>PRODUCT NAME</p>
-                <p>$300</p>
-              </div>
-            </div>
-
-            <div className={classes['features-product-container']}>
-              <div className={classes['features-product-image']}>
-                <img src={`${faker.image.food()}`} alt="random" />
-              </div>
-              <div className={classes['features-product-description']}>
-                <p>PRODUCT NAME</p>
-                <p>$300</p>
-              </div>
-            </div>
-          </div>
-
-          <div className={classes['features-product-footer']}>
-            <div className={classes['product-1']}>
-              <div className={classes['gallery-photo']}>
-                <img src={`${faker.image.food()}`} alt="random" />
-              </div>
-              <div className={classes['gallery-product-name']}>
-                <p>PRODUCT NAME</p>
-                <p>STARTS</p>
-              </div>
-              <p className={classes['gallery-product-price']}>$300</p>
-            </div>
-            <div className={classes['product-2']}>
-              <div className={classes['gallery-photo']}>
-                <img src={`${faker.image.nature()}`} alt="random" />
-              </div>
-              <div className={classes['gallery-product-name']}>
-                <p>PRODUCT NAME</p>
-                <p>STARTS</p>
-              </div>
-              <p className={classes['gallery-product-price']}>$300</p>
-            </div>
-            <div className={classes['product-3']}>
-              <div className={classes['gallery-photo']}>
-                <img src={`${faker.image.business()}`} alt="random" />
-              </div>
-              <div className={classes['gallery-product-name']}>
-                <p>PRODUCT NAME</p>
-                <p>STARTS</p>
-              </div>
-              <p className={classes['gallery-product-price']}>$300</p>
-            </div>
-            <div className={classes['product-4']}>
-              <div className={classes['gallery-photo']}>
-                <img src={`${faker.image.abstract()}`} alt="random" />
-              </div>
-              <div className={classes['gallery-product-name']}>
-                <p>PRODUCT NAME</p>
-                <p>STARTS</p>
-              </div>
-              <p className={classes['gallery-product-price']}>$300</p>
-            </div>
-            <div className={classes['product-5']}>
-              <div className={classes['gallery-photo']}>
-                <img src={`${faker.image.animals()}`} alt="random" />
-              </div>
-              <div className={classes['gallery-product-name']}>
-                <div>
-                  <p>PRODUCT NAME</p>
-                  <p>STARTS</p>
-                </div>
-                <p className={classes['gallery-product-price']}>$300</p>
-              </div>
-            </div>
-          </div>
+        <div className={classes['aboutShop-main']}>
+          <h2 className={classes['aboutShop-title']}>About Our Shop</h2>
+          <p className={classes['aboutShop-description']}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
         </div>
       </section>
-      <section>About your shop</section>
     </Layout>
   );
 };
