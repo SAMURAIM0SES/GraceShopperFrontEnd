@@ -44,7 +44,7 @@ const Products = () => {
                     })}
                 </select>
                 <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
-                <button type="submit" onClick={(e) => e.preventDefault()}>🔍︎</button>
+                <button type="submit">🔍︎</button>
             </form>
             {
                 products.map((product) => {
