@@ -19,10 +19,11 @@ const Products = () => {
 
 
 
-    useEffect(() => { getAllIntialData() }, [])
+    useEffect(() => { getAllIntialData() }, [searchTerm])
 
-    async function submitHandler(event) {
+    function searchHandler(event) {
         event.preventDefault()
+        console.log(searchCategory, searchTerm)
         const searchString = searchTerm.toLowerCase()
         const filteredSearch = products.filter((product) => {
             return product.name.toLowerCase().includes(searchString)
@@ -30,21 +31,22 @@ const Products = () => {
         setProducts(filteredSearch)
     }
 
+
     return (
         <Layout>
             <h1>Products</h1>
-            <form onSubmit={() => submitHandler}>
-                <label>Categories</label>
+            <form>
+                {/* <label>Categories</label>
                 <select>
                     <option>Any</option>
                     {categories.map((category) => {
                         return (
-                            <option key={`categoryHolder${category.id}`} onChange={(e) => setSearchCategory(category.id)}>{category.name}</option>
+                            <option key={`categoryHolder${category.id}`} onChange={(e) => setSearchCategory(e.target.value)}>{category.name}</option>
                         )
                     })}
-                </select>
+                </select> */}
                 <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
-                <button type="submit">🔍︎</button>
+                <button onClick={searchHandler}>🔍︎</button>
             </form>
             {
                 products.map((product) => {
