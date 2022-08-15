@@ -1,7 +1,7 @@
 export const apiURL = "https://graceshopperbackend.herokuapp.com/api"
 
 
-export const registerUser = async (username,password,first_name,last_name,mobile,telefone) => {
+export const registerUser = async (username,password,first_name,last_name,mobile) => {
     try{
      const response = await fetch(`${apiURL}/users/register`, {
        method:"POST",
@@ -80,6 +80,54 @@ export const registerUser = async (username,password,first_name,last_name,mobile
     }
 }
 
+export async function getMyOrderDetails(user_id, token) {
+    try {
+      
+      
+      const response = await fetch(`${apiURL}/users/${user_id}/order-history`,
+      
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        
+      },
+    
+    })
+      const result = await response.json();
+      console.log(result, "should be my order-history");
+      return result;
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  export async function getMyOrders(username, token) {
+    try {
+      
+      
+      const response = await fetch(`${apiURL}/users/${username}/orders`,
+      
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        
+      },
+    
+    })
+      const result = await response.json();
+      console.log(result, "should be my orders");
+      return result;
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   
   export async function getAllProducts() {
     try {
@@ -93,6 +141,84 @@ export const registerUser = async (username,password,first_name,last_name,mobile
   }
 
 
+  export async function getProduct(productId) {
+    try {
+      
+      
+      const response = await fetch(`${apiURL}/catalog/products/${productId}`,
+      
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          
+        
+      },
+    
+    })
+      const result = await response.json();
+      console.log(result, "should be single product by id");
+      return result;
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  export const updateProduct = async (name, description, price, category_id, inventory_id, token, productId) => {
+    try{
+
+        const response = await fetch(`${apiURL}/catalog/products/${productId}`, 
+            {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    
+                    name: name, 
+                    description: description,
+                    price: price,
+                    catefory_id: category_id,
+                    inventory_id: inventory_id
+                   
+                    
+                })
+            })    
+        const result = await response.json();
+        return result;
+    }
+
+    catch (error){   
+    console.error(error);
+    }
+}
+
+
+export const deleteProduct = async (productId) => {
+    try{
+
+        const response = await fetch(`${apiURL}/catalog/products/${productId}`, 
+            {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    
+                },
+            
+            })    
+        const result = await response.json();
+        return result;
+    }
+
+    catch (error){   
+    console.error(error);
+    }
+}
+
+
   export async function getAllCategories() {
     try {
       const response = await fetch(`${apiURL}/catalog/productCategory`);
@@ -104,6 +230,30 @@ export const registerUser = async (username,password,first_name,last_name,mobile
     }
   }
 
+
+  export async function getCategory(categoryId) {
+    try {
+      
+      
+      const response = await fetch(`${apiURL}/catalog/productCategory/${categoryId}`,
+      
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+         
+        
+      },
+    
+    })
+      const result = await response.json();
+      console.log(result, "should be single category by id");
+      return result;
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
 
 
 
