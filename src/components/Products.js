@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react"
+import Layout from "./Layout"
 
-const Products = async () => {
+const Products = () => {
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -12,17 +13,18 @@ const Products = async () => {
     }
 
     return (
-        <div>
-            <form onSubmit={submitHandler()}>
+        <Layout>
+            <h1>Products</h1>
+            <form onSubmit={() => submitHandler}>
                 <label>Categories</label>
                 <select>
                     {categories.map((category) => {
                         return (
-                            <option key={`categoryHolder${category.id}`} onChange={setSearchCategory(category.id)}>{category.name}</option>
+                            <option key={`categoryHolder${category.id}`} onChange={(e) => setSearchCategory(category.id)}>{category.name}</option>
                         )
                     })}
                 </select>
-                <input type='text' value={searchTerm} onChange={setSearchTerm(searchTerm)} placeholder="Search"></input>
+                <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
                 <button type="submit">🔍︎</button>
             </form>
             {products.map((product) => {
@@ -34,7 +36,7 @@ const Products = async () => {
                     </div>
                 )
             })}
-        </div>
+        </Layout>
     )
 }
 
