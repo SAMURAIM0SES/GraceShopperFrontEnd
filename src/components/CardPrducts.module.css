@@ -128,13 +128,19 @@
 .cart-product-quantity {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cart-product-quantity button {
+  padding: 0.4rem;
 }
 
 .cart-product-quantity input {
-  padding: 0.5rem;
+  padding: 0.3rem;
   font-family: inherit;
   font-size: 1.8rem;
-  flex-basis: 6rem;
+  flex-basis: 3rem;
 }
 
 .cart-product-quantity input:focus {

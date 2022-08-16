@@ -41,6 +41,12 @@ const Cart = () => {
     totalCost(DUMMY_PRODUCTS);
   }, [total]);
 
+  const totalSumProducts = (sumProd) => {
+    console.log(sumProd);
+  };
+
+  totalSumProducts();
+
   return (
     <Layout>
       <section>
@@ -60,6 +66,7 @@ const Cart = () => {
                     name={prod.name}
                     description={prod.description}
                     price={prod.price}
+                    onTotalSum={totalSumProducts}
                   />
                 );
               })}

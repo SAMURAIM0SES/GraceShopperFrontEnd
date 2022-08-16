@@ -8,10 +8,21 @@ const CardProducts = (props) => {
   const [productQtn, setProductQtn] = useState(1);
   const [updatePrice, setUpdatedPrice] = useState(price);
 
-  const removeProductHandler = (e) => {
-    setProductQtn(+e.target.value);
-    setUpdatedPrice(price * productQtn);
+  const addQuantityHandler = () => {
+    setProductQtn((prev) => prev + 1);
+    setUpdatedPrice(price * (productQtn + 1));
+    props.onTotalSum(updatePrice);
   };
+
+  const reduceQuantityHandler = () => {
+    setProductQtn((prev) => prev - 1);
+    setUpdatedPrice(updatePrice - price);
+    if (productQtn == 1) {
+      setShowProduct(false);
+    }
+    props.onTotalSum(updatePrice);
+  };
+
   return (
     <>
       {showProduct && (
@@ -26,13 +37,13 @@ const CardProducts = (props) => {
               <p>${updatePrice}</p>
             </div>
             <div className={classes['cart-product-quantity']}>
+              <button onClick={addQuantityHandler}>+</button>
               <input
-                type="number"
-                max="50"
-                min="0"
+                type="text"
                 value={productQtn}
-                onChange={removeProductHandler}
+                onChange={(e) => e.target.value}
               />
+              <button onClick={reduceQuantityHandler}>-</button>
             </div>
           </div>
         </div>
