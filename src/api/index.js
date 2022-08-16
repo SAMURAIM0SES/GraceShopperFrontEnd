@@ -5,7 +5,8 @@ export const registerUser = async (
   password,
   first_name,
   last_name,
-  mobile
+  mobile,
+  email
 ) => {
   try {
     const response = await fetch(`${apiURL}/users/register`, {
@@ -19,6 +20,7 @@ export const registerUser = async (
         first_name: first_name,
         last_name: last_name,
         mobile: mobile,
+        email: email,
       }),
     });
     const result = await response.json();
