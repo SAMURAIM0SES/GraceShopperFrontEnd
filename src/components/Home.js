@@ -10,77 +10,6 @@ const { faker } = require('@faker-js/faker');
 //https://graceshopperbackend.herokuapp.com/
 // npm install react-icons --save
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    name: 'Electronics',
-    description:
-      'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive',
-  },
-
-  {
-    id: 2,
-    name: 'Home',
-    description:
-      'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
-  },
-
-  {
-    id: 3,
-    name: 'Movies',
-    description:
-      'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
-  },
-
-  {
-    id: 4,
-    name: 'Jewelery',
-    description:
-      'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive',
-  },
-
-  {
-    id: 5,
-    name: 'Industrial',
-    description: 'The Football Is Good For Training And Recreational Purposes',
-  },
-
-  {
-    id: 6,
-    name: 'Clothing',
-    description:
-      'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
-  },
-
-  {
-    id: 7,
-    name: 'Electronics',
-    description:
-      'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
-  },
-
-  {
-    id: 8,
-    name: 'Outdoors',
-    description:
-      'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
-  },
-
-  {
-    id: 9,
-    name: 'Health',
-    description:
-      'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
-  },
-
-  {
-    id: 10,
-    name: 'Kids',
-    description:
-      'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality',
-  },
-];
-
 const Home = () => {
   return (
     <Layout>
@@ -93,7 +22,7 @@ const Home = () => {
           <button>Search</button>
         </div>
       </section>
-      <Categories data={DUMMY_DATA} />
+      <Categories />
 
       <section>
         <div className={classes.deal}>

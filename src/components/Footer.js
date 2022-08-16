@@ -1,4 +1,5 @@
 import classes from './Footer.module.css';
+import { AiOutlineCopyrightCircle } from 'react-icons/ai';
 
 const Footer = () => {
   return (
@@ -47,7 +48,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <h2 className={classes['footer-end']}>RestWant Supplies</h2>
+      <h2 className={classes['footer-end']}>
+        <AiOutlineCopyrightCircle />
+        RestWant Supplies
+      </h2>
     </footer>
   );
 };

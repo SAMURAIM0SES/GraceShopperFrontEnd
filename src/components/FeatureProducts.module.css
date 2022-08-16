@@ -1,14 +1,12 @@
 :root {
-  --primary-blue-dark: #0081a7;
-  --primary-blue-light: #00afb9;
-  --secondary-yellow-dark:#fed9b7;
-  --secondary-yellow-light:#fdfcdc;
-  --extra-red:#f07167
-  --primary-grey: #333;
-  --grey-ligth: #e9ecef;
+  --primary-dark: #2d2a32;
+  --primary-blue: #3454d1;
+  --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
+  --primary-grey-dark: #a5a5a5;
+  --primary-grey-light: #eeeeff;
+  --extra-red: #f07167;
 }
-
-
 
 .features-main {
   /* border: 2px solid pink; */
@@ -24,8 +22,8 @@
   margin-bottom: 2rem;
   font-size: 4rem;
   font-weight: 300;
-  background-color: var(--primary-blue-light);
-  color: var(--primary-grey);
+  background-color: var(--secondary-green);
+  color: var(--primary-grey-light);
 }
 
 .features-product-header {
@@ -67,7 +65,6 @@
   grid-column: 1 / 2;
   grid-row: 1 / 6;
   height: 100%;
-  background-color: #e03131;
 }
 
 .product-2 {

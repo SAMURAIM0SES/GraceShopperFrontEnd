@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from 'react';
+import { getAllProducts } from '../api/index';
+
 import classes from './FeatureProducts.module.css';
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
 const { faker } = require('@faker-js/faker');
