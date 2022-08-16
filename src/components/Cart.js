@@ -3,6 +3,7 @@ import Layout from './Layout';
 import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 const { faker } = require('@faker-js/faker');
 
@@ -49,12 +50,13 @@ const Cart = () => {
             <p>2. Shipping Details</p>
             <p>3. Payment Options</p>
           </div>
-
+          <h3>Shopping Cart</h3>
           <div className={classes['cart-body']}>
             <div>
               {DUMMY_PRODUCTS.map((prod) => {
                 return (
                   <CardProducts
+                    key={nanoid()}
                     name={prod.name}
                     description={prod.description}
                     price={prod.price}
