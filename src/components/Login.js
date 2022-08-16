@@ -3,20 +3,23 @@ import { Link } from 'react-router-dom';
 import classes from './Login.module.css';
 import SocialMedia from './SocialMedia';
 import { loginUser } from '../api/index';
-import { storeCurrentUser } from './../utils/auth';
+import { storeCurrentUser, clearCurrentData } from './../utils/auth';
 const { faker } = require('@faker-js/faker');
 
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const { setUserLogged } = props;
 
   const loginUserHandler = async (event) => {
     event.preventDefault();
     const userLogin = await loginUser(user, password);
     if (userLogin) {
       console.log(userLogin);
+      clearCurrentData();
       storeCurrentUser('user', userLogin.user.username);
       storeCurrentUser('token', userLogin.token);
+      setUserLogged(userLogin.user.username);
       setUser('');
       setPassword('');
     } else {

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Layout from './Layout';
 import classes from './CategoryProducts.module.css';
 import { getCategory, getAllProducts } from '../api/index';
+import { GoHome } from 'react-icons/go';
+
 const { faker } = require('@faker-js/faker');
 
 const CategoryProducts = () => {
@@ -37,6 +39,9 @@ const CategoryProducts = () => {
       <section>
         <div className={classes['category-prod-header']}>
           <h2>{categoryInfo.name}</h2>
+          <Link to="/">
+            Go Home <GoHome />
+          </Link>
           <p>{categoryInfo.description}</p>
         </div>
         <div className={classes['category-prod-body']}>

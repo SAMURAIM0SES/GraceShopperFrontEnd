@@ -24,3 +24,10 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+
+.layout-welcome {
+  font-size: 2rem;
+  text-align: center;
+  color: #2ecc40;
+  font-weight: 300;
+}

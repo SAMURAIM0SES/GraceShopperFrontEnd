@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { getAllCategories } from '../api/index';
 import classes from './Categories.module.css';
+import { Link } from 'react-router-dom';
 
 const Categories = (props) => {
   const [categories, setCategories] = useState([]);
@@ -22,7 +23,7 @@ const Categories = (props) => {
           {categories.map((cat) => {
             return (
               <li key={cat.id} className={classes['category-item']}>
-                {cat.name}
+                <Link to={`/category/${cat.id}`}> {cat.name}</Link>
               </li>
             );
           })}

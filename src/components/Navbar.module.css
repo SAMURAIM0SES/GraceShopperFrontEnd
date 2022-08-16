@@ -54,3 +54,18 @@
 .navbar-item a:visited {
   opacity: 1;
 }
+
+.navbar-item button {
+  padding: 0rem 0.4rem;
+  font-family: inherit;
+  border: none;
+  background-color: #ff4136;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.navbar-item button:hover {
+  opacity: 1;
+}
