@@ -126,15 +126,15 @@
 }
 
 .cart-product-quantity {
-  border: 1px solid blue;
   display: flex;
+  justify-content: flex-end;
 }
 
 .cart-product-quantity input {
   padding: 0.5rem;
   font-family: inherit;
   font-size: 1.8rem;
-  width: 80%;
+  flex-basis: 6rem;
 }
 
 .cart-product-quantity input:focus {

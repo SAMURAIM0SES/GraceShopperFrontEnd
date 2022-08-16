@@ -1,6 +1,9 @@
+import React, { useState, useEffect, Fragment } from 'react';
 import Layout from './Layout';
 import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
+import { useNavigate } from 'react-router-dom';
+
 const { faker } = require('@faker-js/faker');
 
 const DUMMY_PRODUCTS = [
@@ -19,6 +22,24 @@ const DUMMY_PRODUCTS = [
 ];
 
 const Cart = () => {
+  const [total, setTotal] = useState(0);
+  const [taxes, setTaxes] = useState(0);
+  const navigate = useNavigate();
+
+  const nextNavigateHandler = () => {
+    navigate('/shipping');
+  };
+
+  const totalCost = (arr) => {
+    const totalSum = arr.reduce((prev, curr) => prev + curr.price, 0);
+    setTotal(totalSum);
+    setTaxes(total * 0.05);
+  };
+
+  useEffect(() => {
+    totalCost(DUMMY_PRODUCTS);
+  }, [total]);
+
   return (
     <Layout>
       <section>
@@ -30,7 +51,19 @@ const Cart = () => {
           </div>
 
           <div className={classes['cart-body']}>
-            <CardProducts data={DUMMY_PRODUCTS} />
+            <div>
+              {DUMMY_PRODUCTS.map((prod) => {
+                return (
+                  <CardProducts
+                    name={prod.name}
+                    description={prod.description}
+                    price={prod.price}
+                  />
+                );
+              })}
+            </div>
+
+            {/* <CardProducts data={DUMMY_PRODUCTS} /> */}
 
             <div className={classes['cart-body-summary']}>
               <h3>Summary</h3>
@@ -40,7 +73,7 @@ const Cart = () => {
               <div className={classes['summary-detail']}>
                 <div className={classes['summary-payment']}>
                   <div>Subtotal</div>
-                  <div>$600</div>
+                  <div>{total}</div>
                 </div>
                 <div className={classes['summary-payment']}>
                   <div>Shipping</div>
@@ -48,18 +81,18 @@ const Cart = () => {
                 </div>
                 <div className={classes['summary-payment']}>
                   <div>Taxes</div>
-                  <div>$13</div>
+                  <div>{taxes}</div>
                 </div>
               </div>
               <div className={classes['summary-total']}>
                 <div>TOTAL</div>
-                <div>$613</div>
+                <div>{total + taxes}</div>
               </div>
             </div>
           </div>
 
           <div className={classes['cart-buttons']}>
-            <button>Next</button>
+            <button onClick={nextNavigateHandler}>Next</button>
             <button>Cancel</button>
           </div>
         </div>
