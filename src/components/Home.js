@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
 import Layout from './Layout';
 import classes from './Home.module.css';
 import Categories from './Categories';
 import Login from './Login';
 import FeatureProducts from './FeatureProducts';
 import { BsSearch } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const { faker } = require('@faker-js/faker');
 
@@ -11,8 +13,17 @@ const { faker } = require('@faker-js/faker');
 // npm install react-icons --save
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [userLogged, setUserLogged] = useState('');
+
+  const shopHandler = () => {
+    navigate('/products');
+  };
+
+  console.log(userLogged, 'this is the user logged');
+
   return (
-    <Layout>
+    <Layout userLogged={userLogged} setUserLogged={setUserLogged}>
       <section>
         <div className={classes.filter}>
           <span>
@@ -39,11 +50,11 @@ const Home = () => {
             </div>
           </div>
           <div className={classes['deal-button']}>
-            <button>SHOP NOW</button>
+            <button onClick={shopHandler}>SHOP NOW</button>
           </div>
         </div>
       </section>
-      <Login />
+      <Login setUserLogged={setUserLogged} />
       <FeatureProducts />
 
       <section>

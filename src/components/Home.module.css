@@ -65,18 +65,17 @@
   align-items: center;
   gap: 4rem;
   margin-top: 3rem;
-
+  background-color: #3d9970;
   padding: 2rem 0;
 }
 
 .deal-title {
-  font-size: 4rem;
-
+  font-size: 5rem;
   padding: 1rem;
-  background-color: #fff;
-  color: var(--primary-blue);
+  color: var(--primary-dark);
   font-weight: 400;
   letter-spacing: 2px;
+  text-shadow: 1px 1px #fff;
 }
 
 .deal-gallery {
@@ -100,9 +99,9 @@
   width: 100%;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid var(--primary-blue);
+  border: 2px solid var(--primary-blue);
   font-family: inherit;
-  color: var(--primary-dark);
+  color: #fff;
   font-size: 1.8rem;
 }
 
