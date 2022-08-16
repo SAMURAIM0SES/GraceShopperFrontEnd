@@ -12,9 +12,9 @@ const SocialMedia = () => {
     <section>
       <h2 className={classes['socialMedia-title']}>Our Social Media</h2>
       <div className={classes['socialMedia-main']}>
-        <ul>
+        <ul className={classes['socialMedia-list']}>
           <li>
-            <Link to="'/">
+            <Link to="'/" className={classes['socialMedia-link']}>
               <span className={classes.fa}>
                 <FaFacebookF />
               </span>
@@ -23,7 +23,7 @@ const SocialMedia = () => {
             </Link>
           </li>
           <li>
-            <Link to="'/">
+            <Link to="'/" className={classes['socialMedia-link']}>
               <span className={classes.fa}>
                 <FaTwitter />
               </span>
@@ -31,7 +31,7 @@ const SocialMedia = () => {
             </Link>
           </li>
           <li>
-            <Link to="'/">
+            <Link to="'/" className={classes['socialMedia-link']}>
               <span className={classes.fa}>
                 <FaGooglePlusG />
               </span>
@@ -39,7 +39,7 @@ const SocialMedia = () => {
             </Link>
           </li>
           <li>
-            <Link to="'/">
+            <Link to="'/" className={classes['socialMedia-link']}>
               <span className={classes.fa}>
                 <FaInstagram />
               </span>
