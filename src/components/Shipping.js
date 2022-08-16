@@ -1,5 +1,6 @@
 import Layout from "./Layout";
 import classes from "./Shipping.module.css";
+const { faker } = require('@faker-js/faker');
 
 const Shipping = () => {
   return (
@@ -7,9 +8,9 @@ const Shipping = () => {
       <section>
         <div className={classes["shipping-main"]}>
           <div className={classes["shipping-header"]}>
-            <p>Shopping Cart</p>
-            <p>Shipping Details</p>
-            <p>Payment Options</p>
+          <p>1. Shopping Cart</p>
+            <p>2. Shipping Details</p>
+            <p>3. Payment Options</p>
           </div>
 
           <div className={classes["shipping-body"]}>
@@ -46,9 +47,14 @@ const Shipping = () => {
                 </div>
               </div>
             </div>
+            
             <div className={classes["shipping-body-summary"]}>
               <h3>Summary</h3>
-              {/* <div>Enter Coupon Code</div> */}
+              <div>Product Name</div>
+              <div>$300</div>
+              <div>Product Name</div>
+              <div>$300</div>
+              <div className={classes["shipping-cart-voucher"]}>HAVE A VOUCHER?</div>
               <div className={classes["summary-detail"]}>
                 <div className={classes["summary-payment"]}>
                   <div>Subtotal</div>
@@ -61,9 +67,9 @@ const Shipping = () => {
                 <div className={classes["summary-payment"]}>
                   <div>Taxes</div>
                   <div>$13</div>
-                  <div>TOTAL</div>
-                  <div>$613</div>
                 </div>
+                  <div className={classes['shipping-total']}>TOTAL</div>
+                  <div>$613</div>
               </div>
             </div>
           </div>
