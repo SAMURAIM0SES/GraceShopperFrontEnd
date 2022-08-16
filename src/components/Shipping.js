@@ -1,64 +1,87 @@
 import Layout from "./Layout";
 import classes from "./Shipping.module.css";
+const { faker } = require('@faker-js/faker');
 
 const Shipping = () => {
-    return (
-        <Layout>
-          <section>
-            <div className={classes["shipping-main"]}>
-              <div className={classes["shipping-header"]}>
-                <p>Shopping Cart</p>
-                <p>Shipping Details</p>
-                <p>Payment Options</p>
-              </div>
-    
-              <div className={classes["shipping-body"]}>
-                <div className={classes["shipping-body-shopping"]}>
-                  <h3>Shipping Details</h3>
-                  <div className={classes["shipping-detailed-information"]}>
-                    <div>First Name</div>
-                    <div>Last Name</div>
-                    <div>Address</div>
-                    <div>Address 2</div>
-                    <div>Country</div>
-                    <div>City</div>
-                    <div>Zip/Postal Code</div>
-                    <div>Phone Number</div>
-                    <div>Free Shipping</div>
-                    <div>Next Day Delivery $20</div>
-                    <div>24 hours from checkout  </div>
+  return (
+    <Layout>
+      <section>
+        <div className={classes["shipping-main"]}>
+          <div className={classes["shipping-header"]}>
+          <p>1. Shopping Cart</p>
+            <p>2. Shipping Details</p>
+            <p>3. Payment Options</p>
+          </div>
+
+          <div className={classes["shipping-body"]}>
+            <div className={classes["shipping-body-shopping"]}>
+              <h3>Shipping Details</h3>
+              <div className={classes["shipping-detailed-information"]}>
+                <div className={classes["shipping-name"]}>
+                  <input type="text" placeholder="First Name" />
+                  <input type="text" placeholder="Last Name" />
+                </div>
+                <div className={classes["shipping-address"]}>
+                  <input type="text" placeholder="Address" />
+                </div>
+                <div className={classes["shipping-address"]}>
+                  <input type="text" placeholder="Address 2" />
+                </div>
+                <div className={classes["shipping-country"]}>
+                  <input type="text" placeholder="Country" />
+                  <input type="text" placeholder="City" />
+                </div>
+                <div>
+                  <input type="text" placeholder="Zip/Postal" />
+                  <input type="text" placeholder="Phone Number" />
+                </div>
+                <div className={classes["shipping-methods"]}>
+                  <div>
+                    <input type="radio" />
+                    <span>Free Shipping</span>
+                  </div>
+                  <div>
+                    <input type="radio" />
+                    <span>Next Day Delivery</span>
                   </div>
                 </div>
-                <div className={classes["shipping-body-summary"]}>
-                    <h3>Summary</h3>
-                    {/* <div>Enter Coupon Code</div> */}
-                    <div className={classes["summary-detail"]}>
-                    <div className={classes["summary-payment"]}>
-                        <div>Subtotal</div>
-                        <div>$600</div>
-                    </div>
-                    <div className={classes["summary-payment"]}>
-                        <div>Shipping</div>
-                        <div>Free</div>
-                    </div>
-                    <div className={classes["summary-payment"]}>
-                        <div>Taxes</div>
-                        <div>$13</div>
-                        <div>TOTAL</div>
-                        <div>$613</div>
-                    </div>
-                    </div>
-                </div>
-              </div>
-    
-              <div className={classes["shipping-buttons"]}>
-                <button>Next</button>
-                <button>Cancel</button>
               </div>
             </div>
-          </section>
-        </Layout>
-      );
+            
+            <div className={classes["shipping-body-summary"]}>
+              <h3>Summary</h3>
+              <div>Product Name</div>
+              <div>$300</div>
+              <div>Product Name</div>
+              <div>$300</div>
+              <div className={classes["shipping-cart-voucher"]}>HAVE A VOUCHER?</div>
+              <div className={classes["summary-detail"]}>
+                <div className={classes["summary-payment"]}>
+                  <div>Subtotal</div>
+                  <div>$600</div>
+                </div>
+                <div className={classes["summary-payment"]}>
+                  <div>Shipping</div>
+                  <div>Free</div>
+                </div>
+                <div className={classes["summary-payment"]}>
+                  <div>Taxes</div>
+                  <div>$13</div>
+                </div>
+                  <div className={classes['shipping-total']}>TOTAL</div>
+                  <div>$613</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={classes["shipping-buttons"]}>
+            <button>Next</button>
+            <button>Cancel</button>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
 };
 
 export default Shipping;

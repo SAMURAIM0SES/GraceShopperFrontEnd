@@ -1,29 +1,129 @@
 .shipping-main {
   font-size: 1.8rem;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .shipping-header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  background-color: var(--primary-blue);
+  height: 15rem;
+  margin-bottom: 6rem;
+  font-size: 2.4rem;
+  color: var(--primary-grey-light);
 }
 
-.shipping-body{
-    border: 1px solid red;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    grid-column-gap: 2rem;   
+.shipping-body {
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 2rem;
 }
 
-.shipping-body-shopping{
-    border: 1px solid black;
+.shipping-body-shopping {
+  /* border: 1px solid black; */
 }
 
-.shipping-body-summary{
-  border: 1px solid green;  
+.shipping-body-summary {
+  /* border: 1px solid green; */
 }
 
-.shipping-detail-information{
-    display: flex;
-    justify-content: space-between;
+.shipping-detail-information {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8rem;
+}
+
+.shipping-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.shipping-name input {
+  font-family: inherit;
+  width: 45%;
+  padding: 0.5rem;
+}
+
+.shipping-address input {
+  font-family: inherit;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.shipping-country {
+  font-family: inherit;
+  width: 45%;
+  margin-bottom: .5rem;
+  
+}
+
+.shipping-methods {
+  /* border: 1px solid tomato; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.shipping-buttons {
+  width: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.shipping-buttons button {
+  padding: 0.7rem 1.4rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  width: 50%;
+  cursor: pointer;
+}
+
+.shipping-buttons button:first-child {
+  background-color: transparent;
+  border: 1.5px solid var(--primary-green);
+}
+
+.shipping-buttons button:first-child:hover {
+  background-color: var(--primary-green);
+  color: #fff;
+}
+
+.shipping-buttons button:last-child {
+  background-color: transparent;
+  border: 1.5px solid var(--extra-red);
+}
+
+.shipping-buttons button:last-child:hover {
+  background-color: var(--extra-red);
+  color: #fff;
+}
+
+.summary-payment{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shipping-cart-voucher{
+  background-color: var(--primary-green);
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  font-weight: 600;
+
+}
+
+.shipping-total{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3.4rem;
+  font-size: 2.8rem;
 }
