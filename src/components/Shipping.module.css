@@ -69,6 +69,11 @@
     display: flex;
   justify-content: space-between;
 }
+/* .shipping-methods input {
+  font-family: inherit;
+  width: 45%;
+  padding: 0.5rem;
+} */
 
 .shipping-buttons {
   width: 30%;
