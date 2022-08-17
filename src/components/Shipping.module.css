@@ -57,16 +57,17 @@
 }
 
 .shipping-country {
+  justify-content: space-between;
   font-family: inherit;
   width: 45%;
-  margin-bottom: .5rem;
-  
+  margin-bottom: 0.5rem;
 }
 
-.shipping-methods {
-  /* border: 1px solid tomato; */
-  display: flex;
+.shipping-methods{
+  box-sizing: content-box;
+    border: 1px solid black;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 
 .shipping-buttons {
@@ -106,24 +107,53 @@
   color: #fff;
 }
 
-.summary-payment{
+.summary-payment {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.shipping-cart-voucher{
+.shipping-cart-voucher {
   background-color: var(--primary-green);
   color: var(--primary-dark);
   text-transform: uppercase;
   letter-spacing: 1.6px;
   font-weight: 600;
-
 }
 
-.shipping-total{
+.shipping-total {
   display: flex;
   justify-content: space-between;
   margin-top: 3.4rem;
   font-size: 2.8rem;
+}
+
+.swipeWrapper {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+  position: relative;
+}
+
+.swipeWrapper:last-of-type {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.swipeWrapper.active {
+  background-color: #eee;
+}
+
+.swipeWrapper .leftColumn {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  height: 16px;
+  width: 16px;
+}
+
+.swipeWrapper .leftColumnSpacer {
+  margin-left: 30px;
 }
