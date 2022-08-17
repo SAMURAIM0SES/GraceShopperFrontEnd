@@ -4,6 +4,7 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { getCurrentData } from './../utils/auth';
 
 const { faker } = require('@faker-js/faker');
 
@@ -25,27 +26,25 @@ const DUMMY_PRODUCTS = [
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
+  const [cartProducts, setCartproducts] = useState([]);
   const navigate = useNavigate();
+
+  const cartStoraged = getCurrentData('cart');
 
   const nextNavigateHandler = () => {
     navigate('/shipping');
   };
 
   const totalCost = (arr) => {
-    const totalSum = arr.reduce((prev, curr) => prev + curr.price, 0);
+    const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
-    setTaxes(total * 0.05);
+    setTaxes(totalSum * 0.1);
   };
 
   useEffect(() => {
-    totalCost(DUMMY_PRODUCTS);
-  }, [total]);
-
-  const totalSumProducts = (sumProd) => {
-    console.log(sumProd);
-  };
-
-  totalSumProducts();
+    totalCost(cartStoraged);
+    setCartproducts(cartStoraged);
+  }, []);
 
   return (
     <Layout>
@@ -59,17 +58,25 @@ const Cart = () => {
           <h3>Shopping Cart</h3>
           <div className={classes['cart-body']}>
             <div>
-              {DUMMY_PRODUCTS.map((prod) => {
-                return (
-                  <CardProducts
-                    key={nanoid()}
-                    name={prod.name}
-                    description={prod.description}
-                    price={prod.price}
-                    onTotalSum={totalSumProducts}
-                  />
-                );
-              })}
+              {cartProducts ? (
+                cartProducts.map((prod) => {
+                  return (
+                    <CardProducts
+                      key={nanoid()}
+                      name={prod.name}
+                      description={prod.description}
+                      price={prod.price}
+                      id={prod.id}
+                      cartProducts={cartProducts}
+                      setCartproducts={setCartproducts}
+                      setTotal={setTotal}
+                      setTaxes={setTaxes}
+                    />
+                  );
+                })
+              ) : (
+                <p>there are products</p>
+              )}
             </div>
 
             {/* <CardProducts data={DUMMY_PRODUCTS} /> */}
@@ -90,12 +97,12 @@ const Cart = () => {
                 </div>
                 <div className={classes['summary-payment']}>
                   <div>Taxes</div>
-                  <div>{taxes}</div>
+                  <div>{taxes.toFixed(2)}</div>
                 </div>
               </div>
               <div className={classes['summary-total']}>
                 <div>TOTAL</div>
-                <div>{total + taxes}</div>
+                <div>{(total + taxes).toFixed(2)}</div>
               </div>
             </div>
           </div>

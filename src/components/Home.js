@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const { faker } = require('@faker-js/faker');
 
 //https://graceshopperbackend.herokuapp.com/
-// npm install react-icons --save
 
 const Home = () => {
   const navigate = useNavigate();

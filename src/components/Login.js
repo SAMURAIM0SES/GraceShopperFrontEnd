@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import classes from './Login.module.css';
 import SocialMedia from './SocialMedia';
 import { loginUser } from '../api/index';
-import { storeCurrentUser, clearCurrentData } from './../utils/auth';
+import { storeCurrentData, clearCurrentData } from './../utils/auth';
 const { faker } = require('@faker-js/faker');
 
 const Login = (props) => {
@@ -17,8 +17,8 @@ const Login = (props) => {
     if (userLogin) {
       console.log(userLogin);
       clearCurrentData();
-      storeCurrentUser('user', userLogin.user.username);
-      storeCurrentUser('token', userLogin.token);
+      storeCurrentData('user', userLogin.user.username);
+      storeCurrentData('token', userLogin.token);
       setUserLogged(userLogin.user.username);
       setUser('');
       setPassword('');

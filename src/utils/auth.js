@@ -1,4 +1,4 @@
-export function storeCurrentUser(key, value) {
+export function storeCurrentData(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
