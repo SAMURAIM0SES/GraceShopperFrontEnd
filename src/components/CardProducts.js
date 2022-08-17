@@ -28,14 +28,14 @@ const CardProducts = (props) => {
     const updatePriceProduct = { ...productSelected, price: updatePrice };
     const cartProductsCopy = [...cartProducts];
 
-    // cartProductsCopy[idxProduct] = updatePriceProduct;
-    // setCartproducts(cartProductsCopy);
-    // const totalSum = cartProductsCopy.reduce(
-    //   (prev, curr) => prev + curr.price * 1,
-    //   0
-    // );
-    // setTotal(totalSum);
-    // setTaxes(totalSum * 0.1);
+    cartProductsCopy[idxProduct] = updatePriceProduct;
+    setCartproducts(cartProductsCopy);
+    const totalSum = cartProductsCopy.reduce(
+      (prev, curr) => prev + curr.price * 1,
+      0
+    );
+    setTotal(totalSum);
+    setTaxes(totalSum * 0.1);
   };
 
   const reduceQuantityHandler = () => {
