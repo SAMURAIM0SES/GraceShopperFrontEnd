@@ -36,21 +36,15 @@ const Cart = () => {
   };
 
   const totalCost = (arr) => {
-    const totalSum = arr.reduce((prev, curr) => prev + curr.price, 0);
+    const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
-    setTaxes(total * 0.05);
+    setTaxes(totalSum * 0.1);
   };
 
   useEffect(() => {
-    totalCost(DUMMY_PRODUCTS);
+    totalCost(cartStoraged);
     setCartproducts(cartStoraged);
-  }, [total]);
-
-  const totalSumProducts = (sumProd) => {
-    console.log('here');
-  };
-
-  totalSumProducts();
+  }, []);
 
   return (
     <Layout>
@@ -72,7 +66,11 @@ const Cart = () => {
                       name={prod.name}
                       description={prod.description}
                       price={prod.price}
-                      onTotalSum={totalSumProducts}
+                      id={prod.id}
+                      cartProducts={cartProducts}
+                      setCartproducts={setCartproducts}
+                      setTotal={setTotal}
+                      setTaxes={setTaxes}
                     />
                   );
                 })
@@ -99,12 +97,12 @@ const Cart = () => {
                 </div>
                 <div className={classes['summary-payment']}>
                   <div>Taxes</div>
-                  <div>{taxes}</div>
+                  <div>{taxes.toFixed(2)}</div>
                 </div>
               </div>
               <div className={classes['summary-total']}>
                 <div>TOTAL</div>
-                <div>{total + taxes}</div>
+                <div>{(total + taxes).toFixed(2)}</div>
               </div>
             </div>
           </div>

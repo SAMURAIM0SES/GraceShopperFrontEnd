@@ -8,7 +8,6 @@
 }
 
 .cart-body-shopping {
-  /* border: 1px solid black; */
 }
 
 .cart-body-shopping h3 {
@@ -24,12 +23,12 @@
 }
 
 .cart-shopping-products {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 15% 1fr 15%;
   margin-bottom: 2rem;
   gap: 10px;
-  border: 2px solid tomato;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 1rem;
 }
 
 .cart-product-image {
@@ -44,7 +43,6 @@
 }
 
 .cart-product-description {
-  /* border: 1px solid pink; */
   margin-right: 20px;
 }
 
@@ -73,13 +71,6 @@
   outline-color: var(--primary-blue);
 }
 
-.cart-body-shopping {
-}
-
-.cart-body-shopping h3 {
-  font-weight: 300;
-}
-
 .cart-body-coupon {
   background-color: var(--primary-green);
   color: var(--primary-dark);
@@ -87,24 +78,6 @@
   letter-spacing: 1.6px;
   font-weight: 600;
   text-align: center;
-}
-
-.cart-shopping-products {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.cart-product-image {
-  width: 100%;
-  flex-basis: 15rem;
-}
-
-.cart-product-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .cart-product-description {
@@ -148,47 +121,6 @@
   outline-color: var(--primary-blue);
 }
 
-.cart-body-shopping {
-}
-
 .cart-body-shopping h3 {
   font-weight: 300;
-}
-
-.cart-buttons {
-  /* border: 3px solid royalblue; */
-  width: 30%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.cart-buttons button {
-  padding: 0.7rem 1.4rem;
-  font-size: 1.6rem;
-  font-family: inherit;
-  width: 50%;
-  cursor: pointer;
-}
-
-.cart-buttons button:first-child {
-  background-color: transparent;
-  border: 1.5px solid var(--primary-green);
-}
-
-.cart-buttons button:first-child:hover {
-  background-color: var(--primary-green);
-  color: #fff;
-}
-
-.cart-buttons button:last-child {
-  background-color: transparent;
-  border: 1.5px solid var(--extra-red);
-}
-
-.cart-buttons button:last-child:hover {
-  background-color: var(--extra-red);
-  color: #fff;
 }

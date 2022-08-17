@@ -3,24 +3,45 @@ import classes from './CardPrducts.module.css';
 const { faker } = require('@faker-js/faker');
 
 const CardProducts = (props) => {
-  const { name, description, price } = props;
+  const {
+    name,
+    description,
+    price,
+    id,
+    cartProducts,
+    setCartproducts,
+    setTotal,
+    setTaxes,
+  } = props;
   const [showProduct, setShowProduct] = useState(true);
   const [productQtn, setProductQtn] = useState(1);
-  const [updatePrice, setUpdatedPrice] = useState(price);
+  const [productPrice, setProductPrice] = useState(price);
 
   const addQuantityHandler = () => {
     setProductQtn((prev) => prev + 1);
-    setUpdatedPrice(price * (productQtn + 1));
-    props.onTotalSum(updatePrice);
+    setProductPrice(price * (productQtn + 1));
+
+    const productSelected = cartProducts.find((prod) => prod.id === id);
+    const idxProduct = cartProducts.indexOf(productSelected);
+
+    const updatePrice = price * (productQtn + 1);
+    const updatePriceProduct = { ...productSelected, price: updatePrice };
+    const cartProductsCopy = [...cartProducts];
+
+    // cartProductsCopy[idxProduct] = updatePriceProduct;
+    // setCartproducts(cartProductsCopy);
+    // const totalSum = cartProductsCopy.reduce(
+    //   (prev, curr) => prev + curr.price * 1,
+    //   0
+    // );
+    // setTotal(totalSum);
+    // setTaxes(totalSum * 0.1);
   };
 
   const reduceQuantityHandler = () => {
     setProductQtn((prev) => prev - 1);
-    setUpdatedPrice(updatePrice - price);
-    if (productQtn == 1) {
-      setShowProduct(false);
-    }
-    props.onTotalSum(updatePrice);
+
+    setProductPrice(productPrice - price);
   };
 
   return (
@@ -29,12 +50,12 @@ const CardProducts = (props) => {
         <div className={classes['cart-body-shopping']}>
           <div className={classes['cart-shopping-products']}>
             <div className={classes['cart-product-image']}>
-              <img src={`${faker.image.food(340, 240, true)}`} alt="random" />
+              <img src={`${faker.image.food(340, 240)}`} alt="random" />
             </div>
             <div className={classes['cart-product-description']}>
               <h4>{name}</h4>
               <p>{description}</p>
-              <p>${updatePrice}</p>
+              <p>${productPrice}</p>
             </div>
             <div className={classes['cart-product-quantity']}>
               <button onClick={addQuantityHandler}>+</button>
@@ -53,41 +74,3 @@ const CardProducts = (props) => {
 };
 
 export default CardProducts;
-
-/*
-const CardProducts = (props) => {
-  const { data } = props;
-  const [productQtn, setProductQtn] = useState(1);
-
-  const removeProductHandler = () => {};
-  return (
-    <div className={classes['cart-body-shopping']}>
-      <h3>Shopping Cart</h3>
-
-      {data.map((prod) => {
-        return (
-          <div className={classes['cart-shopping-products']}>
-            <div className={classes['cart-product-image']}>
-              <img src={`${faker.image.nature()}`} alt="random" />
-            </div>
-            <div className={classes['cart-product-description']}>
-              <h4>{prod.name}</h4>
-              <p>{prod.description}</p>
-              <p>${prod.price}</p>
-            </div>
-            <div className={classes['cart-product-quantity']}>
-              <input
-                type="number"
-                max="50"
-                min="0"
-                value={productQtn}
-                onChange={(e) => setProductQtn(e.target.value)}
-              />
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-*/
