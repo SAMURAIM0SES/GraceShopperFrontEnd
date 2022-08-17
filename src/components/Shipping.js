@@ -1,6 +1,24 @@
+import React, { useState, useEffect, Fragment } from 'react';
 import Layout from "./Layout";
 import classes from "./Shipping.module.css";
+import CardProducts from './CardProducts';
+import { nanoid } from 'nanoid';
 const { faker } = require('@faker-js/faker');
+
+const DUMMY_PRODUCTS = [
+  {
+    name: 'Modern Steel Chair',
+    description:
+      'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
+    price: 354,
+  },
+  {
+    name: 'Generic Metal Shoes',
+    description:
+      'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+    price: 81,
+  },
+];
 
 const Shipping = () => {
   return (
@@ -50,6 +68,16 @@ const Shipping = () => {
             
             <div className={classes["shipping-body-summary"]}>
               <h3>Summary</h3>
+             {/* <div> 
+              {DUMMY_PRODUCTS.map((prod) => {
+                return (
+                  <CardProducts
+                    key={nanoid()}
+                    name={prod.name}
+                    />
+                    );
+              })} */}
+              
               <div>Product Name</div>
               <div>$300</div>
               <div>Product Name</div>
@@ -68,8 +96,8 @@ const Shipping = () => {
                   <div>Taxes</div>
                   <div>$13</div>
                 </div>
-                  <div className={classes['shipping-total']}>TOTAL</div>
-                  <div>$613</div>
+                  <div className={classes['shipping-total']}>TOTAL 
+                  <div></div>$613</div>
               </div>
             </div>
           </div>
