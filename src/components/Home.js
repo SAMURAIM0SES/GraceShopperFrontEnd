@@ -6,6 +6,7 @@ import Login from './Login';
 import FeatureProducts from './FeatureProducts';
 import { BsSearch } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { storeCurrentData, getCurrentData } from './../utils/auth';
 
 const { faker } = require('@faker-js/faker');
 
@@ -15,6 +16,11 @@ const { faker } = require('@faker-js/faker');
 const Home = () => {
   const navigate = useNavigate();
   const [userLogged, setUserLogged] = useState('');
+  const cart = getCurrentData('cart');
+
+  if (!cart) {
+    storeCurrentData('cart', []);
+  }
 
   const shopHandler = () => {
     navigate('/products');

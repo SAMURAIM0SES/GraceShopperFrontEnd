@@ -22,7 +22,7 @@ export const registerUser = async (
         last_name: last_name,
         mobile: mobile,
         email: email,
-        admin: admin
+        admin: admin,
       }),
     });
     const result = await response.json();
@@ -226,6 +226,27 @@ export async function getCategory(categoryId) {
     );
     const result = await response.json();
     console.log(result, 'should be single category by id');
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateCartProducts(productId, cartId, quantity, token) {
+  try {
+    const response = await fetch(`${apiURL}/cart/cart_products`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+        cartId,
+        quantity,
+      }),
+    });
+    const result = await response.json();
     return result;
   } catch (error) {
     console.log(error);
