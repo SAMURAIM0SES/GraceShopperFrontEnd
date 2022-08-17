@@ -24,12 +24,12 @@ const CardProducts = (props) => {
   };
 
   return (
-    <>
+    <div>
       {showProduct && (
         <div className={classes['cart-body-shopping']}>
           <div className={classes['cart-shopping-products']}>
             <div className={classes['cart-product-image']}>
-              <img src={`${faker.image.food(340, 240)}`} alt="random" />
+              <img src={`${faker.image.food(340, 240, true)}`} alt="random" />
             </div>
             <div className={classes['cart-product-description']}>
               <h4>{name}</h4>
@@ -48,7 +48,7 @@ const CardProducts = (props) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

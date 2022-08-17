@@ -4,6 +4,7 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { getCurrentData } from './../utils/auth';
 
 const { faker } = require('@faker-js/faker');
 
@@ -25,7 +26,10 @@ const DUMMY_PRODUCTS = [
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
+  const [cartProducts, setCartproducts] = useState([]);
   const navigate = useNavigate();
+
+  const cartStoraged = getCurrentData('cart');
 
   const nextNavigateHandler = () => {
     navigate('/shipping');
@@ -39,10 +43,11 @@ const Cart = () => {
 
   useEffect(() => {
     totalCost(DUMMY_PRODUCTS);
+    setCartproducts(cartStoraged);
   }, [total]);
 
   const totalSumProducts = (sumProd) => {
-    console.log(sumProd);
+    console.log('here');
   };
 
   totalSumProducts();
@@ -59,17 +64,21 @@ const Cart = () => {
           <h3>Shopping Cart</h3>
           <div className={classes['cart-body']}>
             <div>
-              {DUMMY_PRODUCTS.map((prod) => {
-                return (
-                  <CardProducts
-                    key={nanoid()}
-                    name={prod.name}
-                    description={prod.description}
-                    price={prod.price}
-                    onTotalSum={totalSumProducts}
-                  />
-                );
-              })}
+              {cartProducts ? (
+                cartProducts.map((prod) => {
+                  return (
+                    <CardProducts
+                      key={nanoid()}
+                      name={prod.name}
+                      description={prod.description}
+                      price={prod.price}
+                      onTotalSum={totalSumProducts}
+                    />
+                  );
+                })
+              ) : (
+                <p>there are products</p>
+              )}
             </div>
 
             {/* <CardProducts data={DUMMY_PRODUCTS} /> */}

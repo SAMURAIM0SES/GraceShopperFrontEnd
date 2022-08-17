@@ -47,12 +47,18 @@ const CategoryProducts = () => {
       const newProduct = { ...product, quantity: 1 };
       setSingleProduct(newProduct);
       const productAdded = [];
+      const isProductInCart = cart.find((prod) => prod.id === newProduct.id);
+      if (isProductInCart) {
+        return;
+      }
       productAdded.push(newProduct);
       if (productAdded.length) {
-        setCart(productAdded);
+        setCart((prev) => [...prev, ...productAdded]);
       }
     }
-    console.log(cart);
+    if (cart.length) {
+      storeCurrentData('cart', cart);
+    }
   };
 
   return (
@@ -71,10 +77,7 @@ const CategoryProducts = () => {
               <div className={classes['product-card']} key={nanoid()}>
                 <div className={classes['product-card-img']}>
                   <h4>{prod.name}</h4>
-                  <img
-                    src={`${faker.image.food(640, 480, true)}`}
-                    alt="random"
-                  />
+                  <img src={`${faker.image.food(640, 480)}`} alt="random" />
                 </div>
                 <div className={classes['product-card-info']}>
                   <p className={classes['product-card-description']}>

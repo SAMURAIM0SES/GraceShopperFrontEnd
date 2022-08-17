@@ -29,6 +29,7 @@
   align-items: center;
   margin-bottom: 2rem;
   gap: 10px;
+  border: 2px solid tomato;
 }
 
 .cart-product-image {
