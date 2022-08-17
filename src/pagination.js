@@ -1,81 +1,76 @@
-import React from 'react';
-import classnames from 'classnames';
-import { usePagination, DOTS } from './usePagination';
+import ReactPaginate from 'react-paginate';
+import React, {
+    useEffect,
+    useState
+} from "react";
+import ReactDOM from "react-dom";
 
-const Pagination = props => {
-    const {
-        onPageChange,
-        totalCount,
-        siblingCount = 1,
-        currentPage,
-        pageSize,
-        className
-    } = props;
+const items = [...Array(33).keys()];
 
-    const paginationRange = usePagination({
-        currentPage,
-        totalCount,
-        siblingCount,
-        pageSize
-    });
-
-    // If there are less than 2 times in pagination range we shall not render the component
-    if (currentPage === 0 || paginationRange.length < 2) {
-        return null;
-    }
-
-    const onNext = () => {
-        onPageChange(currentPage + 1);
-    };
-
-    const onPrevious = () => {
-        onPageChange(currentPage - 1);
-    };
-
-    let lastPage = paginationRange[paginationRange.length - 1];
+function Items({ currentItems }) {
     return (
-        <ul
-            className={classnames('pagination-container', { [className]: className })}
-        >
-            {/* Left navigation arrow */}
-            <li
-                className={classnames('pagination-item', {
-                    disabled: currentPage === 1
-                })}
-                onClick={onPrevious}
-            >
-                <div className="arrow left" />
-            </li>
-            {paginationRange.map(pageNumber => {
-
-                // If the pageItem is a DOT, render the DOTS unicode character
-                if (pageNumber === DOTS) {
-                    return <li className="pagination-item dots">&#8230;</li>;
-                }
-
-                // Render our Page Pills
-                return (
-                    <li
-                        className={classnames('pagination-item', {
-                            selected: pageNumber === currentPage
-                        })}
-                        onClick={() => onPageChange(pageNumber)}
-                    >
-                        {pageNumber}
-                    </li>
-                );
-            })}
-            {/*  Right Navigation arrow */}
-            <li
-                className={classnames('pagination-item', {
-                    disabled: currentPage === lastPage
-                })}
-                onClick={onNext}
-            >
-                <div className="arrow right" />
-            </li>
-        </ul>
+        <div className="items">
+            {currentItems && currentItems.map((item) => (
+                <div>
+                    <h3>Item #{item}</h3>
+                </div>
+            ))}
+        </div>
     );
-};
+}
 
-export default Pagination;
+function PaginatedItems({ itemsPerPage }) {
+    // We start with an empty list of items.
+    const [currentItems, setCurrentItems] = useState(null);
+    const [pageCount, setPageCount] = useState(0);
+    // Here we use item offsets; we could also use page offsets
+    // following the API or data you're working with.
+    const [itemOffset, setItemOffset] = useState(0);
+
+    useEffect(() => {
+        // Fetch items from another resources.
+        const endOffset = itemOffset + itemsPerPage;
+        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        setCurrentItems(items.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(items.length / itemsPerPage));
+    }, [itemOffset, itemsPerPage]);
+
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+        const newOffset = event.selected * itemsPerPage % items.length;
+        console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
+        setItemOffset(newOffset);
+    };
+
+    return (
+        <>
+            <Items currentItems={currentItems} />
+            <ReactPaginate
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+            />
+        </>
+    );
+}
+
+// Add a <div id="container"> to your HTML to see the componend rendered.
+ReactDOM.render(
+    <PaginatedItems itemsPerPage={4} />,
+    document.getElementById("container")
+);
