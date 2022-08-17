@@ -63,17 +63,12 @@
   margin-bottom: 0.5rem;
 }
 
-.shipping-methods {
+.shipping-methods{
   box-sizing: content-box;
     border: 1px solid black;
-    display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 }
-/* .shipping-methods input {
-  font-family: inherit;
-  width: 45%;
-  padding: 0.5rem;
-} */
 
 .shipping-buttons {
   width: 30%;
@@ -131,4 +126,34 @@
   justify-content: space-between;
   margin-top: 3.4rem;
   font-size: 2.8rem;
+}
+
+.swipeWrapper {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+  position: relative;
+}
+
+.swipeWrapper:last-of-type {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.swipeWrapper.active {
+  background-color: #eee;
+}
+
+.swipeWrapper .leftColumn {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  height: 16px;
+  width: 16px;
+}
+
+.swipeWrapper .leftColumnSpacer {
+  margin-left: 30px;
 }
