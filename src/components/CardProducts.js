@@ -71,8 +71,6 @@ const CardProducts = (props) => {
     );
     setTotal(totalSum);
     setTaxes(totalSum * 0.12);
-    console.log(productPrice);
-    console.log(updatePriceProduct);
   };
 
   return (

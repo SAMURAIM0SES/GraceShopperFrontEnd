@@ -14,8 +14,8 @@ const CategoryProducts = () => {
   const [categoryInfo, setCategoryInfo] = useState({});
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState({});
-  const [cart, setCart] = useState([]);
   const shoppingCart = getCurrentData('cart');
+  const [cart, setCart] = useState(shoppingCart || []);
 
   const fetchCategory = async (id) => {
     const [category] = await getCategory(id);
@@ -47,7 +47,7 @@ const CategoryProducts = () => {
       const newProduct = { ...product, quantity: 1 };
       setSingleProduct(newProduct);
       const productAdded = [];
-      const isProductInCart = cart.find((prod) => prod.id === newProduct.id);
+      const isProductInCart = cart.find((prod) => prod.id == newProduct.id);
       if (isProductInCart) {
         return;
       }

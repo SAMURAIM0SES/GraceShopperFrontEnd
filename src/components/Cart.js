@@ -6,31 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { getCurrentData, clearCurrentData } from './../utils/auth';
 
-const { faker } = require('@faker-js/faker');
-
-// const DUMMY_PRODUCTS = [
-//   {
-//     name: 'Modern Steel Chair',
-//     description:
-//       'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
-//     price: 354,
-//   },
-//   {
-//     name: 'Generic Metal Shoes',
-//     description:
-//       'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
-//     price: 81,
-//   },
-// ];
-
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
-  const [cartProducts, setCartproducts] = useState([]);
   const [initailProducts, setInitialProducts] = useState([]);
   const navigate = useNavigate();
 
   const cartStoraged = getCurrentData('cart');
+  const [cartProducts, setCartproducts] = useState(cartStoraged || []);
 
   const nextNavigateHandler = () => {
     navigate('/shipping');
@@ -125,7 +108,7 @@ const Cart = () => {
               onClick={nextNavigateHandler}
               disabled={cartProducts.length ? false : true}
             >
-              Next
+              Checkout
             </button>
             <button
               onClick={deleteAllProductsHandler}
