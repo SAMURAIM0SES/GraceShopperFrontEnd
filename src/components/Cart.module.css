@@ -175,4 +175,10 @@
 .cart-buttons button:disabled {
   background-color: var(--primary-grey-light);
   border: 1.5px solid var(--primary-grey-light);
+  color: var(--primary-grey-dark);
+}
+
+.cart-buttons button:disabled:hover {
+  background-color: var(--primary-grey-light);
+  color: var(--primary-grey-dark);
 }

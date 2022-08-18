@@ -6,7 +6,6 @@ import { GoHome } from 'react-icons/go';
 import { nanoid } from 'nanoid';
 import classes from './CategoryProducts.module.css';
 import { storeCurrentData, getCurrentData } from './../utils/auth';
-
 const { faker } = require('@faker-js/faker');
 
 const CategoryProducts = () => {
@@ -34,9 +33,19 @@ const CategoryProducts = () => {
     }
   };
 
+  const creatingCart = () => {
+    const cart = getCurrentData('cart');
+    if (!cart) {
+      storeCurrentData('cart', []);
+    } else {
+      return;
+    }
+  };
+
   useEffect(() => {
     fetchCategory(categoryId);
     fetchAllProducts();
+    creatingCart();
   }, []);
 
   const addToCartHandler = (e) => {
@@ -44,14 +53,16 @@ const CategoryProducts = () => {
       (prod) => prod.id === +e.target.dataset.id
     );
     if (product) {
-      const newProduct = { ...product, quantity: 1 };
-      setSingleProduct(newProduct);
+      const productSelected = { ...product, quantity: 1 };
+      setSingleProduct(productSelected);
       const productAdded = [];
-      const isProductInCart = cart.find((prod) => prod.id == newProduct.id);
+      const isProductInCart = cart.find(
+        (prod) => prod.id == productSelected.id
+      );
       if (isProductInCart) {
         return;
       }
-      productAdded.push(newProduct);
+      productAdded.push(productSelected);
       if (productAdded.length) {
         setCart((prev) => [...prev, ...productAdded]);
       }
@@ -102,14 +113,25 @@ const CategoryProducts = () => {
 export default CategoryProducts;
 
 /*
- <div className={classes['product-card']}>
-            <div className={classes['product-card-img']}>
-              <img src={`${faker.image.food(640, 480, true)}`} alt="random" />
-            </div>
-            <p className={classes['product-card-description']}>
-              descriptionsssssssssssssssssssssss
-              wjhsjshsjhjsssssssssssssssssssssssssssssssss
-            </p>
-            <p className={classes['product-card-price']}>Price</p>
-          </div>
+const addToCartHandler = (e) => {
+    const [product] = categoryProducts.filter(
+      (prod) => prod.id === +e.target.dataset.id
+    );
+    if (product) {
+      const productSelected = { ...product, quantity: 1 };
+      setSingleProduct(productSelected);
+      const productAdded = [];
+      const isProductInCart = cart.find((prod) => prod.id == productSelected.id);
+      if (isProductInCart) {
+        return;
+      }
+      productAdded.push(productSelected);
+      if (productAdded.length) {
+        setCart((prev) => [...prev, ...productAdded]);
+      }
+    }
+    if (cart.length) {
+      storeCurrentData('cart', cart);
+    }
+  };
 */

@@ -26,6 +26,10 @@ const Cart = () => {
   };
 
   useEffect(() => {
+    if (!cartStoraged) {
+      setTotal(0);
+      setTaxes(0);
+    }
     if (cartStoraged) {
       totalCost(cartStoraged);
       setCartproducts(cartStoraged);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from './CardPrducts.module.css';
-import { storeCurrentData, clearCurrentData } from './../utils/auth';
+import { storeCurrentData } from './../utils/auth';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 const { faker } = require('@faker-js/faker');
 
 const CardProducts = (props) => {
@@ -16,6 +17,7 @@ const CardProducts = (props) => {
     qtn,
     initailProducts,
   } = props;
+
   const [showProduct, setShowProduct] = useState(true);
   const [productQtn, setProductQtn] = useState(qtn);
   const [productPrice, setProductPrice] = useState(+price);
@@ -81,8 +83,8 @@ const CardProducts = (props) => {
 
     if (productQtn === 1) {
       console.log('delete');
-      cartProductsCopy.splice(idxProduct, 1);
-      clearCurrentData();
+      const remainPorducts = cartProductsCopy.splice(idxProduct, 1);
+      storeCurrentData('cart', cartProductsCopy);
     }
   };
 
@@ -100,13 +102,17 @@ const CardProducts = (props) => {
               <p>${productPrice}</p>
             </div>
             <div className={classes['cart-product-quantity']}>
-              <button onClick={addQuantityHandler}>+</button>
+              <button onClick={addQuantityHandler}>
+                <AiOutlinePlus />
+              </button>
               <input
                 type="text"
                 value={productQtn}
                 onChange={(e) => e.target.value}
               />
-              <button onClick={reduceQuantityHandler}>-</button>
+              <button onClick={reduceQuantityHandler}>
+                <AiOutlineMinus />
+              </button>
             </div>
           </div>
         </div>

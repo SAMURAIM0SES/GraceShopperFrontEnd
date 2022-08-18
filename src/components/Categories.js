@@ -8,8 +8,7 @@ const Categories = (props) => {
 
   const fetchAllCategories = async () => {
     const allCategories = await getAllCategories();
-    const onlyTenCategories = allCategories.slice(0, 10);
-    setCategories(onlyTenCategories);
+    setCategories(allCategories);
   };
 
   useEffect(() => {
