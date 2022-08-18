@@ -21,7 +21,7 @@ const Payment = () => {
             token,
             product
         }
-        return fetch(`${apiURL}/payment`,{
+        return fetch(`${apiURL}`,{
             method: "POST",
             headers:{ "Content-Type": "application/json"},
             body: JSON.stringify(body)
