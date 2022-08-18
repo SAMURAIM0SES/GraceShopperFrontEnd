@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import Layout from "./Layout"
-import { getAllProducts } from "../api"
+import { getAllProducts, deleteProduct } from "../api"
 import Pagination from "../pagination"
+import { getCurrentData } from "../utils/auth";
 
 
 const Products = () => {
@@ -10,7 +11,9 @@ const Products = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(10)
-    // const [user, setUser] = useState(req.user)
+    const [confirmSelect, setConfirmSelect] = useState(false)
+    const [editProduct, setEditProduct] = useState(false)
+    const [admin] = useState(getCurrentData('admin'))
 
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
@@ -29,6 +32,14 @@ const Products = () => {
             return product.name.toLowerCase().includes(searchString)
         })
         setProducts(filteredSearch)
+    }
+
+    function deleteHandler(productid) {
+        deleteProduct(productid)
+    }
+
+    function editHandler() {
+
     }
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -51,10 +62,24 @@ const Products = () => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>${product.price}</p>
-                        {/* {user.adim ? <div>
-                            <button>edit</button>
-                            <button>delete</button>
-                        </div> : null} */}
+                        {(admin && confirmSelect == false) ? <div>
+                            <button onClick={() => {
+                                setEditProduct(true)
+                            }}>edit</button>
+                            <button onClick={() => {
+                                setConfirmSelect(true)
+                            }}>delete</button>
+                        </div> : null}
+                        {confirmSelect ? <div>
+                            <button onClick={deleteHandler(product.id)}>Confirm</button>
+                            <button onClick={setConfirmSelect(false)}>Cancel</button>
+                        </div> : null}
+                        {editProduct ? <form onSubmit={editHandler}>
+                            <input></input>
+                            <input></input>
+                            <input></input>
+                            <button type='submit'></button>
+                        </form> : null}
                     </div>
                 )
             })
