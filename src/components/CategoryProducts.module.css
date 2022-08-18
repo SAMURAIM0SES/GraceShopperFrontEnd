@@ -120,4 +120,5 @@
 
 .product-card-btn button:hover {
   opacity: 1;
+  transform: scale(1.02);
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from './CardPrducts.module.css';
-import { storeCurrentData, clearCurrentData } from './../utils/auth';
+import { storeCurrentData } from './../utils/auth';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 const { faker } = require('@faker-js/faker');
 
 const CardProducts = (props) => {
@@ -16,21 +17,26 @@ const CardProducts = (props) => {
     qtn,
     initailProducts,
   } = props;
+
   const [showProduct, setShowProduct] = useState(true);
   const [productQtn, setProductQtn] = useState(qtn);
   const [productPrice, setProductPrice] = useState(+price);
 
   const addQuantityHandler = () => {
-    setProductQtn((prev) => prev + 1);
+    const initailProductsCopy = [...initailProducts];
+    const initialPrice = initailProductsCopy.find(
+      (prod) => prod.id === id
+    ).price;
 
-    setProductPrice(price * 1 * productQtn + 1);
+    setProductPrice((prev) => prev + initialPrice * 1);
+    setProductQtn((prev) => prev + 1);
 
     const productSelected = cartProducts.find((prod) => prod.id === id);
     const idxProduct = cartProducts.indexOf(productSelected);
 
     const updatePriceProduct = {
       ...productSelected,
-      price: productPrice + price * 1,
+      price: productPrice + initialPrice * 1,
       quantity: productQtn + 1 * 1,
     };
 
@@ -47,11 +53,14 @@ const CardProducts = (props) => {
   };
 
   const reduceQuantityHandler = () => {
-    setProductQtn((prev) => prev - 1);
     const initailProductsCopy = [...initailProducts];
     const initialPrice = initailProductsCopy.find(
       (prod) => prod.id === id
     ).price;
+
+    setProductPrice((prev) => prev - initialPrice * 1);
+    setProductQtn((prev) => prev - 1);
+
     const productSelected = cartProducts.find((prod) => prod.id === id);
     const idxProduct = cartProducts.indexOf(productSelected);
 
@@ -60,7 +69,7 @@ const CardProducts = (props) => {
       price: productPrice - initialPrice * 1,
       quantity: productQtn - 1 * 1,
     };
-    setProductPrice(productPrice - initialPrice * 1);
+
     const cartProductsCopy = [...cartProducts];
     cartProductsCopy[idxProduct] = updatePriceProduct;
     setCartproducts(cartProductsCopy);
@@ -71,6 +80,12 @@ const CardProducts = (props) => {
     );
     setTotal(totalSum);
     setTaxes(totalSum * 0.12);
+
+    if (productQtn === 1) {
+      console.log('delete');
+      const remainPorducts = cartProductsCopy.splice(idxProduct, 1);
+      storeCurrentData('cart', cartProductsCopy);
+    }
   };
 
   return (
@@ -87,13 +102,17 @@ const CardProducts = (props) => {
               <p>${productPrice}</p>
             </div>
             <div className={classes['cart-product-quantity']}>
-              <button onClick={addQuantityHandler}>+</button>
+              <button onClick={addQuantityHandler}>
+                <AiOutlinePlus />
+              </button>
               <input
                 type="text"
                 value={productQtn}
                 onChange={(e) => e.target.value}
               />
-              <button onClick={reduceQuantityHandler}>-</button>
+              <button onClick={reduceQuantityHandler}>
+                <AiOutlineMinus />
+              </button>
             </div>
           </div>
         </div>

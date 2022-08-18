@@ -125,3 +125,22 @@
 .cart-body-shopping h3 {
   font-weight: 300;
 }
+
+.cart-product-quantity button {
+  padding: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.cart-product-quantity button:first-child:hover {
+  color: var(--secondary-green);
+}
+
+.cart-product-quantity button:last-child:hover {
+  color: var(--extra-red);
+}
