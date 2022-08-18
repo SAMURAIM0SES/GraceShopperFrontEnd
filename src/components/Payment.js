@@ -3,7 +3,10 @@ import classes from "./Payment.module.css";
 import React, {useState, useEffect} from "react";
 import StripeCheckout from "react-stripe-checkout";
 const { faker } = require('@faker-js/faker');
+// export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
+
+
 
 const Payment = () => {
 
@@ -18,17 +21,18 @@ const Payment = () => {
             token,
             product
         }
-        const headers = {
-            "Content-Type": "application/json"
-        }
         return fetch(`${apiURL}/payment`,{
             method: "POST",
-            headers,
+            headers:{ "Content-Type": "application/json"},
             body: JSON.stringify(body)
         }).then(response => {
-            console.log("RESPONSE", response)
-            const {status} = response 
-            console.log("status", status)
+          return response.json()
+            // console.log("RESPONSE", response.json())
+            // const {status} = response 
+            // console.log("status", status)
+            
+    }).then((result)=>{
+console.log(result, "result")
     })
     .catch(error => console.log(error))
     }
@@ -113,7 +117,7 @@ const Payment = () => {
         stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
         token={makePayment}
         name="Place your order now!"
-        amount={product.price}>
+        amount={product.price * 100}>
 
 
         </StripeCheckout>
