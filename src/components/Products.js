@@ -4,11 +4,13 @@ import Layout from "./Layout"
 import { getAllProducts } from "../api"
 import Pagination from "../pagination"
 
+
 const Products = () => {
     const [products, setProducts] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(10)
+    // const [user, setUser] = useState(req.user)
 
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
@@ -49,6 +51,10 @@ const Products = () => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>${product.price}</p>
+                        {/* {user.adim ? <div>
+                            <button>edit</button>
+                            <button>delete</button>
+                        </div> : null} */}
                     </div>
                 )
             })
