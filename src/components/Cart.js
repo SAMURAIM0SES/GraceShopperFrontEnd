@@ -4,29 +4,30 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { getCurrentData } from './../utils/auth';
+import { getCurrentData, clearCurrentData } from './../utils/auth';
 
 const { faker } = require('@faker-js/faker');
 
-const DUMMY_PRODUCTS = [
-  {
-    name: 'Modern Steel Chair',
-    description:
-      'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
-    price: 354,
-  },
-  {
-    name: 'Generic Metal Shoes',
-    description:
-      'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
-    price: 81,
-  },
-];
+// const DUMMY_PRODUCTS = [
+//   {
+//     name: 'Modern Steel Chair',
+//     description:
+//       'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
+//     price: 354,
+//   },
+//   {
+//     name: 'Generic Metal Shoes',
+//     description:
+//       'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+//     price: 81,
+//   },
+// ];
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [cartProducts, setCartproducts] = useState([]);
+  const [initailProducts, setInitialProducts] = useState([]);
   const navigate = useNavigate();
 
   const cartStoraged = getCurrentData('cart');
@@ -38,13 +39,23 @@ const Cart = () => {
   const totalCost = (arr) => {
     const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
-    setTaxes(totalSum * 0.1);
+    setTaxes(totalSum * 0.12);
   };
 
   useEffect(() => {
-    totalCost(cartStoraged);
-    setCartproducts(cartStoraged);
+    if (cartStoraged) {
+      totalCost(cartStoraged);
+      setCartproducts(cartStoraged);
+      setInitialProducts(cartStoraged);
+    }
   }, []);
+
+  const deleteAllProductsHandler = () => {
+    setCartproducts([]);
+    clearCurrentData();
+    setTotal(0);
+    setTaxes(0);
+  };
 
   return (
     <Layout>
@@ -58,7 +69,7 @@ const Cart = () => {
           <h3>Shopping Cart</h3>
           <div className={classes['cart-body']}>
             <div>
-              {cartProducts ? (
+              {cartProducts.length ? (
                 cartProducts.map((prod) => {
                   return (
                     <CardProducts
@@ -71,11 +82,13 @@ const Cart = () => {
                       setCartproducts={setCartproducts}
                       setTotal={setTotal}
                       setTaxes={setTaxes}
+                      qtn={prod.quantity}
+                      initailProducts={initailProducts}
                     />
                   );
                 })
               ) : (
-                <p>there are products</p>
+                <p>there are no products</p>
               )}
             </div>
 
@@ -108,8 +121,18 @@ const Cart = () => {
           </div>
 
           <div className={classes['cart-buttons']}>
-            <button onClick={nextNavigateHandler}>Next</button>
-            <button>Cancel</button>
+            <button
+              onClick={nextNavigateHandler}
+              disabled={cartProducts.length ? false : true}
+            >
+              Next
+            </button>
+            <button
+              onClick={deleteAllProductsHandler}
+              disabled={cartProducts.length ? false : true}
+            >
+              Delete All
+            </button>
           </div>
         </div>
       </section>

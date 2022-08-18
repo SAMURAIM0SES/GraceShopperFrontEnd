@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from './CardPrducts.module.css';
+import { storeCurrentData, clearCurrentData } from './../utils/auth';
 const { faker } = require('@faker-js/faker');
 
 const CardProducts = (props) => {
@@ -12,36 +13,66 @@ const CardProducts = (props) => {
     setCartproducts,
     setTotal,
     setTaxes,
+    qtn,
+    initailProducts,
   } = props;
   const [showProduct, setShowProduct] = useState(true);
-  const [productQtn, setProductQtn] = useState(1);
-  const [productPrice, setProductPrice] = useState(price);
+  const [productQtn, setProductQtn] = useState(qtn);
+  const [productPrice, setProductPrice] = useState(+price);
 
   const addQuantityHandler = () => {
     setProductQtn((prev) => prev + 1);
-    setProductPrice(price * (productQtn + 1));
+
+    setProductPrice(price * 1 * productQtn + 1);
 
     const productSelected = cartProducts.find((prod) => prod.id === id);
     const idxProduct = cartProducts.indexOf(productSelected);
 
-    const updatePrice = price * (productQtn + 1);
-    const updatePriceProduct = { ...productSelected, price: updatePrice };
-    const cartProductsCopy = [...cartProducts];
+    const updatePriceProduct = {
+      ...productSelected,
+      price: productPrice + price * 1,
+      quantity: productQtn + 1 * 1,
+    };
 
+    const cartProductsCopy = [...cartProducts];
     cartProductsCopy[idxProduct] = updatePriceProduct;
     setCartproducts(cartProductsCopy);
+    storeCurrentData('cart', cartProductsCopy);
     const totalSum = cartProductsCopy.reduce(
       (prev, curr) => prev + curr.price * 1,
       0
     );
     setTotal(totalSum);
-    setTaxes(totalSum * 0.1);
+    setTaxes(totalSum * 0.12);
   };
 
   const reduceQuantityHandler = () => {
     setProductQtn((prev) => prev - 1);
+    const initailProductsCopy = [...initailProducts];
+    const initialPrice = initailProductsCopy.find(
+      (prod) => prod.id === id
+    ).price;
+    const productSelected = cartProducts.find((prod) => prod.id === id);
+    const idxProduct = cartProducts.indexOf(productSelected);
 
-    setProductPrice(productPrice - price);
+    const updatePriceProduct = {
+      ...productSelected,
+      price: productPrice - initialPrice * 1,
+      quantity: productQtn - 1 * 1,
+    };
+    setProductPrice(productPrice - initialPrice * 1);
+    const cartProductsCopy = [...cartProducts];
+    cartProductsCopy[idxProduct] = updatePriceProduct;
+    setCartproducts(cartProductsCopy);
+    storeCurrentData('cart', cartProductsCopy);
+    const totalSum = cartProductsCopy.reduce(
+      (prev, curr) => prev + curr.price * 1,
+      0
+    );
+    setTotal(totalSum);
+    setTaxes(totalSum * 0.12);
+    console.log(productPrice);
+    console.log(updatePriceProduct);
   };
 
   return (
