@@ -52,25 +52,21 @@ const CategoryProducts = () => {
     const [product] = categoryProducts.filter(
       (prod) => prod.id === +e.target.dataset.id
     );
-    if (product) {
-      const productSelected = { ...product, quantity: 1 };
-      setSingleProduct(productSelected);
-      const productAdded = [];
-      const isProductInCart = cart.find(
-        (prod) => prod.id == productSelected.id
-      );
-      if (isProductInCart) {
-        return;
-      }
-      productAdded.push(productSelected);
-      if (productAdded.length) {
-        setCart((prev) => [...prev, ...productAdded]);
-      }
+    const productAdded = [];
+    const productSelected = { ...product, quantity: 1 };
+    setSingleProduct(productSelected);
+    productAdded.push(productSelected);
+
+    const isProductInCart = shoppingCart.find(
+      (prod) => prod.id == productSelected.id
+    );
+    if (isProductInCart) {
+      return;
     }
-    if (cart.length) {
-      storeCurrentData('cart', cart);
-    }
+    setCart((prev) => [...prev, ...productAdded]);
   };
+
+  storeCurrentData('cart', cart);
 
   return (
     <Layout>
@@ -82,6 +78,7 @@ const CategoryProducts = () => {
           </Link>
           <p>{categoryInfo.description}</p>
         </div>
+
         <div className={classes['category-prod-body']}>
           {categoryProducts.map((prod) => {
             return (
