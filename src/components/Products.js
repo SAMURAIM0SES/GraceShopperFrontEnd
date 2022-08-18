@@ -2,19 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react"
 import Layout from "./Layout"
 import { getAllProducts } from "../api"
-import { getAllCategories } from "../api"
+import Pagination from "../pagination"
+
 
 const Products = () => {
     const [products, setProducts] = useState([])
-    const [categories, setCategories] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
-    const [searchCategory, setSearchCategory] = useState(0)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [productsPerPage] = useState(10)
+    // const [user, setUser] = useState(req.user)
 
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
         setProducts(allProducts)
-        const allCategories = await getAllCategories()
-        setCategories(allCategories)
     }
 
 
@@ -23,7 +23,7 @@ const Products = () => {
 
     function searchHandler(event) {
         event.preventDefault()
-        console.log(searchCategory, searchTerm)
+        console.log(searchTerm)
         const searchString = searchTerm.toLowerCase()
         const filteredSearch = products.filter((product) => {
             return product.name.toLowerCase().includes(searchString)
@@ -31,34 +31,35 @@ const Products = () => {
         setProducts(filteredSearch)
     }
 
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    const paginate = (pageNumbers) => setCurrentPage(pageNumbers)
+
 
     return (
         <Layout>
             <h1>Products</h1>
-            <form>
-                {/* <label>Categories</label>
-                <select>
-                    <option>Any</option>
-                    {categories.map((category) => {
-                        return (
-                            <option key={`categoryHolder${category.id}`} onChange={(e) => setSearchCategory(e.target.value)}>{category.name}</option>
-                        )
-                    })}
-                </select> */}
+            {/* <form>
                 <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
                 <button onClick={searchHandler}>🔍︎</button>
-            </form>
-            {
-                products.map((product) => {
-                    return (
-                        <div key={`productHolder${product.id}`}>
-                            <h2>{product.name}</h2>
-                            <p>{product.description}</p>
-                            <p>${product.price}</p>
-                        </div>
-                    )
-                })
+            </form> */}
+            {currentProducts.map((product) => {
+                return (
+                    <div key={`productHolder${product.id}`}>
+                        <h2>{product.name}</h2>
+                        <p>{product.description}</p>
+                        <p>${product.price}</p>
+                        {/* {user.adim ? <div>
+                            <button>edit</button>
+                            <button>delete</button>
+                        </div> : null} */}
+                    </div>
+                )
+            })
             }
+            <Pagination productsPerPage={productsPerPage} totalProducts={products.length} paginate={paginate} />
         </Layout >
     )
 }
