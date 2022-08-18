@@ -1,5 +1,7 @@
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 
+// export const apiURL = 'http://localhost:4000/api';
+
 export const registerUser = async (
   username,
   password,
