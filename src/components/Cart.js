@@ -124,3 +124,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
+// getCurrentData()
