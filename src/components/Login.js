@@ -19,6 +19,7 @@ const Login = (props) => {
       clearCurrentData();
       storeCurrentData('user', userLogin.user.username);
       storeCurrentData('token', userLogin.token);
+      storeCurrentData('admin', userLogin.user.admin)
       setUserLogged(userLogin.user.username);
       setUser('');
       setPassword('');
