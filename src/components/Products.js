@@ -1,16 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import Layout from "./Layout"
-import { getAllProducts, deleteProduct, updateProduct, getAllCategories } from "../api"
+import { getAllProducts, deleteProduct, updateProduct } from "../api"
 import Pagination from "../pagination"
 import { getCurrentData } from "../utils/auth";
-import Categories from "./Categories";
 import EditProduct from "./EditProduct";
 
 
 const Products = () => {
     const [products, setProducts] = useState([])
-    const [categories, setCategories] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(10)
@@ -30,8 +28,6 @@ const Products = () => {
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
         setProducts(allProducts)
-        const allCategories = await getAllCategories()
-        setCategories(allCategories)
     }
 
 
@@ -48,23 +44,19 @@ const Products = () => {
         setProducts(filteredSearch)
     }
 
-    function deleteHandler(productid) {
-        deleteProduct(productid)
-        setConfirmSelect(false)
-    }
 
-    function editHandler() {
-        updateProduct(
-            productName,
-            productDescription,
-            productPrice,
-            category_id,
-            inventory_id,
-            token,
-            product_id
-        )
-        setEditProduct(false)
-    }
+    // function editHandler() {
+    //     updateProduct(
+    //         productName,
+    //         productDescription,
+    //         productPrice,
+    //         category_id,
+    //         inventory_id,
+    //         token,
+    //         product_id
+    //     )
+    //     setEditProduct(false)
+    // }
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -96,15 +88,18 @@ const Products = () => {
                                 setInventory_id(product.inventory_id)
                                 setProduct_id(product.id)
                             }}>edit</button>
-                            <button onClick={
+                            <button onClick={() => {
                                 setConfirmSelect(true)
-                            }>delete</button>
+                            }}>delete</button>
                         </div> : null}
                         {confirmSelect ? <div>
-                            <button onClick={deleteHandler(product.id)}>Confirm</button>
-                            <button onClick={setConfirmSelect(false)}>Cancel</button>
+                            <button onClick={() => {
+                                deleteProduct(product.id)
+                                setConfirmSelect(false)
+                            }}>Confirm</button>
+                            <button onClick={() => { setConfirmSelect(false) }}>Cancel</button>
                         </div> : null}
-                        {editProduct ? <EditProduct
+                        {/* {editProduct ? <EditProduct
                             productName={productName}
                             setProductName={setProductName}
                             productDescription={productDescription}
@@ -112,8 +107,10 @@ const Products = () => {
                             productPricd={productPrice}
                             setProductPrice={productPrice}
                             category_id={category_id}
-                            setC
-                        /> : null}
+                            setCategory_id={setCategory_id}
+                            inventory_id={inventory_id}
+
+                        /> : null} */}
                     </div>
                 )
             })

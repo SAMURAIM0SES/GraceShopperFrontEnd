@@ -1,14 +1,25 @@
 import React from "react";
 import { updateProduct } from "../api";
+import { useState, useEffect } from "react"
+import { getCurrentData } from "../utils/auth";
+import { getAllCategories } from "../api";
 
 const EditProduct = (props) => {
-
+    const [categories, setCategories] = useState([])
     const [productName, setProductName] = useState(props.productName, props.setProductName)
     const [productDescription, setProductDescription] = useState(props.productDescription, props.setProductDescription)
     const [productPrice, setProductPrice] = useState(props.productPrice, props.setProductPrice)
     const [category_id, setCategory_id] = useState(props.category_id, props.setCategory_id)
     const [inventory_id, setInventory_id] = useState(props.inventory_id, props.setInventory_id)
     const [product_id, setProduct_id] = useState(props.product_id, props.setProduct_id)
+    const [token] = useState(getCurrentData('token'))
+
+    async function startingData() {
+        const allCategories = await getAllCategories()
+        setCategories(allCategories)
+    }
+
+    useEffect(() => { startingData() }, [])
 
     function editHandler() {
         updateProduct(
@@ -30,7 +41,7 @@ const EditProduct = (props) => {
             <select value={category_id}>
                 {categories.map((category) => {
                     return (
-                        <option key={`category ${category.id}`} onClick={setCategory_id(category.id)}>{category.name}</option>
+                        <option key={`category ${category.id}`} value={category.id} onChange={setCategory_id(category.id)}>{category.name}</option>
                     )
                 })}
             </select>
