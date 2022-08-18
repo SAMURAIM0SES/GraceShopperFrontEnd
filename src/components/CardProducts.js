@@ -38,7 +38,6 @@ const CardProducts = (props) => {
       quantity: productQtn + 1 * 1,
     };
 
-    console.log(updatePriceProduct);
     const cartProductsCopy = [...cartProducts];
     cartProductsCopy[idxProduct] = updatePriceProduct;
     setCartproducts(cartProductsCopy);
@@ -52,23 +51,23 @@ const CardProducts = (props) => {
   };
 
   const reduceQuantityHandler = () => {
-    setProductQtn((prev) => prev - 1);
     const initailProductsCopy = [...initailProducts];
     const initialPrice = initailProductsCopy.find(
       (prod) => prod.id === id
     ).price;
+
+    setProductPrice((prev) => prev - initialPrice * 1);
+    setProductQtn((prev) => prev - 1);
+
     const productSelected = cartProducts.find((prod) => prod.id === id);
     const idxProduct = cartProducts.indexOf(productSelected);
-
-    console.log(productPrice, 'productPrice');
-    console.log(initialPrice, 'initial price');
 
     const updatePriceProduct = {
       ...productSelected,
       price: productPrice - initialPrice * 1,
       quantity: productQtn - 1 * 1,
     };
-    setProductPrice(productPrice - initialPrice * 1);
+
     const cartProductsCopy = [...cartProducts];
     cartProductsCopy[idxProduct] = updatePriceProduct;
     setCartproducts(cartProductsCopy);
@@ -79,6 +78,12 @@ const CardProducts = (props) => {
     );
     setTotal(totalSum);
     setTaxes(totalSum * 0.12);
+
+    if (productQtn === 1) {
+      console.log('delete');
+      cartProductsCopy.splice(idxProduct, 1);
+      clearCurrentData();
+    }
   };
 
   return (
@@ -111,36 +116,3 @@ const CardProducts = (props) => {
 };
 
 export default CardProducts;
-
-/*
-
-const addQuantityHandler = () => {
-    const initailProductsCopy = [...initailProducts];
-    const initialPrice = initailProductsCopy.find(
-      (prod) => prod.id === id
-    ).price;
-    setProductQtn((prev) => prev + 1);
-    setProductPrice(price * 1 * productQtn + 1);
-    setProductPrice(price * 1 + initialPrice);
-
-    const productSelected = cartProducts.find((prod) => prod.id === id);
-    const idxProduct = cartProducts.indexOf(productSelected);
-
-    const updatePriceProduct = {
-      ...productSelected,
-      price: productPrice + price * 1,
-      quantity: productQtn + 1 * 1,
-    };
-
-    const cartProductsCopy = [...cartProducts];
-    cartProductsCopy[idxProduct] = updatePriceProduct;
-    setCartproducts(cartProductsCopy);
-    storeCurrentData('cart', cartProductsCopy);
-    const totalSum = cartProductsCopy.reduce(
-      (prev, curr) => prev + curr.price * 1,
-      0
-    );
-    setTotal(totalSum);
-    setTaxes(totalSum * 0.12);
-  };
-*/
