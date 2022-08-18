@@ -1,23 +1,37 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import Layout from "./Layout"
-import { getAllProducts, deleteProduct } from "../api"
+import { getAllProducts, deleteProduct, updateProduct, getAllCategories } from "../api"
 import Pagination from "../pagination"
 import { getCurrentData } from "../utils/auth";
+import Categories from "./Categories";
+import EditProduct from "./EditProduct";
 
 
 const Products = () => {
     const [products, setProducts] = useState([])
+    const [categories, setCategories] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage] = useState(10)
     const [confirmSelect, setConfirmSelect] = useState(false)
     const [editProduct, setEditProduct] = useState(false)
     const [admin] = useState(getCurrentData('admin'))
+    const [token] = useState(getCurrentData('token'))
+
+    //Edit useStates
+    const [productName, setProductName] = useState('')
+    const [productDescription, setProductDescription] = useState('')
+    const [productPrice, setProductPrice] = useState(0)
+    const [category_id, setCategory_id] = useState(0)
+    const [inventory_id, setInventory_id] = useState(0)
+    const [product_id, setProduct_id] = useState(0)
 
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
         setProducts(allProducts)
+        const allCategories = await getAllCategories()
+        setCategories(allCategories)
     }
 
 
@@ -36,10 +50,20 @@ const Products = () => {
 
     function deleteHandler(productid) {
         deleteProduct(productid)
+        setConfirmSelect(false)
     }
 
     function editHandler() {
-
+        updateProduct(
+            productName,
+            productDescription,
+            productPrice,
+            category_id,
+            inventory_id,
+            token,
+            product_id
+        )
+        setEditProduct(false)
     }
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -62,24 +86,34 @@ const Products = () => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>${product.price}</p>
-                        {(admin && confirmSelect == false) ? <div>
+                        {(admin && confirmSelect === false && editProduct === false) ? <div>
                             <button onClick={() => {
                                 setEditProduct(true)
+                                setProductName(product.name)
+                                setProductDescription(product.description)
+                                setProductPrice(product.price)
+                                setCategory_id(product.category_id)
+                                setInventory_id(product.inventory_id)
+                                setProduct_id(product.id)
                             }}>edit</button>
-                            <button onClick={() => {
+                            <button onClick={
                                 setConfirmSelect(true)
-                            }}>delete</button>
+                            }>delete</button>
                         </div> : null}
                         {confirmSelect ? <div>
                             <button onClick={deleteHandler(product.id)}>Confirm</button>
                             <button onClick={setConfirmSelect(false)}>Cancel</button>
                         </div> : null}
-                        {editProduct ? <form onSubmit={editHandler}>
-                            <input></input>
-                            <input></input>
-                            <input></input>
-                            <button type='submit'></button>
-                        </form> : null}
+                        {editProduct ? <EditProduct
+                            productName={productName}
+                            setProductName={setProductName}
+                            productDescription={productDescription}
+                            setProductDescription={setProductDescription}
+                            productPricd={productPrice}
+                            setProductPrice={productPrice}
+                            category_id={category_id}
+                            setC
+                        /> : null}
                     </div>
                 )
             })
