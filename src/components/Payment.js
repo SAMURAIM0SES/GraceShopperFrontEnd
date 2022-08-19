@@ -3,11 +3,10 @@ import classes from "./Payment.module.css";
 import React, {useState, useEffect} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
-import Cart from "./Cart";
 import { getCurrentData, clearCurrentData } from './../utils/auth'
 import CardProducts from "./CardProducts";
 import { nanoid } from "nanoid";
-const { faker } = require('@faker-js/faker');
+
 // export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 
@@ -40,7 +39,7 @@ const Payment = () => {
       setCartproducts(cartStoraged);
       setInitialProducts(cartStoraged);
     }
-  }, []);
+  }, [cartStoraged]);
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
@@ -151,7 +150,7 @@ console.log(result, "result")
               <div className={classes["summary-detail"]}>
                 <div className={classes["summary-payment"]}>
                   <div>Subtotal</div>
-                  <div>{total}</div>
+                  <div>${total}</div>
                 </div>
                 <div className={classes["summary-payment"]}>
                   <div>Shipping</div>
@@ -159,7 +158,7 @@ console.log(result, "result")
                 </div>
                 <div className={classes["summary-payment"]}>
                   <div>Taxes</div>
-                  <div>{taxes.toFixed(2)}</div>
+                  <div>${taxes.toFixed(2)}</div>
                 </div>
                   <div className={classes['payment-total']}>TOTAL</div>
                   <div>${(total + taxes).toFixed(2)}</div>
