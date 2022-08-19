@@ -1,11 +1,14 @@
 import classes from './Footer.module.css';
 import { AiOutlineCopyrightCircle } from 'react-icons/ai';
+import logo from '../logo/restaWant.svg';
 
 const Footer = () => {
   return (
     <footer className={classes['footer-main']}>
       <div className={classes['footer-content']}>
-        <div>LOGO</div>
+        <div className={classes['footer-logo']}>
+          <img src={logo} />
+        </div>
         <div className={classes['footer-container']}>
           <div className={classes['footer-title']}>MAIN MENU</div>
           <div>

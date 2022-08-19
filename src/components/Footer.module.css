@@ -38,3 +38,16 @@
   font-weight: 300;
   font-size: 1.8rem;
 }
+
+.footer-logo {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
