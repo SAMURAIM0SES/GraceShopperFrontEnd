@@ -18,12 +18,7 @@ const Products = () => {
     const [token] = useState(getCurrentData('token'))
 
     //Edit useStates
-    const [productName, setProductName] = useState('')
-    const [productDescription, setProductDescription] = useState('')
-    const [productPrice, setProductPrice] = useState(0)
-    const [category_id, setCategory_id] = useState(0)
-    const [inventory_id, setInventory_id] = useState(0)
-    const [product_id, setProduct_id] = useState(0)
+    const [currentProduct, setCurrentProduct] = useState({})
 
     const getAllIntialData = async () => {
         const allProducts = await getAllProducts()
@@ -32,7 +27,7 @@ const Products = () => {
 
 
 
-    useEffect(() => { getAllIntialData() }, [searchTerm])
+    useEffect(() => { getAllIntialData() }, [])
 
     function searchHandler(event) {
         event.preventDefault()
@@ -42,6 +37,11 @@ const Products = () => {
             return product.name.toLowerCase().includes(searchString)
         })
         setProducts(filteredSearch)
+    }
+
+    function deleteHandler(productId) {
+        deleteProduct(productId)
+        setConfirmSelect(false)
     }
 
 
@@ -58,6 +58,11 @@ const Products = () => {
     //     setEditProduct(false)
     // }
 
+    {/* <form>
+                <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
+                <button onClick={searchHandler}>🔍︎</button>
+            </form> */}
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
@@ -68,10 +73,7 @@ const Products = () => {
     return (
         <Layout>
             <h1>Products</h1>
-            {/* <form>
-                <input type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search"></input>
-                <button onClick={searchHandler}>🔍︎</button>
-            </form> */}
+            {editProduct ? <EditProduct product={currentProduct} /> : null}
             {currentProducts.map((product) => {
                 return (
                     <div key={`productHolder${product.id}`}>
@@ -81,12 +83,7 @@ const Products = () => {
                         {(admin && confirmSelect === false && editProduct === false) ? <div>
                             <button onClick={() => {
                                 setEditProduct(true)
-                                setProductName(product.name)
-                                setProductDescription(product.description)
-                                setProductPrice(product.price)
-                                setCategory_id(product.category_id)
-                                setInventory_id(product.inventory_id)
-                                setProduct_id(product.id)
+                                setCurrentProduct(product)
                             }}>edit</button>
                             <button onClick={() => {
                                 setConfirmSelect(true)
@@ -94,23 +91,11 @@ const Products = () => {
                         </div> : null}
                         {confirmSelect ? <div>
                             <button onClick={() => {
-                                deleteProduct(product.id)
-                                setConfirmSelect(false)
+                                deleteHandler(product.id)
+                                console.log(product.id)
                             }}>Confirm</button>
                             <button onClick={() => { setConfirmSelect(false) }}>Cancel</button>
                         </div> : null}
-                        {/* {editProduct ? <EditProduct
-                            productName={productName}
-                            setProductName={setProductName}
-                            productDescription={productDescription}
-                            setProductDescription={setProductDescription}
-                            productPricd={productPrice}
-                            setProductPrice={productPrice}
-                            category_id={category_id}
-                            setCategory_id={setCategory_id}
-                            inventory_id={inventory_id}
-
-                        /> : null} */}
                     </div>
                 )
             })
