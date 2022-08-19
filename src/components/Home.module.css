@@ -98,17 +98,20 @@
   padding: 0.6rem 1.3rem;
   width: 100%;
   cursor: pointer;
-  background-color: transparent;
+  background-color: var(--primary-blue);
   border: 2px solid var(--primary-blue);
   font-family: inherit;
   color: #fff;
   font-size: 1.8rem;
+  opacity: 0.9;
+  transition: all 0.2ss;
 }
 
 .deal-button button:hover {
   background-color: var(--primary-blue);
   color: #fff;
   transform: scale(0.99);
+  opacity: 1;
 }
 
 /* About your shop */

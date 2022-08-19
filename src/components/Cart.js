@@ -111,12 +111,14 @@ const Cart = () => {
             <button
               onClick={nextNavigateHandler}
               disabled={cartProducts.length ? false : true}
+              className={classes['checkout-btn']}
             >
               Checkout
             </button>
             <button
               onClick={deleteAllProductsHandler}
               disabled={cartProducts.length ? false : true}
+              className={classes['deleteAll-btn']}
             >
               Delete All
             </button>

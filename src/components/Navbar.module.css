@@ -2,6 +2,7 @@
   --primary-dark: #2d2a32;
   --primary-blue: #3454d1;
   --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
   --primary-grey-dark: #a5a5a5;
   --primary-grey-light: #eeeeff;
   --extra-red: #f07167;
@@ -46,7 +47,8 @@
 
 .navbar-item a {
   text-decoration: none;
-  color: var(--primary-grey-light);
+  /* color: var(--primary-grey-light); */
+  color: var(--secondary-green);
   opacity: 0.8;
 }
 

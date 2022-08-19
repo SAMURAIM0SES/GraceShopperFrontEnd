@@ -55,6 +55,49 @@ const Register = () => {
             className={classes['register-form']}
           >
             <div className={classes['register-field']}>
+              <input type="text" ref={username} />
+              <label>Username</label>
+            </div>
+            <div className={classes['register-field']}>
+              <input type="text" ref={password} />
+              <label>Password</label>
+            </div>
+            <div className={classes['register-field']}>
+              <input type="text" ref={firstName} />
+              <label>First Name</label>
+            </div>
+            <div className={classes['register-field']}>
+              <input type="text" ref={lastName} />
+              <label>Last Name</label>
+            </div>
+            <div className={classes['register-field']}>
+              <input type="text" ref={mobile} />
+              <label>Phone Number</label>
+            </div>
+            <div className={classes['register-field']}>
+              <input type="text" ref={email} />
+              <label>Email</label>
+            </div>
+            <div className={classes['register-button']}>
+              <button type="submit">Create My account</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Register;
+
+/*
+ <div className={classes['register-main']}>
+          <h2>Create an Account</h2>
+          <form
+            onSubmit={registerUserHandler}
+            className={classes['register-form']}
+          >
+            <div className={classes['register-field']}>
               <label>Username</label>
               <input type="text" placeholder="your username" ref={username} />
             </div>
@@ -91,9 +134,4 @@ const Register = () => {
             </div>
           </form>
         </div>
-      </section>
-    </Layout>
-  );
-};
-
-export default Register;
+*/

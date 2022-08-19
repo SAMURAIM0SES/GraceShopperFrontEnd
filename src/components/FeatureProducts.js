@@ -21,6 +21,7 @@ const FeatureProducts = () => {
 
   useEffect(() => {
     fetchProducts();
+    console.log(randomProducts);
   }, []);
 
   return (
@@ -52,7 +53,7 @@ const FeatureProducts = () => {
         <div className={classes['features-product-footer']}>
           {randomProducts.map((prod, idx) => {
             return (
-              <div className={classes[`product-${prod.id}`]} key={nanoid()}>
+              <div className={classes[`product-${idx + 1}`]} key={nanoid()}>
                 <div className={classes['gallery-photo']}>
                   <img
                     src={`${faker.image.food(640, 480, true)}`}
