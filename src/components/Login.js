@@ -9,22 +9,32 @@ const { faker } = require('@faker-js/faker');
 const Login = (props) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [showError, setShowError] = useState(false);
   const { setUserLogged } = props;
 
   const loginUserHandler = async (event) => {
     event.preventDefault();
-    const userLogin = await loginUser(user, password);
-    if (userLogin) {
-      console.log(userLogin);
-      clearCurrentData();
-      storeCurrentData('user', userLogin.user.username);
-      storeCurrentData('token', userLogin.token);
-      storeCurrentData('admin', userLogin.user.admin)
-      setUserLogged(userLogin.user.username);
-      setUser('');
-      setPassword('');
-    } else {
-      console.log('there was an error');
+    try {
+      const userLogin = await loginUser(user, password);
+      if (userLogin.name === 'TypeError') {
+        setShowError(true);
+        throw new Error('Username or Password are Incorrect - Try Again !!');
+      }
+
+      if (userLogin.token) {
+        console.log(userLogin, '************************');
+        clearCurrentData();
+        storeCurrentData('user', userLogin.user.username);
+        storeCurrentData('token', userLogin.token);
+        storeCurrentData('admin', userLogin.user.admin);
+        setUserLogged(userLogin.user.username);
+        setUser('');
+        setPassword('');
+      } else {
+        setShowError(true);
+      }
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -41,16 +51,27 @@ const Login = (props) => {
               type="text"
               placeholder="Enter Username"
               value={user}
-              onChange={(e) => setUser(e.target.value)}
+              onChange={(e) => {
+                setUser(e.target.value);
+                setShowError(false);
+              }}
             />
             <label>Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setShowError(false);
+              }}
             />
           </div>
+          {showError && (
+            <span className={classes['login-error']}>
+              Username or Password Incorrect
+            </span>
+          )}
           <div className={classes['login-btn']}>
             <button>LOGIN</button>
           </div>
@@ -71,3 +92,24 @@ const Login = (props) => {
 };
 
 export default Login;
+
+/*
+  const loginUserHandler = async (event) => {
+    event.preventDefault();
+    const userLogin = await loginUser(user, password);
+    console.log(userLogin, 'here login%%%%%%%%%%%%%%%%%%%%%');
+    if (userLogin.token) {
+      console.log(userLogin, '************************');
+      clearCurrentData();
+      storeCurrentData('user', userLogin.user.username);
+      storeCurrentData('token', userLogin.token);
+      storeCurrentData('admin', userLogin.user.admin);
+      setUserLogged(userLogin.user.username);
+      setUser('');
+      setPassword('');
+    } else {
+      console.error();
+      setShowError(true);
+    }
+  };
+*/

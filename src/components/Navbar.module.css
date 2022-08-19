@@ -9,8 +9,8 @@
 }
 
 .navbar-main {
-  padding: 0.3rem;
-  /* background-color: var(--primary-blue-dark); */
+  padding: 0.8rem 0.3rem;
+
   background-color: var(--primary-dark);
   color: #fff;
 }
@@ -70,4 +70,24 @@
 
 .navbar-item button:hover {
   opacity: 1;
+}
+
+.cart-nav {
+  position: relative;
+}
+
+.cart-nav span {
+  position: absolute;
+  top: -19%;
+  right: -15%;
+  background-color: #ff4136;
+  color: #fff;
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

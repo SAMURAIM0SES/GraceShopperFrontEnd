@@ -72,11 +72,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*
-   <div className={classes['gallery-product-name']}>
-                <p>PRODUCT NAME</p>
-                <p>STARTS</p>
-              </div>
-              <p className={classes['gallery-product-price']}>$300</p>
-*/
