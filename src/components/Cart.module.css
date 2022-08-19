@@ -2,6 +2,7 @@
   --primary-dark: #2d2a32;
   --primary-blue: #3454d1;
   --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
   --primary-grey-dark: #a5a5a5;
   --primary-grey-light: #eeeeff;
   --extra-red: #f07167;
@@ -152,24 +153,25 @@
   cursor: pointer;
 }
 
-.cart-buttons button:first-child {
+.checkout-btn {
   background-color: transparent;
-  border: 1.5px solid var(--primary-green);
+  border: 1.5px solid var(--secondary-green);
 }
 
-.cart-buttons button:first-child:hover {
-  background-color: var(--primary-green);
+.checkout-btn:hover {
+  background-color: var(--secondary-green);
   color: #fff;
 }
 
-.cart-buttons button:last-child {
-  background-color: transparent;
-  border: 1.5px solid var(--extra-red);
-}
-
-.cart-buttons button:last-child:hover {
+.deleteAll-btn {
   background-color: var(--extra-red);
+  border: 1.5px solid var(--extra-red);
   color: #fff;
+  opacity: 0.85;
+}
+
+.deleteAll-btn:hover {
+  opacity: 1;
 }
 
 .cart-buttons button:disabled {

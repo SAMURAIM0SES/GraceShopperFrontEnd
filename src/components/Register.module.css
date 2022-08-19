@@ -16,10 +16,136 @@
 
 .register-main h2 {
   font-size: 4rem;
+  color: var(--secondary-green);
+  text-transform: uppercase;
+  background-color: var(--primary-dark);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .register-form {
-  /* border: 1px solid tomato; */
+  position: relative;
+  display: inline-block;
+  width: 40%;
+  padding: 30px 25px;
+  background-color: white;
+  border-radius: 40px;
+  margin: 40px 0;
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.register-field {
+  position: relative;
+  padding: 1rem 0;
+  margin-bottom: -1.8rem;
+}
+
+.register-field:first-of-type {
+  padding-top: 0;
+}
+
+.register-field:last-of-type {
+  padding-bottom: 0;
+}
+
+.register-field label {
+  transform-origin: left center;
+  color: var(--extra-red);
+  letter-spacing: 1px;
+  font-size: 1.7rem;
+  padding: 1rem 1.5rem;
+  display: block;
+  position: absolute;
+  margin-top: -4.3rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.register-field input {
+  appearance: none;
+  background-color: none;
+  border: 1px solid var(--extra-red);
+  line-height: 0;
+  font-size: 1.7rem;
+  width: 100%;
+  display: block;
+  padding: 1rem 1.5rem;
+  border-radius: 6rem;
+  color: var(--extra-red);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.register-field input:focus {
+  outline: none;
+  background: var(--extra-red);
+  color: #fff;
+  margin-top: 3rem;
+}
+
+.register-field input:valid {
+  margin-top: 3rem;
+}
+
+.register-field input:focus ~ label {
+  transform: translate(0, -3.5rem) scale(0.6);
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+.register-field input:valid ~ label {
+  text-transform: uppercase;
+  font-style: italic;
+  transform: translate(5px, -3.5rem) scale(0.7);
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7rem;
+}
+
+.register-button button {
+  margin-top: 3.5rem;
+  background-color: white;
+  border: 1px solid var(--extra-red);
+  line-height: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+  border-radius: 6rem;
+  color: var(--extra-red);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.8rem;
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+.register-button button:hover,
+.register-button button:focus {
+  color: #fff;
+  background-color: var(--extra-red);
+}
+
+/*
+.register-main {
+  text-align: center;
+  gap: 3rem;
+  font-size: 2rem;
+}
+
+.register-main h2 {
+  font-size: 4rem;
+  color: var(--primary-blue);
+}
+
+.register-form {
   width: 50%;
   margin: 0 auto;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -63,3 +189,4 @@
   opacity: 1;
   transform: scale(0.98);
 }
+*/
