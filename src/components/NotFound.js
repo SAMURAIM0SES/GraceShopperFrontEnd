@@ -11,14 +11,17 @@ const NotFound = (props) => {
     navigate('/');
   };
   return (
-    <div className={classes.modal}>
-      <div className={classes['modal-content']}>
-        <div className={classes['modal-header']}>
-          <h4 className={classes['modal-title']}>{props.title}</h4>
+    <div className={classes.NotFound}>
+      <div className={classes['NotFound-content']}>
+        <div className={classes['NotFound-header']}>
+          <h4 className={classes['NotFound-title']}>{props.title}</h4>
         </div>
-        <div className={classes['modal-body']}>{props.body}</div>
-        <div className={classes['modal-footer']}>
-          <button className={classes['modal-btn']} onClick={closeModalHandler}>
+        <div className={classes['NotFound-body']}>{props.body}</div>
+        <div className={classes['NotFound-footer']}>
+          <button
+            className={classes['NotFound-btn']}
+            onClick={closeModalHandler}
+          >
             Close
           </button>
         </div>

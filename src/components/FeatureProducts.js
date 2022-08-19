@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAllProducts } from '../api/index';
 import classes from './FeatureProducts.module.css';
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
+import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { nanoid } from 'nanoid';
 const { faker } = require('@faker-js/faker');
 
@@ -27,7 +28,9 @@ const FeatureProducts = () => {
   return (
     <section>
       <div className={classes['features-main']}>
-        <h2 className={classes['features-title']}>Feature Products</h2>
+        <h2 className={classes['features-title']}>
+          Feature Products <MdOutlineProductionQuantityLimits />
+        </h2>
         <div className={classes['features-product-header']}>
           {initialProducts.map((prod, idx) => {
             return (

@@ -138,6 +138,11 @@
   text-align: center;
 
   background-color: var(--primary-grey-dark);
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .aboutShop-title {
   font-size: 5em;

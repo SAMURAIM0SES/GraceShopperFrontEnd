@@ -4,7 +4,7 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { getCurrentData, clearCurrentData } from './../utils/auth';
+import { getCurrentData, clearCurrentItem } from './../utils/auth';
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
@@ -39,7 +39,7 @@ const Cart = () => {
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
-    clearCurrentData();
+    clearCurrentItem('cart');
     setTotal(0);
     setTaxes(0);
   };

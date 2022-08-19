@@ -57,7 +57,7 @@ const Register = () => {
             onSubmit={registerUserHandler}
             className={classes['register-form']}
           >
-            <p>All fiels are required</p>
+            <p>All fields are required</p>
             <div className={classes['register-field']}>
               <input type="text" ref={username} required />
               <label>Username</label>

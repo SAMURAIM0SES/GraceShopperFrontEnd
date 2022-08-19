@@ -22,7 +22,11 @@ function App() {
       <Route
         path="*"
         element={
-          <NotFound title="Page Not Found" body={'Error 404'} show={true} />
+          <NotFound
+            title="Page Not Found"
+            body={'404: That page does not exist'}
+            show={true}
+          />
         }
       />
     </Routes>

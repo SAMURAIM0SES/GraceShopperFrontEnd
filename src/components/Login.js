@@ -22,7 +22,6 @@ const Login = (props) => {
       }
 
       if (userLogin.token) {
-        console.log(userLogin, '************************');
         clearCurrentData();
         storeCurrentData('user', userLogin.user.username);
         storeCurrentData('token', userLogin.token);
@@ -92,24 +91,3 @@ const Login = (props) => {
 };
 
 export default Login;
-
-/*
-  const loginUserHandler = async (event) => {
-    event.preventDefault();
-    const userLogin = await loginUser(user, password);
-    console.log(userLogin, 'here login%%%%%%%%%%%%%%%%%%%%%');
-    if (userLogin.token) {
-      console.log(userLogin, '************************');
-      clearCurrentData();
-      storeCurrentData('user', userLogin.user.username);
-      storeCurrentData('token', userLogin.token);
-      storeCurrentData('admin', userLogin.user.admin);
-      setUserLogged(userLogin.user.username);
-      setUser('');
-      setPassword('');
-    } else {
-      console.error();
-      setShowError(true);
-    }
-  };
-*/
