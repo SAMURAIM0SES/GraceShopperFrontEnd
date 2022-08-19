@@ -7,6 +7,7 @@ import Shipping from './Shipping';
 import Register from './Register';
 import CategoryProducts from './CategoryProducts';
 import Payment from './Payment';
+import NotFound from './NotFound';
 
 function App() {
   return (
@@ -18,6 +19,12 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/shipping" element={<Shipping />} />
       <Route path="/payment" element={<Payment />} />
+      <Route
+        path="*"
+        element={
+          <NotFound title="Page Not Found" body={'Error 404'} show={true} />
+        }
+      />
     </Routes>
   );
 }
