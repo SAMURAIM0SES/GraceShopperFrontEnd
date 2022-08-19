@@ -8,13 +8,14 @@ import classes from './CategoryProducts.module.css';
 import { storeCurrentData, getCurrentData } from './../utils/auth';
 const { faker } = require('@faker-js/faker');
 
-const CategoryProducts = () => {
+const CategoryProducts = (props) => {
   const { categoryId } = useParams();
   const [categoryInfo, setCategoryInfo] = useState({});
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState({});
   const shoppingCart = getCurrentData('cart');
   const [cart, setCart] = useState(shoppingCart || []);
+  const [cartQtn, setCartQtn] = useState(0);
 
   const fetchCategory = async (id) => {
     const [category] = await getCategory(id);
@@ -64,12 +65,13 @@ const CategoryProducts = () => {
       return;
     }
     setCart((prev) => [...prev, ...productAdded]);
+    setCartQtn((prev) => prev + 1);
   };
 
   storeCurrentData('cart', cart);
 
   return (
-    <Layout>
+    <Layout cartQtn={cartQtn}>
       <section>
         <div className={classes['category-prod-header']}>
           <h2>{categoryInfo.name}</h2>

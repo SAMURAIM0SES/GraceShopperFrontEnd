@@ -1,0 +1,67 @@
+:root {
+  --primary-dark: #2d2a32;
+  --primary-blue: #3454d1;
+  --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
+  --primary-grey-dark: #a5a5a5;
+  --primary-grey-light: #eeeeff;
+  --extra-red: #f07167;
+}
+
+.NotFound {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.NotFound-content {
+  width: 50%;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  border-radius: 20px;
+  color: var(--extra-red);
+  padding: 1.5rem;
+}
+
+.NotFound-header,
+.NotFound-footer {
+  padding: 1rem;
+}
+
+.NotFound-title {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.NotFound-body {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  font-size: 2.4rem;
+}
+
+.NotFound-btn {
+  padding: 0.7rem 2rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 2rem;
+  width: 25%;
+  background-color: var(--extra-red);
+  border: none;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.NotFound-btn:hover {
+  opacity: 1;
+}
