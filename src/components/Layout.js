@@ -1,6 +1,7 @@
 import classes from './Layout.module.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { FaUserAlt } from 'react-icons/fa';
 
 const Layout = (props) => {
   const { userLogged, setUserLogged } = props;
@@ -12,7 +13,10 @@ const Layout = (props) => {
         </nav>
         <h1 className={classes['layout-title']}>RestaWant Supplies</h1>
         {userLogged && (
-          <h4 className={classes['layout-welcome']}>Welcome {userLogged}</h4>
+          <h4 className={classes['layout-welcome']}>
+            <FaUserAlt />
+            Welcome {userLogged}
+          </h4>
         )}
       </header>
       <main className={classes['layout-body']}>{props.children}</main>

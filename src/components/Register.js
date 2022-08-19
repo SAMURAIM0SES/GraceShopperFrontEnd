@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { registerUser } from '../api/index';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,8 +11,9 @@ const Register = () => {
   const firstName = useRef();
   const lastName = useRef();
   const mobile = useRef();
-  const email = useRef();
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
+  const [email, setEmail] = useState('');
 
   const registerUserHandler = async (event) => {
     event.preventDefault();
@@ -23,7 +24,7 @@ const Register = () => {
       firstName.current.value &&
       lastName.current.value &&
       mobile.current.value &&
-      email.current.value
+      email
     ) {
       const newUser = await registerUser(
         username.current.value,
@@ -31,18 +32,20 @@ const Register = () => {
         firstName.current.value,
         lastName.current.value,
         +mobile.current.value,
-        email.current.value
+        email
       );
-      username.current.value = '';
-      password.current.value = '';
-      firstName.current.value = '';
-      lastName.current.value = '';
-      mobile.current.value = '';
-      email.current.value = '';
 
-      navigate('/');
-    } else {
-      console.log('Please fill in all the fields');
+      if (newUser.name === 'EmailExistsError') {
+        setShowError(true);
+      } else {
+        username.current.value = '';
+        password.current.value = '';
+        firstName.current.value = '';
+        lastName.current.value = '';
+        mobile.current.value = '';
+        setEmail('');
+        navigate('/');
+      }
     }
   };
   return (
@@ -76,8 +79,17 @@ const Register = () => {
               <label>Phone Number</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={email} required />
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setShowError(false);
+                }}
+                required
+              />
               <label>Email</label>
+              {showError && <p>This email is already taken</p>}
             </div>
             <div className={classes['register-button']}>
               <button type="submit">Create My account</button>

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import classes from './Navbar.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { GiShoppingCart } from 'react-icons/gi';
@@ -8,7 +9,9 @@ import { getCurrentData, clearCurrentData } from '../utils/auth';
 
 const Navbar = (props) => {
   const token = getCurrentData('token');
+  const cart = getCurrentData('cart');
   const { userLogged, setUserLogged } = props;
+  const [cartQtn, setCartQtn] = useState(cart ? cart.length : null);
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -31,8 +34,9 @@ const Navbar = (props) => {
           </Link>
         </li>
         <li className={classes['navbar-item']}>
-          <Link to="/cart">
+          <Link to="/cart" className={classes['cart-nav']}>
             Cart <GiShoppingCart />
+            <span>{cartQtn}</span>
           </Link>
         </li>
         {userLogged || token ? (
