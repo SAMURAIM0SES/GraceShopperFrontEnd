@@ -27,6 +27,10 @@ export const registerUser = async (
         admin: admin,
       }),
     });
+
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, "i'm from api index!!!");
     return result;
@@ -47,6 +51,9 @@ export const loginUser = async (username, password) => {
         password: password,
       }),
     });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, 'look at this result for token');
     return result;
@@ -77,6 +84,9 @@ export const updateUser = async (
         email: email,
       }),
     });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     return result;
   } catch (error) {
@@ -97,6 +107,9 @@ export async function getMyOrderDetails(user_id, token) {
         },
       }
     );
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, 'should be my order-history');
     return result;
@@ -118,6 +131,9 @@ export async function getMyOrders(username, token) {
         },
       }
     );
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, 'should be my orders');
     return result;
@@ -129,6 +145,9 @@ export async function getMyOrders(username, token) {
 export async function getAllProducts() {
   try {
     const response = await fetch(`${apiURL}/catalog/products`);
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result);
     return result;
@@ -149,6 +168,9 @@ export async function getProduct(productId) {
         },
       }
     );
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, 'should be single product by id');
     return result;
@@ -181,6 +203,9 @@ export const updateProduct = async (
         inventory_id: inventory_id,
       }),
     });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     return result;
   } catch (error) {
@@ -196,6 +221,9 @@ export const deleteProduct = async (productId) => {
         'Content-Type': 'application/json',
       },
     });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     return result;
   } catch (error) {
@@ -206,6 +234,9 @@ export const deleteProduct = async (productId) => {
 export async function getAllCategories() {
   try {
     const response = await fetch(`${apiURL}/catalog/productCategory`);
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result);
     return result;
@@ -226,6 +257,9 @@ export async function getCategory(categoryId) {
         },
       }
     );
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     console.log(result, 'should be single category by id');
     return result;
@@ -248,6 +282,9 @@ export async function updateCartProducts(productId, cartId, quantity, token) {
         quantity,
       }),
     });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
     const result = await response.json();
     return result;
   } catch (error) {
