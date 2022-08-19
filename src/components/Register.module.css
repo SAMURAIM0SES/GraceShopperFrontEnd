@@ -15,6 +15,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background-image: url('https://picsum.photos/1920/1280?random=10');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .register-main h2 {
@@ -25,6 +28,11 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding: 1.6rem;
   border-radius: 50px;
+}
+
+.register-main p {
+  font-size: 1.4rem;
+  color: var(--extra-red);
 }
 
 .register-form {
@@ -56,7 +64,7 @@
 
 .register-field label {
   transform-origin: left center;
-  color: var(--extra-red);
+  color: var(--secondary-green);
   letter-spacing: 1px;
   font-size: 1.7rem;
   padding: 1rem 1.5rem;
@@ -70,14 +78,14 @@
 .register-field input {
   appearance: none;
   background-color: none;
-  border: 1px solid var(--extra-red);
+  border: 1px solid var(--secondary-green);
   line-height: 0;
   font-size: 1.7rem;
   width: 100%;
   display: block;
   padding: 1rem 1.5rem;
   border-radius: 6rem;
-  color: var(--extra-red);
+  color: var(--secondary-green);
   letter-spacing: 1px;
   position: relative;
   z-index: 1;
@@ -85,7 +93,7 @@
 
 .register-field input:focus {
   outline: none;
-  background: var(--extra-red);
+  background: var(--secondary-green);
   color: #fff;
   margin-top: 3rem;
 }
