@@ -55,27 +55,27 @@ const Register = () => {
             className={classes['register-form']}
           >
             <div className={classes['register-field']}>
-              <input type="text" ref={username} />
+              <input type="text" ref={username} required />
               <label>Username</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={password} />
+              <input type="text" ref={password} required />
               <label>Password</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={firstName} />
+              <input type="text" ref={firstName} required />
               <label>First Name</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={lastName} />
+              <input type="text" ref={lastName} required />
               <label>Last Name</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={mobile} />
+              <input type="text" ref={mobile} required />
               <label>Phone Number</label>
             </div>
             <div className={classes['register-field']}>
-              <input type="text" ref={email} />
+              <input type="text" ref={email} required />
               <label>Email</label>
             </div>
             <div className={classes['register-button']}>
