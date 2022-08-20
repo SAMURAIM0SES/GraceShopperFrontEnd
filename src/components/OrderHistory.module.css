@@ -1,0 +1,50 @@
+:root {
+  --primary-dark: #2d2a32;
+  --primary-blue: #3454d1;
+  --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
+  --primary-grey-dark: #a5a5a5;
+  --primary-grey-light: #eeeeff;
+  --extra-red: #f07167;
+}
+
+.history-main {
+  font-size: 1.6rem;
+  border: 2px solid pink;
+  padding: 1rem;
+}
+.history-header {
+}
+.history-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.history-card {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 1rem;
+  width: 70%;
+  border-left: 3px solid var(--secondary-green);
+  margin: 0 auto;
+}
+.history-photo {
+  width: 50%;
+}
+
+.history-photo img {
+  display: block;
+  width: 100%;
+  border-radius: 100%;
+}
+
+.history-price {
+}
+.history-quantity {
+}
+.history-date {
+}
