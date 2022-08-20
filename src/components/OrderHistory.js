@@ -5,6 +5,7 @@ import { getMyOrderDetails } from '../api/index';
 import { getCurrentData } from '../utils/auth';
 import classes from './OrderHistory.module.css';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { BsClockHistory } from 'react-icons/bs';
 const { faker } = require('@faker-js/faker');
 
 const DUMMY_DATA = [
@@ -48,7 +49,12 @@ const OrderHistory = () => {
         <div className={classes['history-main']}>
           <div className={classes['history-header']}>
             <h2>{user}</h2>
-            <h3>Order History</h3>
+            <h3>
+              Order History{' '}
+              <span>
+                <BsClockHistory />
+              </span>
+            </h3>
           </div>
           <div className={classes['history-body']}>
             {DUMMY_DATA.map((data) => {
@@ -66,7 +72,7 @@ const OrderHistory = () => {
                   </div>
                   <div className={classes['history-price']}>
                     <p>Price</p>
-                    <p>{data.price}</p>
+                    <p>${data.price}</p>
                   </div>
                   <div className={classes['history-quantity']}>
                     <p>Quantity</p>
