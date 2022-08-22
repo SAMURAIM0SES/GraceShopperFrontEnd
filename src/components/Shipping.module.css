@@ -96,6 +96,15 @@
   background-color: var(--primary-green);
   color: #fff;
 }
+.shipping-buttons-next button:first-child {
+  background-color: transparent;
+  border: 1.5px solid var(--primary-green);
+}
+
+.shipping-buttons-next button:first-child:hover {
+  background-color: var(--primary-green);
+  color: #fff;
+}
 
 .shipping-buttons button:last-child {
   background-color: transparent;
