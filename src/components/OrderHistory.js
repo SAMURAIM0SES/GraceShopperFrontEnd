@@ -40,7 +40,7 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    getMyOrderDetails();
+    getUserOrderHistory();
     console.log(token);
   }, []);
   return (
