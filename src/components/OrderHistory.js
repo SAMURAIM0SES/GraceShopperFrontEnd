@@ -34,16 +34,19 @@ const OrderHistory = () => {
   const token = getCurrentData('token');
   const userId = getCurrentData('userId');
   const user = getCurrentData('user');
+  const [myOrderHistory, setMyOrderHistory] = useState([]);
 
   const getUserOrderHistory = async () => {
     const orderHistory = await getMyOrderDetails(userId, token);
-    console.log(orderHistory);
+    if (orderHistory) {
+      setMyOrderHistory(orderHistory);
+    }
   };
 
   useEffect(() => {
     getUserOrderHistory();
-    console.log(token);
   }, []);
+
   return (
     <Layout>
       <section>
@@ -58,9 +61,9 @@ const OrderHistory = () => {
             </h3>
           </div>
           <div className={classes['history-body']}>
-            {DUMMY_DATA.map((data) => {
+            {myOrderHistory.map((data) => {
               return (
-                <div key = {nanoid()} className={classes['history-card']}>
+                <div key={nanoid()} className={classes['history-card']}>
                   <div className={classes['history-photo']}>
                     <img
                       src={`${faker.image.food(300, 300, true)}`}

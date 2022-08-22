@@ -291,3 +291,55 @@ export async function updateCartProducts(productId, cartId, quantity, token) {
     console.log(error);
   }
 }
+
+export const createShoppingCart = async (user_id, is_purchased, date) => {
+  try {
+    const response = await fetch(`${apiURL}/cart`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user_id,
+        is_purchased: is_purchased,
+        date: date,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    const result = await response.json();
+    console.log(result, 'The shopping cart was created');
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const createShoppingCartProducts = async (
+  product_id,
+  cart_id,
+  quantity
+) => {
+  try {
+    const response = await fetch(`${apiURL}/cart/cart_products`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        product_id: product_id,
+        cart_id: cart_id,
+        quantity: quantity,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    const result = await response.json();
+    console.log(result, 'This product was added to the table cart_products');
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
