@@ -6,6 +6,7 @@ import { getCurrentData } from '../utils/auth';
 import classes from './OrderHistory.module.css';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsClockHistory } from 'react-icons/bs';
+import { nanoid } from 'nanoid';
 const { faker } = require('@faker-js/faker');
 
 const DUMMY_DATA = [
@@ -59,7 +60,7 @@ const OrderHistory = () => {
           <div className={classes['history-body']}>
             {DUMMY_DATA.map((data) => {
               return (
-                <div className={classes['history-card']}>
+                <div key = {nanoid()} className={classes['history-card']}>
                   <div className={classes['history-photo']}>
                     <img
                       src={`${faker.image.food(300, 300, true)}`}
