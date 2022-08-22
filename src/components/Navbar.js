@@ -10,6 +10,7 @@ import { getCurrentData, clearCurrentData } from '../utils/auth';
 const Navbar = (props) => {
   const token = getCurrentData('token');
   const cart = getCurrentData('cart');
+  const userId = getCurrentData('userId');
   const { userLogged, setUserLogged, cartQtn } = props;
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const Navbar = (props) => {
         </li>
         {userLogged || token ? (
           <li className={classes['navbar-item']}>
-            <Link to="/">
+            <Link to={`/${userId}/order-history`}>
               Order History <VscHistory />
             </Link>
           </li>
