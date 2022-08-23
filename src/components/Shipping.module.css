@@ -22,14 +22,6 @@
   grid-column-gap: 2rem;
 }
 
-.shipping-body-shopping {
-  /* border: 1px solid black; */
-}
-
-.shipping-body-summary {
-  /* border: 1px solid green; */
-}
-
 .shipping-detail-information {
   display: flex;
   justify-content: space-between;
@@ -96,6 +88,15 @@
   color: #fff;
 }
 
+.next-page-button{
+  background-color: transparent;
+  border: 1.5px solid var(--primary-green);
+}
+.next-page-button:hover{
+  background-color:  var(--primary-green);
+  border: 1.5px solid var(--primary-green);
+}
+
 .shipping-buttons button:last-child {
   background-color: transparent;
   border: 1.5px solid var(--extra-red);
@@ -130,3 +131,7 @@
 .shipping-header :nth-child(3) {
   border-bottom: 2px solid var(--primary-grey-light);
 }
+
+
+
+
