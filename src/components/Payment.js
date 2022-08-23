@@ -3,7 +3,7 @@ import classes from "./Payment.module.css";
 import React, {useState, useEffect} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
-import { getCurrentData, clearCurrentData } from './../utils/auth'
+import { getCurrentData, clearCurrentItem } from './../utils/auth'
 import CardProducts from "./CardProducts";
 import { nanoid } from "nanoid";
 
@@ -43,7 +43,7 @@ const Payment = () => {
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
-    clearCurrentData();
+    clearCurrentItem('cart');
     setTotal(0);
     setTaxes(0);
   };
