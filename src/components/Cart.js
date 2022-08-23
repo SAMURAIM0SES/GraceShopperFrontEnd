@@ -1,22 +1,30 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { getCurrentData, clearCurrentItem } from './../utils/auth';
+import { createShoppingCartProducts, createShoppingCart } from '../api/index';
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [initailProducts, setInitialProducts] = useState([]);
   const navigate = useNavigate();
-
   const cartStoraged = getCurrentData('cart');
+  const userId = getCurrentData('userId');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
 
   const nextNavigateHandler = () => {
-    navigate('/shipping');
+    if (userId) {
+      const cartShoppingCopy = [...cartStoraged];
+      cartShoppingCopy.forEach((prod) => {
+        createShoppingCartProducts(prod.id, userId, prod.quantity);
+      });
+    }
+
+    // navigate('/shipping');
   };
 
   const totalCost = (arr) => {
