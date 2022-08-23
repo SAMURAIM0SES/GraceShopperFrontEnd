@@ -110,7 +110,7 @@ console.log(result, "result")
               )}
             </div>
             <div className={classes["shipping-body-shopping"]}>
-              <h3>Payment Details</h3>
+              <h3>Shipping Details</h3>
               <div className={classes["shipping-detailed-information"]}>
                 <div className={classes["payment-name"]}>
                   <input type="text" placeholder="First Name" />
