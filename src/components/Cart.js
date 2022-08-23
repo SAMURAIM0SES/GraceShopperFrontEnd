@@ -24,7 +24,7 @@ const Cart = () => {
       });
     }
 
-    // navigate('/shipping');
+    navigate('/shipping');
   };
 
   const totalCost = (arr) => {
