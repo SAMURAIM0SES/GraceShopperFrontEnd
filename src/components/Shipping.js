@@ -1,25 +1,26 @@
 import Layout from "./Layout";
 import classes from "./Shipping.module.css";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import StripeCheckout from "react-stripe-checkout";
+import { useNavigate } from 'react-router-dom';
 import { getCurrentData, clearCurrentData } from './../utils/auth'
-import CardProducts from "./CardProducts"
+import CardProducts from "./CardProducts";
 import { nanoid } from "nanoid";
+
+
+export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
+
+
 
 const Shipping = () => {
   const navigate = useNavigate();
+  const backNavigateHandler = () => {
+    navigate('/cart');
+  };
+
   const nextNavigateHandler = () => {
     navigate('/payment');
-   };
-    const backNavigateHandler = () => {
-      navigate('/cart');
-     };
-
-    //  const backNavigateHandler = () => {
-    //   navigate('/cart');
-    //  };
-
-
+  };
   const cartStoraged = getCurrentData('cart');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
   const [total, setTotal] = useState(0);
@@ -45,19 +46,48 @@ const Shipping = () => {
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
-    clearCurrentData();
+    clearCurrentData('cart');
     setTotal(0);
     setTaxes(0);
   };
   
+  
 
+
+    const makePayment = token => {
+        const body = {
+            token,
+            cartProducts
+        }
+        return fetch(`${apiURL}`,{
+            method: "POST",
+            headers:{ "Content-Type": "application/json"},
+            body: JSON.stringify(body)
+        }).then(response => {
+          return response.json()
+       
+            
+    }).then((result)=>{
+console.log(result, "result")
+    })
+    .catch(error => console.log(error))
+    }
 
   return (
     <Layout>
+      
       <section>
         <div className={classes["shipping-main"]}>
-          {/* <div>
-          {cartProducts.length ? (
+          <div className={classes["shipping-header"]}>
+          <p>1. Shopping Cart</p>
+            <p>2. Shipping Details</p>
+            <p>3. Payment Options</p>
+          </div>
+          
+
+          <div className={classes["shipping-body"]}>
+          <div>
+              {cartProducts.length ? (
                 cartProducts.map((prod) => {
                   return (
                     <CardProducts
@@ -78,18 +108,11 @@ const Shipping = () => {
               ) : (
                 <p>there are no products</p>
               )}
-          </div> */}
-          <div className={classes["shipping-header"]}>
-            <p>1. Shopping Cart</p>
-            <p>2. Shipping Details</p>
-            <p>3. Payment Options</p>
-          </div>
-
-          <div className={classes["shipping-body"]}>
+            </div>
             <div className={classes["shipping-body-shopping"]}>
-              <h3>Shipping Details</h3>
+              <h3>Payment Details</h3>
               <div className={classes["shipping-detailed-information"]}>
-                <div className={classes["shipping-name"]}>
+                <div className={classes["payment-name"]}>
                   <input type="text" placeholder="First Name" />
                   <input type="text" placeholder="Last Name" />
                 </div>
@@ -109,109 +132,60 @@ const Shipping = () => {
                 </div>
                 <div className={classes["shipping-methods"]}>
                   <div>
-                    <div class="swipeWrapper clearfix active">
-                      <div class="leftColumn">
-                        <input
-                          type="radio"
-                          name="shippingMethodEdit"
-                          value="101"
-                        />
-                      </div>
-                      <div class="leftColumnSpacer">
-                        <div class="row">
-                          <div class="col-xs-9">
-                            Free Shipping (7 Day Ground)
-                          </div>
-                          <div class="col-xs-3 shippingRate">$0.00</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="swipeWrapper clearfix">
-                      <div class="leftColumn">
-                        <input
-                          type="radio"
-                          name="shippingMethodEdit"
-                          value="102"
-                        />
-                      </div>
-                      <div class="leftColumnSpacer">
-                        <div class="row">
-                          <div class="col-xs-9">Next Day Shipping</div>
-                          <div class="col-xs-3 shippingRate">$20</div>
-                        </div>
-                      </div>
-                    </div>
+                    <input type="radio" />
+                    <span>Free Shipping</span>
+                  </div>
+                  <div>
+                    <input type="radio" />
+                    <span>Next Day Delivery</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-            <div className={classes['cart-body-summary']}>
-              <h3>Summary</h3>
-              <div className={classes['cart-body-coupon']}>
-                Enter Coupon Code
-              </div>
-              <div className={classes['summary-detail']}>
-                <div className={classes['summary-payment']}>
-                  <div>Subtotal</div>
-                  <div>total</div>
-                </div>
-                <div className={classes['summary-payment']}>
-                  <div>Shipping</div>
-                  <div>Free</div>
-                </div>
-                <div className={classes['summary-payment']}>
-                  <div>Taxes</div>
-                  <div>taxes</div>
-                </div>
-              </div>
-              <div className={classes['summary-total']}>
-                <div>TOTAL</div>
-                <div>Total</div>
-              </div>
-            </div>
-          </div>
-
-
-            </div>
-
-            {/* <div className={classes["shipping-body-summary"]}>
-              <h3>Summary</h3>
-              <div>Product Name</div>
-              <div>$300</div>
-              <div>Product Name</div>
-              <div>$300</div>
-              <div className={classes["shipping-cart-voucher"]}>
+            
+            <div className={classes["shipping-body-summary"]}>
+            <div className={classes["shipping-cart-voucher"]}>
                 HAVE A VOUCHER?
               </div>
+
+              <h3>Summary</h3>
+              
+             
+              
               <div className={classes["summary-detail"]}>
-                <div className={classes["summary-payment"]}>
+                <div className={classes["summary-shipping"]}>
                   <div>Subtotal</div>
-                  <div>$600</div>
+                  <div>${total}</div>
                 </div>
-                <div className={classes["summary-payment"]}>
+                <div className={classes["summary-shipping"]}>
                   <div>Shipping</div>
                   <div>Free</div>
                 </div>
-                <div className={classes["summary-payment"]}>
+                <div className={classes["summary-shipping"]}>
                   <div>Taxes</div>
-                  <div>$13</div>
+                  <div>${taxes.toFixed(2)}</div>
                 </div>
-                <div className={classes["shipping-total"]}>
-                  TOTAL
-                  <div></div>$613
-                </div>
-              </div>
-            </div> */}
+                  <div className={classes['shipping-total']}>TOTAL</div>
+                  <div>${(total + taxes).toFixed(2)}</div>
+             </div>
+            </div>
           </div>
 
           <div className={classes["shipping-buttons"]}>
-          <button onClick={backNavigateHandler}>Back</button>
-          <div className={classes["shipping-buttons"]}>
-            <button onClick={nextNavigateHandler}>Next</button>
-            <button>Cancel</button>
+          <button
+            onClick={backNavigateHandler}>Back</button>
+            <button
+            onClick={nextNavigateHandler}>Next</button>
+            <button
+              onClick={deleteAllProductsHandler}
+              disabled={cartProducts.length ? false : true}
+              className={classes['deleteAll-btn']}
+            >
+              Delete All
+            </button>
           </div>
-          </div>
+        </div>
+        
       </section>
     </Layout>
   );
