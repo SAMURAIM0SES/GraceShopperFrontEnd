@@ -1,7 +1,6 @@
+import React, {useState, useEffect} from "react";
 import Layout from "./Layout";
 import classes from "./Shipping.module.css";
-import React, {useState, useEffect} from "react";
-import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
 import { getCurrentData, clearCurrentData } from './../utils/auth'
 import CardProducts from "./CardProducts";
@@ -51,27 +50,6 @@ const Shipping = () => {
     setTaxes(0);
   };
   
-  
-
-
-    const makePayment = token => {
-        const body = {
-            token,
-            cartProducts
-        }
-        return fetch(`${apiURL}`,{
-            method: "POST",
-            headers:{ "Content-Type": "application/json"},
-            body: JSON.stringify(body)
-        }).then(response => {
-          return response.json()
-       
-            
-    }).then((result)=>{
-console.log(result, "result")
-    })
-    .catch(error => console.log(error))
-    }
 
   return (
     <Layout>
@@ -112,7 +90,7 @@ console.log(result, "result")
             <div className={classes["shipping-body-shopping"]}>
               <h3>Shipping Details</h3>
               <div className={classes["shipping-detailed-information"]}>
-                <div className={classes["payment-name"]}>
+                <div className={classes["shipping-name"]}>
                   <input type="text" placeholder="First Name" />
                   <input type="text" placeholder="Last Name" />
                 </div>
@@ -174,7 +152,7 @@ console.log(result, "result")
           <div className={classes["shipping-buttons"]}>
           <button
             onClick={backNavigateHandler}>Back</button>
-            <button
+            <button className={classes['next-page-button']}
             onClick={nextNavigateHandler}>Next</button>
             <button
               onClick={deleteAllProductsHandler}
