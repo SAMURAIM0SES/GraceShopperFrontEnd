@@ -17,16 +17,15 @@ const Cart = () => {
   const userId = getCurrentData('userId');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
 
-  const nextNavigateHandler = async () => {
+  const nextNavigateHandler = () => {
     if (userId) {
       cartStoraged.forEach((element) => {
         createShoppingCartProducts(element.id, cartUserId, element.quantity);
       });
-
-      console.log(cartStoraged, '--', cartUserId);
     }
-
-    // navigate('/shipping');
+    setTimeout(() => {
+      navigate('/shipping');
+    }, 1000);
   };
 
   const totalCost = (arr) => {

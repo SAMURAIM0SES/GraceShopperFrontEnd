@@ -1,16 +1,13 @@
-import Layout from "./Layout";
-import classes from "./Shipping.module.css";
-import React, {useState, useEffect} from "react";
-import StripeCheckout from "react-stripe-checkout";
+import Layout from './Layout';
+import classes from './Shipping.module.css';
+import React, { useState, useEffect } from 'react';
+import StripeCheckout from 'react-stripe-checkout';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentData, clearCurrentData } from './../utils/auth'
-import CardProducts from "./CardProducts";
-import { nanoid } from "nanoid";
-
+import { getCurrentData, clearCurrentData } from './../utils/auth';
+import CardProducts from './CardProducts';
+import { nanoid } from 'nanoid';
 
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
-
-
 
 const Shipping = () => {
   const navigate = useNavigate();
@@ -30,7 +27,7 @@ const Shipping = () => {
     const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
     setTaxes(totalSum * 0.12);
-  };  
+  };
 
   useEffect(() => {
     if (!cartStoraged) {
@@ -50,43 +47,38 @@ const Shipping = () => {
     setTotal(0);
     setTaxes(0);
   };
-  
-  
 
-
-    const makePayment = token => {
-        const body = {
-            token,
-            cartProducts
-        }
-        return fetch(`${apiURL}`,{
-            method: "POST",
-            headers:{ "Content-Type": "application/json"},
-            body: JSON.stringify(body)
-        }).then(response => {
-          return response.json()
-       
-            
-    }).then((result)=>{
-console.log(result, "result")
+  const makePayment = (token) => {
+    const body = {
+      token,
+      cartProducts,
+    };
+    return fetch(`${apiURL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     })
-    .catch(error => console.log(error))
-    }
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result, 'result');
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Layout>
-      
       <section>
-        <div className={classes["shipping-main"]}>
-          <div className={classes["shipping-header"]}>
-          <p>1. Shopping Cart</p>
+        <div className={classes['shipping-main']}>
+          <div className={classes['shipping-header']}>
+            <p>1. Shopping Cart</p>
             <p>2. Shipping Details</p>
             <p>3. Payment Options</p>
           </div>
-          
 
-          <div className={classes["shipping-body"]}>
-          <div>
+          <div className={classes['shipping-body']}>
+            <div>
               {cartProducts.length ? (
                 cartProducts.map((prod) => {
                   return (
@@ -109,20 +101,20 @@ console.log(result, "result")
                 <p>there are no products</p>
               )}
             </div>
-            <div className={classes["shipping-body-shopping"]}>
+            <div className={classes['shipping-body-shopping']}>
               <h3>Shipping Details</h3>
-              <div className={classes["shipping-detailed-information"]}>
-                <div className={classes["payment-name"]}>
+              <div className={classes['shipping-detailed-information']}>
+                <div className={classes['payment-name']}>
                   <input type="text" placeholder="First Name" />
                   <input type="text" placeholder="Last Name" />
                 </div>
-                <div className={classes["shipping-address"]}>
+                <div className={classes['shipping-address']}>
                   <input type="text" placeholder="Address" />
                 </div>
-                <div className={classes["shipping-address"]}>
+                <div className={classes['shipping-address']}>
                   <input type="text" placeholder="Address 2" />
                 </div>
-                <div className={classes["shipping-country"]}>
+                <div className={classes['shipping-country']}>
                   <input type="text" placeholder="Country" />
                   <input type="text" placeholder="City" />
                 </div>
@@ -130,7 +122,7 @@ console.log(result, "result")
                   <input type="text" placeholder="Zip/Postal" />
                   <input type="text" placeholder="Phone Number" />
                 </div>
-                <div className={classes["shipping-methods"]}>
+                <div className={classes['shipping-methods']}>
                   <div>
                     <input type="radio" />
                     <span>Free Shipping</span>
@@ -142,40 +134,36 @@ console.log(result, "result")
                 </div>
               </div>
             </div>
-            
-            <div className={classes["shipping-body-summary"]}>
-            <div className={classes["shipping-cart-voucher"]}>
+
+            <div className={classes['shipping-body-summary']}>
+              <div className={classes['shipping-cart-voucher']}>
                 HAVE A VOUCHER?
               </div>
 
               <h3>Summary</h3>
-              
-             
-              
-              <div className={classes["summary-detail"]}>
-                <div className={classes["summary-shipping"]}>
+
+              <div className={classes['summary-detail']}>
+                <div className={classes['summary-shipping']}>
                   <div>Subtotal</div>
                   <div>${total}</div>
                 </div>
-                <div className={classes["summary-shipping"]}>
+                <div className={classes['summary-shipping']}>
                   <div>Shipping</div>
                   <div>Free</div>
                 </div>
-                <div className={classes["summary-shipping"]}>
+                <div className={classes['summary-shipping']}>
                   <div>Taxes</div>
                   <div>${taxes.toFixed(2)}</div>
                 </div>
-                  <div className={classes['shipping-total']}>TOTAL</div>
-                  <div>${(total + taxes).toFixed(2)}</div>
-             </div>
+                <div className={classes['shipping-total']}>TOTAL</div>
+                <div>${(total + taxes).toFixed(2)}</div>
+              </div>
             </div>
           </div>
 
-          <div className={classes["shipping-buttons"]}>
-          <button
-            onClick={backNavigateHandler}>Back</button>
-            <button
-            onClick={nextNavigateHandler}>Next</button>
+          <div className={classes['shipping-buttons']}>
+            <button onClick={backNavigateHandler}>Back</button>
+            <button onClick={nextNavigateHandler}>Next</button>
             <button
               onClick={deleteAllProductsHandler}
               disabled={cartProducts.length ? false : true}
@@ -185,7 +173,6 @@ console.log(result, "result")
             </button>
           </div>
         </div>
-        
       </section>
     </Layout>
   );
