@@ -17,7 +17,8 @@
     "react-stripe-checkout": "^2.6.3",
     "stripe": "^10.2.0",
     "stripe-checkout": "^1.0.9",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@faker-js/faker": "^7.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,9 +43,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^7.4.0"
   }
+  
   
 }
