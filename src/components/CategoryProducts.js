@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from './Layout';
-import { getCategory, getAllProducts } from '../api/index';
+import {
+  getCategory,
+  getAllProducts,
+  createShoppingCartProducts,
+} from '../api/index';
 import { GoHome } from 'react-icons/go';
 import { nanoid } from 'nanoid';
 import classes from './CategoryProducts.module.css';
@@ -14,6 +18,7 @@ const CategoryProducts = (props) => {
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState({});
   const shoppingCart = getCurrentData('cart');
+  const cartUser = getCurrentData('cartUserId');
   const [cart, setCart] = useState(shoppingCart || []);
   const [cartQtn, setCartQtn] = useState(0);
 
@@ -49,7 +54,7 @@ const CategoryProducts = (props) => {
     creatingCart();
   }, []);
 
-  const addToCartHandler = (e) => {
+  const addToCartHandler = async (e) => {
     const [product] = categoryProducts.filter(
       (prod) => prod.id === +e.target.dataset.id
     );
