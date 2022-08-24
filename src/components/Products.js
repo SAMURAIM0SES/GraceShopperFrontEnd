@@ -99,7 +99,7 @@ const Products = () => {
                                 <p className={classes['product-card-description']}>{product.description}</p>
                                 <p className={classes['product-card-price']}>${product.price}</p>
                             </div>
-                            <button className={classes['product-button']} data-id={product.id} onClick={addToCartHandler}>Purchase</button>
+                            <button className={classes['product-button']} data-id={product.id} onClick={addToCartHandler}>Add to Cart</button>
                             {(admin && confirmSelect === false && editProduct === false) ? <div>
                                 <button className={classes['product-admin-button-edit']} onClick={() => {
                                     setEditProduct(true)
