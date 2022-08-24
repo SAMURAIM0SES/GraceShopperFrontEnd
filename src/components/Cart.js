@@ -5,7 +5,7 @@ import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { getCurrentData, clearCurrentItem } from './../utils/auth';
-import { createShoppingCartProducts } from '../api/index';
+import { createShoppingCartProducts, createShoppingCart } from '../api/index';
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
@@ -24,6 +24,7 @@ const Cart = () => {
       });
 
       console.log(cartStoraged, '--', cartUserId);
+      createShoppingCart(userId, false, Date.now());
     }
 
     // navigate('/shipping');

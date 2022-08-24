@@ -38,7 +38,7 @@ const Shipping = () => {
       setCartproducts(cartStoraged);
       setInitialProducts(cartStoraged);
     }
-  }, [cartStoraged]);
+  }, []);
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
