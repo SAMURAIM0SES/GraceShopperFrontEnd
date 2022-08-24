@@ -1,0 +1,17 @@
+.pagination-body {
+    display: flex;
+    size: 15px;
+    justify-content: center;
+}
+
+.pagination-item {
+    min-width: 30px;
+    min-height: 30px;
+    list-style: none;
+    font-size: 25px;
+    margin-right: 15px;
+    border: solid #2d2a32 2px;
+    cursor: pointer;
+    background-color: #2fcb00;
+    color: #3454d1;
+}
