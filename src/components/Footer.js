@@ -1,6 +1,6 @@
 import classes from './Footer.module.css';
 import { AiOutlineCopyrightCircle } from 'react-icons/ai';
-import logo from '../logo/restaWant.svg';
+import logo from '../logo/logo.svg';
 
 const Footer = () => {
   return (
