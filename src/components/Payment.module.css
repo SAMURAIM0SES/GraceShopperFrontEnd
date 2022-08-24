@@ -26,7 +26,6 @@
 }
 
 .payment-body {
-  /* border: 1px solid red; */
   display: grid;
   grid-template-columns: 60% 40%;
   grid-column-gap: 2rem;
@@ -34,7 +33,6 @@
 }
 
 .payment-body-shopping {
-  /* border: 1px solid black; */
   padding: 1.2rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -107,10 +105,6 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.payment-body-summary {
-  border: 1px solid green;
-}
-
 .payment-detailed-information {
   width: 100%;
 }
@@ -156,12 +150,6 @@ input:checked + .slider:before {
   margin-bottom: 0.5rem;
 }
 
-.payment-methods {
-  /* border: 1px solid tomato; */
-  display: flex;
-  justify-content: space-between;
-}
-
 .payment-buttons {
   width: 30%;
   display: flex;
@@ -199,26 +187,72 @@ input:checked + .slider:before {
   color: #fff;
 }
 
+.payment-body-summary {
+  padding: 1rem;
+  width: 60%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  transform: translateY(-4rem);
+}
+
+.delivery-type {
+  background-color: var(--primary-dark);
+  color: var(--primary-green);
+  padding: 0 0.8rem;
+  border-radius: 18px;
+}
+
+.summary-detail {
+  display: flex;
+  flex-direction: column;
+}
+
 .summary-payment {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.payment-cart-voucher {
-  background-color: var(--primary-green);
-  color: var(--primary-dark);
-  text-transform: uppercase;
-  letter-spacing: 1.6px;
-  font-weight: 600;
-}
-
 .payment-total {
   display: flex;
   justify-content: space-between;
-  margin-top: 3.4rem;
   font-size: 2.8rem;
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--secondary-green);
 }
 .payment-header :nth-child(3) {
   border-bottom: 2px solid var(--primary-grey-light);
+}
+
+.stripe {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.btn-buyNow {
+  padding: 0.2rem 1.4rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: 1px solid var(--secondary-green);
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.btn-buyNow:hover {
+  background-color: var(--secondary-green);
+  border: 1px solid var(--secondary-green);
+  color: #fff;
+}
+
+@media screen and (max-width: 950px) {
+  .payment-body {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-body-summary {
+    transform: translateY(0);
+    margin-top: 2rem;
+  }
 }

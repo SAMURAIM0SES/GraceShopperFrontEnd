@@ -6,11 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentData, clearCurrentItem } from './../utils/auth';
 import CardProducts from './CardProducts';
 import { nanoid } from 'nanoid';
+import { GiTakeMyMoney } from 'react-icons/gi';
+import { HiOutlineReceiptTax } from 'react-icons/hi';
+import { TbTruckDelivery } from 'react-icons/tb';
 
 // export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 
 const Payment = () => {
+  const [buyNow, setBuyNow] = useState(true);
   const navigate = useNavigate();
   const backNavigateHandler = () => {
     navigate('/shipping');
@@ -45,6 +49,7 @@ const Payment = () => {
     clearCurrentItem('cart');
     setTotal(0);
     setTaxes(0);
+    navigate('/');
   };
 
   const makePayment = (token) => {
@@ -70,8 +75,11 @@ const Payment = () => {
   };
 
   const shippingHandler = () => {
-    console.log('here in checkbox');
     setShowShipping((prev) => !prev);
+  };
+
+  const stripeHandler = () => {
+    setBuyNow((prev) => !prev);
   };
 
   return (
@@ -154,25 +162,50 @@ const Payment = () => {
 
               <div className={classes['summary-detail']}>
                 <div className={classes['summary-payment']}>
-                  <div>Subtotal</div>
+                  <div>
+                    <GiTakeMyMoney /> Subtotal
+                  </div>
                   <div>${total}</div>
                 </div>
                 <div className={classes['summary-payment']}>
-                  <div>Shipping</div>
-                  <div>Free</div>
-                </div>
-                <div className={classes['summary-payment']}>
-                  <div>Taxes</div>
+                  <div>
+                    <HiOutlineReceiptTax />
+                    Taxes
+                  </div>
                   <div>${taxes.toFixed(2)}</div>
                 </div>
-                <div className={classes['payment-total']}>TOTAL</div>
-                <div>${(total + taxes).toFixed(2)}</div>
-                <StripeCheckout
-                  stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
-                  token={makePayment}
-                  name="Place your order now!"
-                  amount={`${total + taxes}` * 100}
-                ></StripeCheckout>
+                <div className={classes['summary-payment']}>
+                  <div>
+                    <TbTruckDelivery />
+                    Shipping
+                  </div>
+                  <div className={classes['delivery-type']}>
+                    {showShipping ? 'Free Shipping' : 'Next Day Delivery'}
+                  </div>
+                </div>
+
+                <div className={classes['payment-total']}>
+                  <p>Total</p>
+                  <p>${(total + taxes).toFixed(2)}</p>
+                </div>
+
+                <div className={classes.stripe}>
+                  {buyNow ? (
+                    <button
+                      onClick={stripeHandler}
+                      className={classes['btn-buyNow']}
+                    >
+                      Buy now
+                    </button>
+                  ) : (
+                    <StripeCheckout
+                      stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
+                      token={makePayment}
+                      name="Place your order now!"
+                      amount={`${total + taxes}` * 100}
+                    ></StripeCheckout>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -184,7 +217,7 @@ const Payment = () => {
               disabled={cartProducts.length ? false : true}
               className={classes['deleteAll-btn']}
             >
-              Delete All
+              Cancel All
             </button>
           </div>
         </div>
@@ -194,16 +227,3 @@ const Payment = () => {
 };
 
 export default Payment;
-
-/*
-<div className={classes['payment-methods']}>
-                  <div>
-                    <input type="radio" />
-                    <span>Free Shipping</span>
-                  </div>
-                  <div>
-                    <input type="radio" />
-                    <span>Next Day Delivery</span>
-                  </div>
-                </div>
-*/
