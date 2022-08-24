@@ -20,12 +20,9 @@
     "@faker-js/faker": "^7.4.0"
   },
   "scripts": {
-    "start": "node --optimize_for_size --max_old_space_size=460 react-scripts start",
-
-    "build": "node --optimize_for_size --max_old_space_size=460 react-scripts build",
-
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start-dev": "NODE_ENV='development' react-scripts start",
+    "start": "react-scripts start",
+    "build": "NODE_ENV=production react-scripts build"
   },
   "eslintConfig": {
     "extends": [
