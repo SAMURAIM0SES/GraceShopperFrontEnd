@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import Layout from './Layout';
-import classes from './Shipping.module.css';
-import { useNavigate } from 'react-router-dom';
-import { getCurrentData, clearCurrentData } from './../utils/auth';
-import CardProducts from './CardProducts';
-import { nanoid } from 'nanoid';
+import React, { useState, useEffect } from "react";
+import Layout from "./Layout";
+import classes from "./Shipping.module.css";
+import { useNavigate } from "react-router-dom";
+import { getCurrentData, clearCurrentData } from "./../utils/auth";
+import CardProducts from "./CardProducts";
+import { nanoid } from "nanoid";
 
-export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
+export const apiURL = "https://graceshopperbackend.herokuapp.com/api";
 
 const Shipping = () => {
   const navigate = useNavigate();
   const backNavigateHandler = () => {
-    navigate('/cart');
+    navigate("/cart");
   };
 
   const nextNavigateHandler = () => {
-    navigate('/payment');
+    navigate("/payment");
   };
-  const cartStoraged = getCurrentData('cart');
+  const cartStoraged = getCurrentData("cart");
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
@@ -42,7 +42,7 @@ const Shipping = () => {
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
-    clearCurrentData('cart');
+    clearCurrentData("cart");
     setTotal(0);
     setTaxes(0);
   };
@@ -50,14 +50,14 @@ const Shipping = () => {
   return (
     <Layout>
       <section>
-        <div className={classes['shipping-main']}>
-          <div className={classes['shipping-header']}>
+        <div className={classes["shipping-main"]}>
+          <div className={classes["shipping-header"]}>
             <p>1. Shopping Cart</p>
             <p>2. Shipping Details</p>
             <p>3. Payment Options</p>
           </div>
 
-          <div className={classes['shipping-body']}>
+          <div className={classes["shipping-body"]}>
             <div>
               {cartProducts.length ? (
                 cartProducts.map((prod) => {
@@ -81,28 +81,28 @@ const Shipping = () => {
                 <p>there are no products</p>
               )}
             </div>
-            <div className={classes['shipping-body-shopping']}>
+            <div className={classes["shipping-body-shopping"]}>
               <h3>Shipping Details</h3>
-              <div className={classes['shipping-detailed-information']}>
-                <div className={classes['shipping-name']}>
+              <div className={classes["shipping-detailed-information"]}>
+                <div className={classes["shipping-name"]}>
                   <input type="text" placeholder="First Name" />
                   <input type="text" placeholder="Last Name" />
                 </div>
-                <div className={classes['shipping-address']}>
+                <div className={classes["shipping-address"]}>
                   <input type="text" placeholder="Address" />
                 </div>
-                <div className={classes['shipping-address']}>
+                <div className={classes["shipping-address"]}>
                   <input type="text" placeholder="Address 2" />
                 </div>
-                <div className={classes['shipping-country']}>
+                <div className={classes["shipping-country"]}>
                   <input type="text" placeholder="Country" />
                   <input type="text" placeholder="City" />
                 </div>
-                <div>
+                <div className={classes["zip-postal-phone-number"]}>
                   <input type="text" placeholder="Zip/Postal" />
                   <input type="text" placeholder="Phone Number" />
                 </div>
-                <div className={classes['shipping-methods']}>
+                <div className={classes["shipping-methods"]}>
                   <div>
                     <input type="radio" />
                     <span>Free Shipping</span>
@@ -115,36 +115,41 @@ const Shipping = () => {
               </div>
             </div>
 
-            <div className={classes['shipping-body-summary']}>
-              <div className={classes['shipping-cart-voucher']}>
+            <div className={classes["shipping-body-summary"]}>
+              <div className={classes["shipping-cart-voucher"]}>
                 HAVE A VOUCHER?
+                <select name="Select" className={classes["choose-option"]}>
+                  <option value="">Select</option>
+                  <option value="">Yes</option>
+                  <option value="">No</option>
+                </select>
               </div>
 
               <h3>Summary</h3>
 
-              <div className={classes['summary-detail']}>
-                <div className={classes['summary-shipping']}>
+              <div className={classes["summary-detail"]}>
+                <div className={classes["summary-shipping"]}>
                   <div>Subtotal</div>
                   <div>${total}</div>
                 </div>
-                <div className={classes['summary-shipping']}>
+                <div className={classes["summary-shipping"]}>
                   <div>Shipping</div>
                   <div>Free</div>
                 </div>
-                <div className={classes['summary-shipping']}>
+                <div className={classes["summary-shipping"]}>
                   <div>Taxes</div>
                   <div>${taxes.toFixed(2)}</div>
                 </div>
-                <div className={classes['shipping-total']}>TOTAL</div>
+                <div className={classes["shipping-total"]}>TOTAL</div>
                 <div>${(total + taxes).toFixed(2)}</div>
               </div>
             </div>
           </div>
 
-          <div className={classes['shipping-buttons']}>
+          <div className={classes["shipping-buttons"]}>
             <button onClick={backNavigateHandler}>Back</button>
             <button
-              className={classes['next-page-button']}
+              className={classes["next-page-button"]}
               onClick={nextNavigateHandler}
             >
               Next
@@ -152,7 +157,7 @@ const Shipping = () => {
             <button
               onClick={deleteAllProductsHandler}
               disabled={cartProducts.length ? false : true}
-              className={classes['deleteAll-btn']}
+              className={classes["deleteAll-btn"]}
             >
               Delete All
             </button>
