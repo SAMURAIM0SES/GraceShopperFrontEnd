@@ -20,7 +20,7 @@
     "@faker-js/faker": "^7.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node --max_old_space_size=8192 node_modules/.bin/react-scripts start",
     "build": "node --max_old_space_size=8192 node_modules/.bin/react-scripts build",
 
     "test": "react-scripts test",
