@@ -27,7 +27,7 @@ const Cart = () => {
       createShoppingCart(userId, false, Date.now());
     }
 
-    // navigate('/shipping');
+    navigate('/shipping');
   };
 
   const totalCost = (arr) => {

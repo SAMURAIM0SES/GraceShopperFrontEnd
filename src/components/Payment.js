@@ -21,6 +21,7 @@ const Payment = () => {
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [initailProducts, setInitialProducts] = useState([]);
+  const [showShipping, setShowShipping] = useState(false);
   const totalCost = (arr) => {
     const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
@@ -66,6 +67,11 @@ const Payment = () => {
         console.log(result, 'result');
       })
       .catch((error) => console.log(error));
+  };
+
+  const shippingHandler = () => {
+    console.log('here in checkbox');
+    setShowShipping((prev) => !prev);
   };
 
   return (
@@ -119,18 +125,25 @@ const Payment = () => {
                   <input type="text" placeholder="Country" />
                   <input type="text" placeholder="City" />
                 </div>
-                <div>
+                <div className={classes['payment-postal']}>
                   <input type="text" placeholder="Zip/Postal" />
                   <input type="text" placeholder="Phone Number" />
                 </div>
                 <div className={classes['payment-methods']}>
-                  <div>
-                    <input type="radio" />
-                    <span>Free Shipping</span>
-                  </div>
-                  <div>
-                    <input type="radio" />
-                    <span>Next Day Delivery</span>
+                  <div className={classes['radio-container']}>
+                    <div className={classes['radio-input']}>
+                      <h3>
+                        {showShipping ? 'Free Shipping' : 'Next Day Delivery'}
+                      </h3>
+                    </div>
+                    <div className={classes['radio-input']}>
+                      <label className={classes.switch}>
+                        <input type="checkbox" onChange={shippingHandler} />
+                        <span
+                          className={`${classes.slider} ${classes.round}`}
+                        ></span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -181,3 +194,16 @@ const Payment = () => {
 };
 
 export default Payment;
+
+/*
+<div className={classes['payment-methods']}>
+                  <div>
+                    <input type="radio" />
+                    <span>Free Shipping</span>
+                  </div>
+                  <div>
+                    <input type="radio" />
+                    <span>Next Day Delivery</span>
+                  </div>
+                </div>
+*/
