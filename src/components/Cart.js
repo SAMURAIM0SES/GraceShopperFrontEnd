@@ -17,15 +17,17 @@ const Cart = () => {
   const [initailProducts, setInitialProducts] = useState([]);
   const navigate = useNavigate();
   const cartStoraged = getCurrentData('cart');
-  const cartUserId = getCurrentData('cartUserId');
+  const cartId = getCurrentData('cartId');
   const userId = getCurrentData('userId');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
 
   const nextNavigateHandler = async () => {
-    if (userId) {
-      const cartCreated = await createShoppingCart(userId, false, '2022-08-23');
-      storeCurrentData('cartId', cartCreated[0].id);
-      console.log('cartCreated', cartCreated);
+    if (!cartId) {
+      const cartCreated = await createShoppingCart(userId, false, Date.now());
+      if (cartCreated) {
+        storeCurrentData('cartId', cartCreated[0].id);
+        console.log('cartCreated', cartCreated);
+      }
     }
 
     navigate('/shipping');
@@ -90,8 +92,6 @@ const Cart = () => {
                 <p>there are no products</p>
               )}
             </div>
-
-            {/* <CardProducts data={DUMMY_PRODUCTS} /> */}
 
             <div className={classes['cart-body-summary']}>
               <h3>Summary</h3>
