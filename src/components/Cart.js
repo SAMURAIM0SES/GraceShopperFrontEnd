@@ -4,8 +4,12 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { getCurrentData, clearCurrentItem } from './../utils/auth';
-import { createShoppingCartProducts, createShoppingCart } from '../api/index';
+import {
+  getCurrentData,
+  clearCurrentItem,
+  storeCurrentData,
+} from './../utils/auth';
+import { createShoppingCart } from '../api/index';
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
@@ -19,12 +23,9 @@ const Cart = () => {
 
   const nextNavigateHandler = async () => {
     if (userId) {
-      cartStoraged.forEach((element) => {
-        createShoppingCartProducts(element.id, cartUserId, element.quantity);
-      });
-
-      console.log(cartStoraged, '--', cartUserId);
-      createShoppingCart(userId, false, Date.now());
+      const cartCreated = await createShoppingCart(userId, false, '2022-08-23');
+      storeCurrentData('cartId', cartCreated[0].id);
+      console.log('cartCreated', cartCreated);
     }
 
     navigate('/shipping');

@@ -184,3 +184,29 @@
   background-color: var(--primary-grey-light);
   color: var(--primary-grey-dark);
 }
+
+@media screen and (max-width: 1098px) {
+  .cart-body {
+    grid-template-columns: 60% 40%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cart-body {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-buttons {
+    width: 50%;
+  }
+  .cart-buttons button {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .cart-buttons {
+    width: 90%;
+    margin: 2rem auto;
+  }
+}

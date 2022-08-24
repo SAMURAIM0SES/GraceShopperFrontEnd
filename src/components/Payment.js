@@ -9,18 +9,23 @@ import { nanoid } from 'nanoid';
 import { GiTakeMyMoney } from 'react-icons/gi';
 import { HiOutlineReceiptTax } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
+import { updateCart, createShoppingCartProducts } from '../api';
 
 // export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 
 const Payment = () => {
+  const cartId = getCurrentData('cartId');
+  const userId = getCurrentData('userId');
+  console.log(cartId, userId);
+
+  const cartStoraged = getCurrentData('cart');
   const [buyNow, setBuyNow] = useState(true);
   const navigate = useNavigate();
   const backNavigateHandler = () => {
     navigate('/shipping');
   };
 
-  const cartStoraged = getCurrentData('cart');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
@@ -78,7 +83,12 @@ const Payment = () => {
     setShowShipping((prev) => !prev);
   };
 
-  const stripeHandler = () => {
+  const stripeHandler = async () => {
+    //here goes the function for update cart from false to true
+    await cartStoraged.forEach((element) => {
+      createShoppingCartProducts(element.id, cartId, element.quantity);
+    });
+    await updateCart(cartId, userId);
     setBuyNow((prev) => !prev);
   };
 

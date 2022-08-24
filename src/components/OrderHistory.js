@@ -38,6 +38,8 @@ const OrderHistory = () => {
 
   const getUserOrderHistory = async () => {
     const orderHistory = await getMyOrderDetails(userId, token);
+    console.log(orderHistory, 'order Histopry %%%');
+
     if (orderHistory) {
       setMyOrderHistory(orderHistory);
     }
