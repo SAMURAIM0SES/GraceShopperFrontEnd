@@ -1,16 +1,14 @@
-import Layout from "./Layout";
-import classes from "./Payment.module.css";
-import React, {useState, useEffect} from "react";
-import StripeCheckout from "react-stripe-checkout";
+import Layout from './Layout';
+import classes from './Payment.module.css';
+import React, { useState, useEffect } from 'react';
+import StripeCheckout from 'react-stripe-checkout';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentData, clearCurrentItem } from './../utils/auth'
-import CardProducts from "./CardProducts";
-import { nanoid } from "nanoid";
+import { getCurrentData, clearCurrentItem } from './../utils/auth';
+import CardProducts from './CardProducts';
+import { nanoid } from 'nanoid';
 
 // export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
-
-
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -27,7 +25,7 @@ const Payment = () => {
     const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
     setTaxes(totalSum * 0.12);
-  };  
+  };
 
   useEffect(() => {
     if (!cartStoraged) {
@@ -39,7 +37,7 @@ const Payment = () => {
       setCartproducts(cartStoraged);
       setInitialProducts(cartStoraged);
     }
-  }, [cartStoraged]);
+  }, []);
 
   const deleteAllProductsHandler = () => {
     setCartproducts([]);
@@ -47,45 +45,41 @@ const Payment = () => {
     setTotal(0);
     setTaxes(0);
   };
-  
-  
 
-
-    const makePayment = token => {
-        const body = {
-            token,
-            cartProducts
-        }
-        return fetch(`${apiURL}`,{
-            method: "POST",
-            headers:{ "Content-Type": "application/json"},
-            body: JSON.stringify(body)
-        }).then(response => {
-          return response.json()
-            // console.log("RESPONSE", response.json())
-            // const {status} = response 
-            // console.log("status", status)
-            
-    }).then((result)=>{
-console.log(result, "result")
+  const makePayment = (token) => {
+    const body = {
+      token,
+      cartProducts,
+    };
+    return fetch(`${apiURL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     })
-    .catch(error => console.log(error))
-    }
+      .then((response) => {
+        return response.json();
+        // console.log("RESPONSE", response.json())
+        // const {status} = response
+        // console.log("status", status)
+      })
+      .then((result) => {
+        console.log(result, 'result');
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Layout>
-      
       <section>
-        <div className={classes["payment-main"]}>
-          <div className={classes["payment-header"]}>
-          <p>1. Shopping Cart</p>
+        <div className={classes['payment-main']}>
+          <div className={classes['payment-header']}>
+            <p>1. Shopping Cart</p>
             <p>2. Shipping Details</p>
             <p>3. Payment Options</p>
           </div>
-          
 
-          <div className={classes["payment-body"]}>
-          <div>
+          <div className={classes['payment-body']}>
+            <div>
               {cartProducts.length ? (
                 cartProducts.map((prod) => {
                   return (
@@ -108,20 +102,20 @@ console.log(result, "result")
                 <p>there are no products</p>
               )}
             </div>
-            <div className={classes["payment-body-shopping"]}>
+            <div className={classes['payment-body-shopping']}>
               <h3>Payment Details</h3>
-              <div className={classes["payment-detailed-information"]}>
-                <div className={classes["payment-name"]}>
+              <div className={classes['payment-detailed-information']}>
+                <div className={classes['payment-name']}>
                   <input type="text" placeholder="First Name" />
                   <input type="text" placeholder="Last Name" />
                 </div>
-                <div className={classes["payment-address"]}>
+                <div className={classes['payment-address']}>
                   <input type="text" placeholder="Address" />
                 </div>
-                <div className={classes["payment-address"]}>
+                <div className={classes['payment-address']}>
                   <input type="text" placeholder="Address 2" />
                 </div>
-                <div className={classes["payment-country"]}>
+                <div className={classes['payment-country']}>
                   <input type="text" placeholder="Country" />
                   <input type="text" placeholder="City" />
                 </div>
@@ -129,7 +123,7 @@ console.log(result, "result")
                   <input type="text" placeholder="Zip/Postal" />
                   <input type="text" placeholder="Phone Number" />
                 </div>
-                <div className={classes["payment-methods"]}>
+                <div className={classes['payment-methods']}>
                   <div>
                     <input type="radio" />
                     <span>Free Shipping</span>
@@ -141,42 +135,37 @@ console.log(result, "result")
                 </div>
               </div>
             </div>
-            
-            <div className={classes["payment-body-summary"]}>
+
+            <div className={classes['payment-body-summary']}>
               <h3>Summary</h3>
-              
-             
-              
-              <div className={classes["summary-detail"]}>
-                <div className={classes["summary-payment"]}>
+
+              <div className={classes['summary-detail']}>
+                <div className={classes['summary-payment']}>
                   <div>Subtotal</div>
                   <div>${total}</div>
                 </div>
-                <div className={classes["summary-payment"]}>
+                <div className={classes['summary-payment']}>
                   <div>Shipping</div>
                   <div>Free</div>
                 </div>
-                <div className={classes["summary-payment"]}>
+                <div className={classes['summary-payment']}>
                   <div>Taxes</div>
                   <div>${taxes.toFixed(2)}</div>
                 </div>
-                  <div className={classes['payment-total']}>TOTAL</div>
-                  <div>${(total + taxes).toFixed(2)}</div>
-                  <StripeCheckout 
-        stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
-        token={makePayment}
-        name="Place your order now!"
-        amount={`${total + taxes}` * 100}>
-
-
-        </StripeCheckout>
+                <div className={classes['payment-total']}>TOTAL</div>
+                <div>${(total + taxes).toFixed(2)}</div>
+                <StripeCheckout
+                  stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
+                  token={makePayment}
+                  name="Place your order now!"
+                  amount={`${total + taxes}` * 100}
+                ></StripeCheckout>
               </div>
             </div>
           </div>
 
-          <div className={classes["payment-buttons"]}>
-            <button
-            onClick={backNavigateHandler}>Back</button>
+          <div className={classes['payment-buttons']}>
+            <button onClick={backNavigateHandler}>Back</button>
             <button
               onClick={deleteAllProductsHandler}
               disabled={cartProducts.length ? false : true}
@@ -186,7 +175,6 @@ console.log(result, "result")
             </button>
           </div>
         </div>
-        
       </section>
     </Layout>
   );
