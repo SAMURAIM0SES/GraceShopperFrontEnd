@@ -20,10 +20,6 @@ const Login = (props) => {
         setShowError(true);
         throw new Error('Username or Password are Incorrect - Try Again !!');
       }
-      const carts = await getAllCartInfo();
-      const cartUserId = carts.filter(
-        (cart) => cart.user_id === userLogin.user.id
-      )[0].id;
 
       if (userLogin.token) {
         clearCurrentData();
@@ -31,10 +27,8 @@ const Login = (props) => {
         storeCurrentData('token', userLogin.token);
         storeCurrentData('admin', userLogin.user.admin);
         storeCurrentData('userId', userLogin.user.id);
-        storeCurrentData('cartUserId', cartUserId);
         setUserLogged(userLogin.user.username);
-        // await createShoppingCart(userLogin.user.id, false, Date.now());
-        // console.log('here^^^^^^^^^^^^^^^^^^');
+
         setUser('');
         setPassword('');
       } else {

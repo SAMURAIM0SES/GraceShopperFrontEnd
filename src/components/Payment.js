@@ -6,21 +6,31 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentData, clearCurrentItem } from './../utils/auth';
 import CardProducts from './CardProducts';
 import { nanoid } from 'nanoid';
+import { GiTakeMyMoney } from 'react-icons/gi';
+import { HiOutlineReceiptTax } from 'react-icons/hi';
+import { TbTruckDelivery } from 'react-icons/tb';
+import { updateCart, createShoppingCartProducts } from '../api';
 
 // export const apiURL = 'http://localhost:4000/api';
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 
 const Payment = () => {
+  const cartId = getCurrentData('cartId');
+  const userId = getCurrentData('userId');
+  console.log(cartId, userId);
+
+  const cartStoraged = getCurrentData('cart');
+  const [buyNow, setBuyNow] = useState(true);
   const navigate = useNavigate();
   const backNavigateHandler = () => {
     navigate('/shipping');
   };
 
-  const cartStoraged = getCurrentData('cart');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
   const [total, setTotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [initailProducts, setInitialProducts] = useState([]);
+  const [showShipping, setShowShipping] = useState(false);
   const totalCost = (arr) => {
     const totalSum = arr.reduce((prev, curr) => prev + curr.price * 1, 0);
     setTotal(totalSum);
@@ -44,6 +54,7 @@ const Payment = () => {
     clearCurrentItem('cart');
     setTotal(0);
     setTaxes(0);
+    navigate('/');
   };
 
   const makePayment = (token) => {
@@ -66,6 +77,19 @@ const Payment = () => {
         console.log(result, 'result');
       })
       .catch((error) => console.log(error));
+  };
+
+  const shippingHandler = () => {
+    setShowShipping((prev) => !prev);
+  };
+
+  const stripeHandler = async () => {
+    //here goes the function for update cart from false to true
+    await cartStoraged.forEach((element) => {
+      createShoppingCartProducts(element.id, cartId, element.quantity);
+    });
+    await updateCart(cartId, userId);
+    setBuyNow((prev) => !prev);
   };
 
   return (
@@ -119,18 +143,25 @@ const Payment = () => {
                   <input type="text" placeholder="Country" />
                   <input type="text" placeholder="City" />
                 </div>
-                <div>
+                <div className={classes['payment-postal']}>
                   <input type="text" placeholder="Zip/Postal" />
                   <input type="text" placeholder="Phone Number" />
                 </div>
                 <div className={classes['payment-methods']}>
-                  <div>
-                    <input type="radio" />
-                    <span>Free Shipping</span>
-                  </div>
-                  <div>
-                    <input type="radio" />
-                    <span>Next Day Delivery</span>
+                  <div className={classes['radio-container']}>
+                    <div className={classes['radio-input']}>
+                      <h3>
+                        {showShipping ? 'Free Shipping' : 'Next Day Delivery'}
+                      </h3>
+                    </div>
+                    <div className={classes['radio-input']}>
+                      <label className={classes.switch}>
+                        <input type="checkbox" onChange={shippingHandler} />
+                        <span
+                          className={`${classes.slider} ${classes.round}`}
+                        ></span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -141,25 +172,50 @@ const Payment = () => {
 
               <div className={classes['summary-detail']}>
                 <div className={classes['summary-payment']}>
-                  <div>Subtotal</div>
+                  <div>
+                    <GiTakeMyMoney /> Subtotal
+                  </div>
                   <div>${total}</div>
                 </div>
                 <div className={classes['summary-payment']}>
-                  <div>Shipping</div>
-                  <div>Free</div>
-                </div>
-                <div className={classes['summary-payment']}>
-                  <div>Taxes</div>
+                  <div>
+                    <HiOutlineReceiptTax />
+                    Taxes
+                  </div>
                   <div>${taxes.toFixed(2)}</div>
                 </div>
-                <div className={classes['payment-total']}>TOTAL</div>
-                <div>${(total + taxes).toFixed(2)}</div>
-                <StripeCheckout
-                  stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
-                  token={makePayment}
-                  name="Place your order now!"
-                  amount={`${total + taxes}` * 100}
-                ></StripeCheckout>
+                <div className={classes['summary-payment']}>
+                  <div>
+                    <TbTruckDelivery />
+                    Shipping
+                  </div>
+                  <div className={classes['delivery-type']}>
+                    {showShipping ? 'Free Shipping' : 'Next Day Delivery'}
+                  </div>
+                </div>
+
+                <div className={classes['payment-total']}>
+                  <p>Total</p>
+                  <p>${(total + taxes).toFixed(2)}</p>
+                </div>
+
+                <div className={classes.stripe}>
+                  {buyNow ? (
+                    <button
+                      onClick={stripeHandler}
+                      className={classes['btn-buyNow']}
+                    >
+                      Buy now
+                    </button>
+                  ) : (
+                    <StripeCheckout
+                      stripeKey="pk_test_51LXprnBIJA8lOQIHEZrWR5feoiqcUV7QgcMzbFPm6zZd7qqa3RfdDrOsN4TLTy4GxPHfMfWQRdhZhSA5lY2y2E6300R9dcIYL2"
+                      token={makePayment}
+                      name="Place your order now!"
+                      amount={`${total + taxes}` * 100}
+                    ></StripeCheckout>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -171,7 +227,7 @@ const Payment = () => {
               disabled={cartProducts.length ? false : true}
               className={classes['deleteAll-btn']}
             >
-              Delete All
+              Cancel All
             </button>
           </div>
         </div>

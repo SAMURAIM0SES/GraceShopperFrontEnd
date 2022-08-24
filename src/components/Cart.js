@@ -4,8 +4,12 @@ import classes from './Cart.module.css';
 import CardProducts from './CardProducts';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { getCurrentData, clearCurrentItem } from './../utils/auth';
-import { createShoppingCartProducts, createShoppingCart } from '../api/index';
+import {
+  getCurrentData,
+  clearCurrentItem,
+  storeCurrentData,
+} from './../utils/auth';
+import { createShoppingCart } from '../api/index';
 
 const Cart = () => {
   const [total, setTotal] = useState(0);
@@ -13,21 +17,20 @@ const Cart = () => {
   const [initailProducts, setInitialProducts] = useState([]);
   const navigate = useNavigate();
   const cartStoraged = getCurrentData('cart');
-  const cartUserId = getCurrentData('cartUserId');
+  const cartId = getCurrentData('cartId');
   const userId = getCurrentData('userId');
   const [cartProducts, setCartproducts] = useState(cartStoraged || []);
 
   const nextNavigateHandler = async () => {
-    if (userId) {
-      cartStoraged.forEach((element) => {
-        createShoppingCartProducts(element.id, cartUserId, element.quantity);
-      });
-
-      console.log(cartStoraged, '--', cartUserId);
-      createShoppingCart(userId, false, Date.now());
+    if (!cartId) {
+      const cartCreated = await createShoppingCart(userId, false, Date.now());
+      if (cartCreated) {
+        storeCurrentData('cartId', cartCreated[0].id);
+        console.log('cartCreated', cartCreated);
+      }
     }
 
-    // navigate('/shipping');
+    navigate('/shipping');
   };
 
   const totalCost = (arr) => {
@@ -89,8 +92,6 @@ const Cart = () => {
                 <p>there are no products</p>
               )}
             </div>
-
-            {/* <CardProducts data={DUMMY_PRODUCTS} /> */}
 
             <div className={classes['cart-body-summary']}>
               <h3>Summary</h3>

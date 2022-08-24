@@ -295,7 +295,7 @@ export async function updateCartProducts(productId, cartId, quantity, token) {
 export const createShoppingCart = async (user_id, is_purchased, date) => {
   try {
     const response = await fetch(
-      'https://graceshopperbackend.herokuapp.com/api/cart',
+      `${apiURL}/cart`,
 
       {
         method: 'POST',
@@ -319,6 +319,28 @@ export const createShoppingCart = async (user_id, is_purchased, date) => {
     console.error(error);
   }
 };
+
+export async function updateCart(id, user_id) {
+  try {
+    const response = await fetch(`${apiURL}/cart`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+        user_id,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const createShoppingCartProducts = async (
   product_id,
@@ -351,6 +373,20 @@ export const createShoppingCartProducts = async (
 export const getAllCartInfo = async () => {
   try {
     const response = await fetch(`${apiURL}/cart`);
+    if (!response.ok) {
+      throw new Error('Something went wrong');
+    }
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAllCartProducts = async () => {
+  try {
+    const response = await fetch(`${apiURL}/cart/cart_products`);
     if (!response.ok) {
       throw new Error('Something went wrong');
     }
