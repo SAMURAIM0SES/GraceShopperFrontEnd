@@ -63,7 +63,7 @@ const OrderHistory = () => {
                   </div>
                   <div className={classes['history-date']}>
                     <p>Date</p>
-                    <p>{data.date}</p>
+                    <p>{data.date ? data.date.slice(0, 10) : null}</p>
                   </div>
                 </div>
               );
