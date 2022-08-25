@@ -23,7 +23,7 @@ const Cart = () => {
 
   const nextNavigateHandler = async () => {
     if (!cartId) {
-      const cartCreated = await createShoppingCart(userId, false, Date.now());
+      const cartCreated = await createShoppingCart(userId, false, '2020-12-1');
       if (cartCreated) {
         storeCurrentData('cartId', cartCreated[0].id);
         console.log('cartCreated', cartCreated);

@@ -1,4 +1,5 @@
 export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
+// export const apiURL = 'https://quiet-depths-60847.herokuapp.com/api';
 
 // export const apiURL = 'http://localhost:4000/api';
 
@@ -295,10 +296,11 @@ export async function updateCartProducts(productId, cartId, quantity, token) {
 export const createShoppingCart = async (user_id, is_purchased, date) => {
   try {
     const response = await fetch(
-      `${apiURL}/cart`,
+      `${apiURL}/cart/cart_create`,
 
       {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
