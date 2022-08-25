@@ -87,7 +87,12 @@ const Products = () => {
         <div className={classes['product-title']}>
           <h2>Products</h2>
         </div>
-        {editProduct ? <EditProduct product={currentProduct} /> : null}
+        {editProduct ? (
+          <EditProduct
+            product={currentProduct}
+            setEditProduct={setEditProduct}
+          />
+        ) : null}
         <div className={classes['product-header']}>
           {currentProducts.map((product) => {
             return (
@@ -140,7 +145,6 @@ const Products = () => {
                     <button
                       onClick={() => {
                         deleteHandler(product.id);
-                        console.log(product.id);
                       }}
                     >
                       Confirm

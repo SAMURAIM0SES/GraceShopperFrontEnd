@@ -1,57 +1,67 @@
+:root {
+  --primary-dark: #2d2a32;
+  --primary-blue: #3454d1;
+  --primary-green: #31cb00;
+  --secondary-green: #04aa6d;
+  --primary-grey-dark: #a5a5a5;
+  --primary-grey-light: #eeeeff;
+  --extra-red: #f07167;
+}
 .edit-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: solid #2d2a32;
-    max-width: 70%;
-    margin-right: 15%;
-    margin-left: 15%;
-    background-color: #a5a5a5;
+  width: 50%;
+  margin: 0 auto 4rem auto;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.edit-name {
-    max-width: 45%;
-    min-width: 45%;
-    max-height: 35px;
-    min-height: 35px;
-    justify-content: center;
-    background-color: #eeeeff;
-    text-size-adjust: 25px;
-    color: #2fcb00;
+.edit-form div {
+  display: grid;
+  margin-bottom: 1rem;
 }
 
-.edit-description {
-    max-width: 60%;
-    min-width: 60%;
-    max-height: 35px;
-    min-height: 35px;
-    justify-content: center;
-    background-color: #eeeeff;
-    text-size-adjust: 25px;
-    color: #3454d1;
+.edit-field label {
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
-.edit-price {
-    max-width: 10%;
-    min-width: 10%;
-    max-height: 35px;
-    min-height: 35px;
-    justify-content: center;
-    background-color: #eeeeff;
-    text-size-adjust: 25px;
-    color: #3454d1;
+.edit-field input {
+  font-family: inherit;
+  font-size: 1.5rem;
 }
 
-.edit-submit {
-    max-width: 10%;
-    min-width: 10%;
-    background-color: #3454d1;
-    color: #2fcb00;
+.edit-btn {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 8rem;
+  justify-items: center;
 }
 
-.edit-cancel {
-    max-width: 10%;
-    min-width: 10%;
-    background-color: #2fcb00;
-    color: #3454d1;
+.edit-btn button {
+  padding: 0.5rem 1.3rem;
+  font-family: inherit;
+  font-size: 1.7rem;
+  width: 50%;
+  cursor: pointer;
+}
+
+.edit-btn button:nth-child(1) {
+  border: 1px solid var(--secondary-green);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.edit-btn button:nth-child(1):hover {
+  background-color: var(--secondary-green);
+  color: #fff;
+}
+
+.edit-btn button:nth-child(2) {
+  border: 1px solid var(--extra-red);
+  background-color: transparent;
+}
+
+.edit-btn button:nth-child(2):hover {
+  background-color: var(--extra-red);
+  color: #fff;
 }
