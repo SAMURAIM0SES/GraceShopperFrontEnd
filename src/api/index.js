@@ -150,7 +150,7 @@ export async function getAllProducts() {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.log(error);
