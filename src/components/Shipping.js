@@ -119,7 +119,7 @@ const Shipping = () => {
               <div className={classes["shipping-cart-voucher"]}>
                 HAVE A VOUCHER?
                 <select name="Select" className={classes["choose-option"]}>
-                  <option value="">Select</option>
+                  <option value="">Select:</option>
                   <option value="">Yes</option>
                   <option value="">No</option>
                 </select>
