@@ -69,9 +69,7 @@ const Payment = () => {
     })
       .then((response) => {
         return response.json();
-        // console.log("RESPONSE", response.json())
-        // const {status} = response
-        // console.log("status", status)
+      
       })
       .then((result) => {
         console.log(result, 'result');
@@ -84,7 +82,7 @@ const Payment = () => {
   };
 
   const stripeHandler = async () => {
-    //here goes the function for update cart from false to true
+    
     await cartStoraged.forEach((element) => {
       createShoppingCartProducts(element.id, cartId, element.quantity);
     });
@@ -113,6 +111,7 @@ const Payment = () => {
                       description={prod.description}
                       price={prod.price}
                       id={prod.id}
+                      img={prod.img}
                       cartProducts={cartProducts}
                       setCartproducts={setCartproducts}
                       setTotal={setTotal}

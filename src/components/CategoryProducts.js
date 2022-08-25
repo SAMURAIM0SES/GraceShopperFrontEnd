@@ -92,7 +92,7 @@ const CategoryProducts = (props) => {
               <div className={classes['product-card']} key={nanoid()}>
                 <div className={classes['product-card-img']}>
                   <h4>{prod.name}</h4>
-                  <img src={`${faker.image.food(640, 480)}`} alt="random" />
+                  <img src={prod.img} alt="random" />
                 </div>
                 <div className={classes['product-card-info']}>
                   <p className={classes['product-card-description']}>

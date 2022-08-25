@@ -79,6 +79,7 @@ const Cart = () => {
                       description={prod.description}
                       price={prod.price}
                       id={prod.id}
+                      img={prod.img}
                       cartProducts={cartProducts}
                       setCartproducts={setCartproducts}
                       setTotal={setTotal}
