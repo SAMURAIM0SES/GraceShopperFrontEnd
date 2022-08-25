@@ -13,9 +13,12 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
       <ul className={classes['pagination-body']}>
         {pageNumbers.map((number) => (
           <li key={number} className={classes['pagination-item']}>
-            <a onClick={() => paginate(number)} className={classes['pagination-link']}>
+            <button
+              onClick={() => paginate(number)}
+              className={classes['pagination-link']}
+            >
               {number}
-            </a>
+            </button>
           </li>
         ))}
       </ul>
@@ -24,3 +27,21 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
 };
 
 export default Pagination;
+
+/*
+
+<nav>
+      <ul className={classes['pagination-body']}>
+        {pageNumbers.map((number) => (
+          <li key={number} className={classes['pagination-item']}>
+            <a
+              onClick={() => paginate(number)}
+              className={classes['pagination-link']}
+            >
+              {number}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+*/
