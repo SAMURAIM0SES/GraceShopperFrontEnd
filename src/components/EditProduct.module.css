@@ -1,0 +1,57 @@
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid #2d2a32;
+    max-width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
+    background-color: #a5a5a5;
+}
+
+.edit-name {
+    max-width: 45%;
+    min-width: 45%;
+    max-height: 35px;
+    min-height: 35px;
+    justify-content: center;
+    background-color: #eeeeff;
+    text-size-adjust: 25px;
+    color: #2fcb00;
+}
+
+.edit-description {
+    max-width: 60%;
+    min-width: 60%;
+    max-height: 35px;
+    min-height: 35px;
+    justify-content: center;
+    background-color: #eeeeff;
+    text-size-adjust: 25px;
+    color: #3454d1;
+}
+
+.edit-price {
+    max-width: 10%;
+    min-width: 10%;
+    max-height: 35px;
+    min-height: 35px;
+    justify-content: center;
+    background-color: #eeeeff;
+    text-size-adjust: 25px;
+    color: #3454d1;
+}
+
+.edit-submit {
+    max-width: 10%;
+    min-width: 10%;
+    background-color: #3454d1;
+    color: #2fcb00;
+}
+
+.edit-cancel {
+    max-width: 10%;
+    min-width: 10%;
+    background-color: #2fcb00;
+    color: #3454d1;
+}
