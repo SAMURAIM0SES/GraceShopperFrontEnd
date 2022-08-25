@@ -9,26 +9,7 @@ import { BsClockHistory } from 'react-icons/bs';
 import { nanoid } from 'nanoid';
 const { faker } = require('@faker-js/faker');
 
-const DUMMY_DATA = [
-  {
-    name: '24" Cast Iron Skillet',
-    price: '50.00',
-    quantity: 200,
-    date: '2022-08-17',
-  },
-  {
-    name: 'Rustic Rubber Cheese',
-    price: '693.00',
-    quantity: 300,
-    date: '2022-08-17',
-  },
-  {
-    name: '24" Cast Iron Skillet',
-    price: '50.00',
-    quantity: 600,
-    date: '2022-08-17',
-  },
-];
+
 
 const OrderHistory = () => {
   const token = getCurrentData('token');
@@ -68,7 +49,7 @@ const OrderHistory = () => {
                 <div key={nanoid()} className={classes['history-card']}>
                   <div className={classes['history-photo']}>
                     <img
-                      src={`${faker.image.food(300, 300, true)}`}
+                      src={'https://loremflickr.com/400/400/food?17370'}
                       alt="random"
                     />
                   </div>
@@ -100,22 +81,3 @@ const OrderHistory = () => {
 
 export default OrderHistory;
 
-/*
-<div className={classes['history-card']}>
-              <div className={classes['history-photo']}>
-                <img src={`${faker.image.food(300, 300, true)}`} alt="random" />
-              </div>
-              <div className={classes['history-price']}>
-                <p>Price</p>
-                <p>Price</p>
-              </div>
-              <div className={classes['history-quantity']}>
-                <p>Quantity</p>
-                <p>Quantity</p>
-              </div>
-              <div className={classes['history-date']}>
-                <p>Date</p>
-                <p>Date</p>
-              </div>
-            </div>
-*/

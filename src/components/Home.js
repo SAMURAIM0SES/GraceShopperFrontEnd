@@ -39,13 +39,13 @@ const Home = () => {
           <h2 className={classes['deal-title']}>TRIPLE DEAL OF THE DAY</h2>
           <div className={classes['deal-gallery']}>
             <div className={classes['deal-gallery-photo']}>
-              <img src={`${faker.image.food(400, 400, true)}`} alt="random" />
+              <img src={'https://loremflickr.com/600/600/food?17370'} alt="random" />
             </div>
             <div className={classes['deal-gallery-photo']}>
-              <img src={`${faker.image.food(400, 400, true)}`} alt="random" />
+              <img src={'https://loremflickr.com/600/600/food?19334'} alt="random" />
             </div>
             <div className={classes['deal-gallery-photo']}>
-              <img src={`${faker.image.food(400, 400, true)}`} alt="random" />
+              <img src={'https://loremflickr.com/600/600/food?63756'} alt="random" />
             </div>
           </div>
           <div className={classes['deal-button']}>

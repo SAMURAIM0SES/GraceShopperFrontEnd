@@ -10,6 +10,7 @@ const CardProducts = (props) => {
     description,
     price,
     id,
+    img,
     cartProducts,
     setCartproducts,
     setTotal,
@@ -94,7 +95,7 @@ const CardProducts = (props) => {
         <div className={classes['cart-body-shopping']}>
           <div className={classes['cart-shopping-products']}>
             <div className={classes['cart-product-image']}>
-              <img src={`${faker.image.food(340, 240)}`} alt="random" />
+              <img src={'https://loremflickr.com/200/200/food?20788'} alt="random" />
             </div>
             <div className={classes['cart-product-description']}>
               <h4>{name}</h4>

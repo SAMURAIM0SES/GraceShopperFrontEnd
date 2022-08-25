@@ -44,7 +44,7 @@ const Login = (props) => {
       <div>
         <form className={classes['login-form']} onSubmit={loginUserHandler}>
           <div className={classes['login-img']}>
-            <img src={`${faker.image.abstract()}`} alt="random" />
+            <img src={'https://loremflickr.com/400/400/abstract?8080'} alt="random" />
           </div>
           <div className={classes['login-inputs']}>
             <label>Username</label>
