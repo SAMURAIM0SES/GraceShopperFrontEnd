@@ -4,7 +4,7 @@ import classes from './FeatureProducts.module.css';
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { nanoid } from 'nanoid';
-const { faker } = require('@faker-js/faker');
+
 
 const FeatureProducts = () => {
   const [initialProducts, setinitialProducts] = useState([]);

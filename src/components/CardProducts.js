@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './CardPrducts.module.css';
 import { storeCurrentData } from './../utils/auth';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-const { faker } = require('@faker-js/faker');
+
 
 const CardProducts = (props) => {
   const {

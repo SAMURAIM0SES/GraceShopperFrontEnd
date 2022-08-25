@@ -7,7 +7,7 @@ import classes from './OrderHistory.module.css';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsClockHistory } from 'react-icons/bs';
 import { nanoid } from 'nanoid';
-const { faker } = require('@faker-js/faker');
+
 
 
 

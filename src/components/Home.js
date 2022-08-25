@@ -7,7 +7,7 @@ import FeatureProducts from './FeatureProducts';
 import { BsSearch } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-const { faker } = require('@faker-js/faker');
+
 
 //https://graceshopperbackend.herokuapp.com/
 
