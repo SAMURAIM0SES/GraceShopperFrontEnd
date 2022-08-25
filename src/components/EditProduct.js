@@ -3,6 +3,7 @@ import { updateProduct } from "../api";
 import { useState, useEffect } from "react"
 import { getCurrentData } from "../utils/auth";
 import { getAllCategories } from "../api";
+import classes from './EditProduct.module.css'
 
 const EditProduct = (props) => {
     const [editProduct] = useState(props.product)
@@ -35,19 +36,12 @@ const EditProduct = (props) => {
     }
 
     return (
-        <form onSubmit={() => { editHandler() }}>
-            <input type='text' value={productName} onChange={(e) => { setProductName(e.target.value) }}></input>
-            <input type='text' value={productDescription} onChange={(e) => { setProductDescription(e.target.value) }}></input>
-            <input type='text' value={productPrice} onChange={(e) => { setProductPrice(e.target.value) }}></input>
-            {/* <select value={category_id}>
-                {categories.map((category) => {
-                    return (
-                        <option key={`category ${category.id}`} value={category.id} onChange={setCategory_id(category.id)}>{category.name}</option>
-                    )
-                })}
-            </select> */}
-            <button type='submit'>Submit</button>
-            <button>Cancel</button>
+        <form className={classes['edit-form']} onSubmit={() => { editHandler() }}>
+            <input className={classes['edit-name']} type='text' value={productName} onChange={(e) => { setProductName(e.target.value) }}></input>
+            <input className={classes['edit-description']} type='text' value={productDescription} onChange={(e) => { setProductDescription(e.target.value) }}></input>
+            <input className={classes['edit-price']} type='text' value={productPrice} onChange={(e) => { setProductPrice(e.target.value) }}></input>
+            <button className={classes['edit-submit']} type='submit'>Submit</button>
+            <button className={classes['edit-cancel']}>Cancel</button>
         </form>
     )
 }
