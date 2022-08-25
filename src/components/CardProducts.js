@@ -3,7 +3,6 @@ import classes from './CardPrducts.module.css';
 import { storeCurrentData } from './../utils/auth';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-
 const CardProducts = (props) => {
   const {
     name,
@@ -83,7 +82,6 @@ const CardProducts = (props) => {
     setTaxes(totalSum * 0.12);
 
     if (productQtn === 1) {
-      console.log('delete');
       const remainPorducts = cartProductsCopy.splice(idxProduct, 1);
       storeCurrentData('cart', cartProductsCopy);
     }
@@ -95,7 +93,10 @@ const CardProducts = (props) => {
         <div className={classes['cart-body-shopping']}>
           <div className={classes['cart-shopping-products']}>
             <div className={classes['cart-product-image']}>
-              <img src={'https://loremflickr.com/200/200/food?20788'} alt="random" />
+              <img
+                src={'https://loremflickr.com/200/200/food?20788'}
+                alt="random"
+              />
             </div>
             <div className={classes['cart-product-description']}>
               <h4>{name}</h4>

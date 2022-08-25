@@ -33,7 +33,7 @@ export const registerUser = async (
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, "i'm from api index!!!");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -56,7 +56,7 @@ export const loginUser = async (username, password) => {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'look at this result for token');
+
     return result;
   } catch (error) {
     console.error(error);
@@ -112,7 +112,7 @@ export async function getMyOrderDetails(user_id, token) {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'should be my order-history');
+
     return result;
   } catch (error) {
     console.log(error);
@@ -136,7 +136,7 @@ export async function getMyOrders(username, token) {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'should be my orders');
+
     return result;
   } catch (error) {
     console.log(error);
@@ -173,7 +173,7 @@ export async function getProduct(productId) {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'should be single product by id');
+
     return result;
   } catch (error) {
     console.log(error);
@@ -261,7 +261,7 @@ export async function getCategory(categoryId) {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'should be single category by id');
+
     return result;
   } catch (error) {
     console.log(error);
@@ -314,7 +314,7 @@ export const createShoppingCart = async (user_id, is_purchased, date) => {
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'The shopping cart was created');
+
     return result;
   } catch (error) {
     console.error(error);
@@ -364,7 +364,7 @@ export const createShoppingCartProducts = async (
       throw new Error('Something went wrong');
     }
     const result = await response.json();
-    console.log(result, 'This product was added to the table cart_products');
+
     return result;
   } catch (error) {
     console.error(error);

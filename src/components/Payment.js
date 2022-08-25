@@ -17,7 +17,7 @@ export const apiURL = 'https://graceshopperbackend.herokuapp.com/api';
 const Payment = () => {
   const cartId = getCurrentData('cartId');
   const userId = getCurrentData('userId');
-  console.log(cartId, userId);
+  const token = getCurrentData('token');
 
   const cartStoraged = getCurrentData('cart');
   const [buyNow, setBuyNow] = useState(true);
@@ -69,7 +69,6 @@ const Payment = () => {
     })
       .then((response) => {
         return response.json();
-      
       })
       .then((result) => {
         console.log(result, 'result');
@@ -82,12 +81,13 @@ const Payment = () => {
   };
 
   const stripeHandler = async () => {
-    
-    await cartStoraged.forEach((element) => {
-      createShoppingCartProducts(element.id, cartId, element.quantity);
-    });
-    await updateCart(cartId, userId);
     setBuyNow((prev) => !prev);
+    if (token) {
+      await cartStoraged.forEach((element) => {
+        createShoppingCartProducts(element.id, cartId, element.quantity);
+      });
+      await updateCart(cartId, userId);
+    }
   };
 
   return (

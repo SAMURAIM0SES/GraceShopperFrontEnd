@@ -8,9 +8,6 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { BsClockHistory } from 'react-icons/bs';
 import { nanoid } from 'nanoid';
 
-
-
-
 const OrderHistory = () => {
   const token = getCurrentData('token');
   const userId = getCurrentData('userId');
@@ -19,7 +16,6 @@ const OrderHistory = () => {
 
   const getUserOrderHistory = async () => {
     const orderHistory = await getMyOrderDetails(userId, token);
-    console.log(orderHistory, 'order Histopry %%%');
 
     if (orderHistory) {
       setMyOrderHistory(orderHistory);
@@ -80,4 +76,3 @@ const OrderHistory = () => {
 };
 
 export default OrderHistory;
-

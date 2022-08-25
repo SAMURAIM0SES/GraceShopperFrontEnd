@@ -7,8 +7,6 @@ import FeatureProducts from './FeatureProducts';
 import { BsSearch } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-
-
 //https://graceshopperbackend.herokuapp.com/
 
 const Home = () => {
@@ -18,8 +16,6 @@ const Home = () => {
   const shopHandler = () => {
     navigate('/products');
   };
-
-  console.log(userLogged, 'this is the user logged');
 
   return (
     <Layout userLogged={userLogged} setUserLogged={setUserLogged}>
@@ -39,13 +35,22 @@ const Home = () => {
           <h2 className={classes['deal-title']}>TRIPLE DEAL OF THE DAY</h2>
           <div className={classes['deal-gallery']}>
             <div className={classes['deal-gallery-photo']}>
-              <img src={'https://loremflickr.com/600/600/food?17370'} alt="random" />
+              <img
+                src={'https://loremflickr.com/600/600/food?17370'}
+                alt="random"
+              />
             </div>
             <div className={classes['deal-gallery-photo']}>
-              <img src={'https://loremflickr.com/600/600/food?19334'} alt="random" />
+              <img
+                src={'https://loremflickr.com/600/600/food?19334'}
+                alt="random"
+              />
             </div>
             <div className={classes['deal-gallery-photo']}>
-              <img src={'https://loremflickr.com/600/600/food?63756'} alt="random" />
+              <img
+                src={'https://loremflickr.com/600/600/food?63756'}
+                alt="random"
+              />
             </div>
           </div>
           <div className={classes['deal-button']}>
