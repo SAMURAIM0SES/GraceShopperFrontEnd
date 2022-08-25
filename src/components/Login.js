@@ -4,7 +4,7 @@ import classes from './Login.module.css';
 import SocialMedia from './SocialMedia';
 import { loginUser, getAllCartInfo, createShoppingCart } from '../api/index';
 import { storeCurrentData, clearCurrentData } from './../utils/auth';
-const { faker } = require('@faker-js/faker');
+
 
 const Login = (props) => {
   const [user, setUser] = useState('');

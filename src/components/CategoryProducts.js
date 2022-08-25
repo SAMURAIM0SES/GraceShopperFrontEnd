@@ -10,7 +10,7 @@ import { GoHome } from 'react-icons/go';
 import { nanoid } from 'nanoid';
 import classes from './CategoryProducts.module.css';
 import { storeCurrentData, getCurrentData } from './../utils/auth';
-const { faker } = require('@faker-js/faker');
+
 
 const CategoryProducts = (props) => {
   const { categoryId } = useParams();
