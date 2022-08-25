@@ -140,3 +140,12 @@
     height: 7rem;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .socialMedia-list {
+    flex-direction: column;
+    gap: 2.5rem;
+    right: -10rem;
+    top: -10rem;
+  }
+}

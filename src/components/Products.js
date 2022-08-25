@@ -48,6 +48,7 @@ const Products = () => {
 
   function deleteHandler(productId) {
     deleteProduct(productId);
+    getAllIntialData();
     setConfirmSelect(false);
   }
 
@@ -141,7 +142,7 @@ const Products = () => {
                   </div>
                 ) : null}
                 {confirmSelect ? (
-                  <div>
+                  <div className={classes['confirm-btn']}>
                     <button
                       onClick={() => {
                         deleteHandler(product.id);
